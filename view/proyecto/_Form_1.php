@@ -8,18 +8,18 @@ tinymce.init({
     selector: "textarea",
     theme: "modern",
     plugins: [
-        "advlist autolink lists link image charmap print preview hr anchor pagebreak",
-        "searchreplace wordcount visualblocks visualchars code fullscreen",
-        "insertdatetime media nonbreaking save table contextmenu directionality",
-        "emoticons template paste textcolor colorpicker textpattern"
-    ],
-    toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
-    toolbar2: "print preview media | forecolor backcolor emoticons",
-    image_advtab: true,
-    templates: [
-        {title: 'Test template 1', content: 'Test 1'},
-        {title: 'Test template 2', content: 'Test 2'}
+        //"advlist autolink lists link image charmap print preview hr anchor pagebreak",
+        //"searchreplace wordcount visualblocks visualchars code fullscreen"
+        "insertdatetime media nonbreaking save table contextmenu directionality"
+        //"emoticons template paste textcolor colorpicker textpattern"
     ]
+    //toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+    //toolbar2: "print preview media | forecolor backcolor emoticons",
+    //image_advtab: true,
+//    templates: [
+//        {title: 'Test template 1', content: 'Test 1'},
+//        {title: 'Test template 2', content: 'Test 2'}
+//    ]
 });
 </script>
 
@@ -82,12 +82,10 @@ tinymce.init({
 					<span class="input-group-addon"><label class="control-label"><strong for="nombre_proyecto">NOMBRE DE PROYECTO:</strong></label></span>
 					</div>
 					<div class="col-md-12 colpad ">
+                        <input id="nombre_proyecto" name="nombre_proyecto" type="text" class="form-control" placeholder="Nombre proyecto"  value="<?php /*echo $obj->nombre_proyecto; */?>" />
+                  <!-- <textarea id="nombre_proyecto" name="nombre_proyecto" class="form-control" rows="2" placeholder="Nombre proyecto"><?php /*echo $obj->nombre_proyecto; */?></textarea>-->
 
-                      
-	
-                   <textarea id="nombre_proyecto" name="nombre_proyecto" class="form-control" rows="2" placeholder="Nombre proyecto"><?php echo $obj->nombre_proyecto; ?></textarea>
-                   
-                                        </div>
+                    </div>
 					</div>
                     </div>
                        
@@ -595,7 +593,7 @@ tinymce.init({
 				<div class="form-group">
                             <div class="col-lg-6 col-lg-offset-3">
                                 
-                        <a id="save" style="font-size: 10px;padding: 4px; " class="btn btn-success" onclick="tinyMCE.execCommand('mceSave')">GRABAR</a>
+                        <a id="save" style="font-size: 10px;padding: 4px; " class="btn btn-success" onclick="validarForm()">GRABAR</a> <!--//tinyMCE.execCommand('mceSave')-->
                         <a href="index.php?controller=proyecto" style="color: #fff;background-color: #d9534f;border-color: #d43f3a;" class="button">ATRAS</a>
                         <button type="button" style="font-size: 10px;padding: 4px;" class="btn push_button_warning btn-warning" id="resetBtn">LIMPIAR FORM</button>
                             </div>
