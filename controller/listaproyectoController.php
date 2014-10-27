@@ -26,32 +26,32 @@ class listaproyectoController extends Controller {
 public function editar_estado() {
     $obj=new listaproyecto();
     $data=array();
-    $data['lista']=$obj->lista_procesos($_REQUEST['id']);
+    $data['lista']=$obj->lista_procesos($_REQUEST['idproyecto']);
+    $data['proyecto']=$obj->getproyecto($_REQUEST['idproyecto']);
       $view = new View();
         $view->setData($data);
         $view->setTemplate('../view/listaproyecto/lista_procesos.php');
         $view->setLayout('../template/Layout.php');
         $view->render();
-    ///lista de procesos del poyecto je
-        /* $a=$_GET['idproyecto'];
-         $obj = new listaproyecto();
-           $p = $obj->modificar_estado($a);
-          
-            if ($p[0]){
-                die("<script>alert()</script>");
-              
-            } else {
-            $data = array();
-            $view = new View();
-            $data['msg'] = $p[1];
-            $data['url'] =  'index.php?controller=listaproyecto';
-            $view->setData($data);
-            $view->setTemplate( '../view/_Error_App.php' );
-            $view->setLayout( '../template/Layout.php' );
-            $view->render();
-            }*/
-         }         
-         
+  
+         }  
+         public function get_procesos()
+         {
+            $obj=new listaproyecto();            
+               $data=array();
+    $data['lista_procesos']=$obj->lista_procesos_left($_REQUEST['id']);
+      $view = new View();
+        $view->setData($data);
+        $view->setTemplate('../view/listaproyecto/frm_procesos.php');
+      //  $view->setLayout('../template/Layout.php');
+        echo $view->renderPartial();
+         }
+         public function save_procesos()
+         {
+             $obj=new listaproyecto();
+             //echo "22";
+             print_r(json_encode($obj->save_procesos($_REQUEST)));
+         }
         public function getDetalleProyecto ()
        {
         $codproyecto=$_POST['idproyecto'];
