@@ -97,12 +97,12 @@
 $("#emergente").load("index.php?controller=listaproyecto&action=get_verificar_procesos&"+str, function(){
 			
 			$.blockUI({
-                            overlayCSS: { backgroundColor: '#5d881a' },
+                          //  overlayCSS: { backgroundColor: 'white' },
 				message: $("#emergente"),
 				css:{
 					top: '10%',
 					width: '77%',
-					height: '84%',
+					height: '85%',
 					left: '15%'
                                         //backgroundColor: '#5d881a'
 				}

@@ -62,6 +62,11 @@ public function editar_estado() {
         $view->setTemplate('../view/listaproyecto/verificar_procesos.php');
         echo $view->renderPartial();  
          }
+         public function update_procesos(){
+           $obj=new listaproyecto();
+          print_r(json_encode($obj->update_procesos($_REQUEST)));
+         }
+         ///
         public function getDetalleProyecto ()
        {
         $codproyecto=$_POST['idproyecto'];

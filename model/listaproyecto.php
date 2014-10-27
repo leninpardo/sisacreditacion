@@ -138,6 +138,27 @@ WHERE detalle_proceso_proyecto.idproyecto=".$id);
         }
         return $array;
     }
+        function update_procesos($_P)
+    {
+       $sql2 = ("UPDATE detalle_proceso_proyecto set detalle_proceso_proyecto.fecha_finalizacion=:p3,detalle_proceso_proyecto.estado=2 ,
+           detalle_proceso_proyecto.descripcion=:p4
+where detalle_proceso_proyecto.idproyecto=:p1 and detalle_proceso_proyecto.idproceso_proyecto=:p2");
+          $stmt = $this->db->prepare($sql2);
+  
+
+              $stmt->bindValue(':p1', $_P["id_proyecto"] , PDO::PARAM_INT);
+              $stmt->bindValue(':p2', $_P['idproceso'], PDO::PARAM_INT);
+              $stmt->bindValue(':p3', $_P['fecha_e'], PDO::PARAM_STR);
+              $stmt->bindValue(':p4', $_P['obs'], PDO::PARAM_STR);
+              $stmt->execute();   
+              $p2 = $stmt->errorInfo();
+           //$stmt->db->commit();            
+             
+                            
+        $array= array("rep"=>1 , "msg"=>$p2);
+      
+        return $array;
+    }
         public  function ver_proyecto($id){
             $stmt2 = $this->db->prepare("SELECT nombre_proyecto,concat(profesores.NombreProfesor,' ',profesores.ApellidoPaterno) as docente from proyecto
 INNER JOIN detalle_profesor_proy_fun on(detalle_profesor_proy_fun.idproyecto=proyecto.idproyecto)

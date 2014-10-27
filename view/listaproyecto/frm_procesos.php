@@ -60,7 +60,11 @@ and open the template in the editor.
         });
         $("#guardar").click(function() {
             str = $("#frm_procesos").serialize();
-            alert(str);
+                   bval = true;
+        bval = bval && $("#select_proceso" ).required();
+        bval = bval && $("#fecha_i" ).required();
+        bval = bval && $("#fecha_l" ).required();
+        if(bval){
             $.post('index.php', 'controller=listaproyecto&action=save_procesos&' + str, function(data)
             {
                 if (data.rep!=1) {
@@ -72,9 +76,11 @@ and open the template in the editor.
                     });
                     location.reload();
                 } else {
-                    alert(data.rep);
+                    alert(data.msg);
                 }
             });
+        }
+        return false;
         });
 
     });

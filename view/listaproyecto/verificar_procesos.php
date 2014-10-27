@@ -66,11 +66,15 @@ and open the template in the editor.
      
         $("#guardar").click(function() {
             str = $("#frm_procesos").serialize();
-            alert(str);
+                bval = true;
+        
+        bval = bval && $("#fecha_e").required();
+        bval = bval && $("#obs").required();
+        if(bval){
             $.post('index.php', 'controller=listaproyecto&action=update_procesos&' + str, function(data)
             {
                 if (data.rep!=1) {
-                    alert("se guardo correctamente");
+                    alert("se Finalizo correctamente");
                     $.unblockUI({
                         onUnblock: function() {
                             $("#emergente").html("");
@@ -81,6 +85,8 @@ and open the template in the editor.
                     alert(data.rep);
                 }
             });
+            }
+            return false;
         });
 
     });
