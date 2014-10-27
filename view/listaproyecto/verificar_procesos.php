@@ -40,7 +40,7 @@ and open the template in the editor.
         <fieldset>
 
             <legend>Acciones</legend>
-            <?php if($datos[0][5]==1){ ?>
+            <?php if($datos[0][9]==1){ ?>
             <a class="btn btn-default" id="guardar" >Dar por culminacion el proceso</a>
             <?php }else{?>
             <div class="message">El proceso se concluyo</div>
