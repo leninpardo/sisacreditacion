@@ -44,6 +44,7 @@ and open the template in the editor.
 <script>
     $(function()
     {
+        
         $("#cancel").click(function() {
             $.unblockUI({
                 onUnblock: function() {

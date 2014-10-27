@@ -63,7 +63,7 @@
                  echo "<th>Finalizado el proceso</th>";  
               }
           }
-          echo "<th><a class='btn btn-info'id='' href='#'>Verificar/culminar proceso</a></th>";
+          echo "<th><a class='procesos btn btn-info proyecto='".$proyecto[0][0]."' val='$l[0]' id='' href='#'>Verificar/culminar proceso</a></th>";
      echo '</tr>';
     }
     
@@ -89,6 +89,28 @@
 <!--en modal-->
 <script>
       $(function(){
+          $(".procesos").click(function(e){
+              idproceso=$(this).attr("val");
+              idproyecto=$("#idproyecto").val();
+                e.preventDefault();
+                str="idproceso="+idproceso+"&idproyecto="+idproyecto;
+$("#emergente").load("index.php?controller=listaproyecto&action=get_verificar_procesos&"+str, function(){
+			
+			$.blockUI({
+                            overlayCSS: { backgroundColor: '#5d881a' },
+				message: $("#emergente"),
+				css:{
+					top: '10%',
+					width: '77%',
+					height: '84%',
+					left: '15%'
+                                        //backgroundColor: '#5d881a'
+				}
+			}); 
+		});  
+    });
+   
+         
     $("#agregar").click(function(e){
         
       e.preventDefault();

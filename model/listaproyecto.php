@@ -170,6 +170,30 @@ WHERE detalle_proceso_proyecto.idproyecto=:p1)");
               $stmt2->execute();
               return $stmt2->fetchAll();   
     }
+    public function lista_verificar_procesos_proyecto($idproyecto,$idproceso)
+    {
+        /**/
+             $stmt2 = $this->db->prepare("SELECT
+proceso_proyecto.idproceso_proyecto,
+proceso_proyecto.nombre,
+proceso_proyecto.responsable,
+proyecto.idproyecto,
+proyecto.nombre_proyecto,
+detalle_proceso_proyecto.fecha_ingreso,
+detalle_proceso_proyecto.fecha_plazo,
+detalle_proceso_proyecto.fecha_finalizacion,
+detalle_proceso_proyecto.descripcion,
+detalle_proceso_proyecto.estado
+FROM
+proceso_proyecto
+INNER JOIN detalle_proceso_proyecto ON proceso_proyecto.idproceso_proyecto = detalle_proceso_proyecto.idproceso_proyecto
+INNER JOIN proyecto ON proyecto.idproyecto = detalle_proceso_proyecto.idproyecto
+WHERE detalle_proceso_proyecto.idproyecto=:p1 and detalle_proceso_proyecto.idproceso_proyecto=:p2");
+              $stmt2->bindValue(':p1', $idproyecto , PDO::PARAM_INT);
+               $stmt2->bindValue(':p2', $idproceso , PDO::PARAM_INT);
+              $stmt2->execute();
+              return $stmt2->fetchAll();     
+    }
     
 }
 ?>
