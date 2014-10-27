@@ -1,6 +1,18 @@
 <?php
 include_once("../lib/dbfactory.php");
-class listaproyecto extends Main{    
+class listaproyecto extends Main{  
+    function getproyecto($id)
+    {
+    $stmt = $this->db->prepare("select proyecto.idproyecto,proyecto.nombre_proyecto,concat(profesores.NombreProfesor,'  ',profesores.ApellidoPaterno) from proyecto 
+INNER JOIN detalle_profesor_proy_fun on(proyecto.idproyecto=detalle_profesor_proy_fun.idproyecto)
+INNER JOIN profesores on(profesores.CodigoProfesor=detalle_profesor_proy_fun.CodigoProfesor)
+WHERE proyecto.idproyecto=:id");
+ $stmt->bindValue(':id', $id , PDO::PARAM_INT);
+ $stmt->execute();
+ return $stmt->fetchAll();
+       
+    }
+    
     function index($query,$p,$c) 
     {       
         
@@ -61,7 +73,7 @@ class listaproyecto extends Main{
         $stmt2 = $this->db->prepare($sql2);
         $fecha=date("Y-m-d");
         $estado=0;            
-        $semestre="20132";    
+        $semestre="20132";
               
               $stmt2->bindValue(':p1', $_P["idproyecto"] , PDO::PARAM_STR);
               $stmt2->bindValue(':p2', $fecha, PDO::PARAM_STR);
@@ -81,7 +93,7 @@ class listaproyecto extends Main{
     }
     
     public  function lista_procesos($id){
-            $stmt2 = $this->db->prepare("SELECT
+            $stmt = $this->db->prepare("SELECT
 proceso_proyecto.idproceso_proyecto,
 proceso_proyecto.nombre,
 proceso_proyecto.responsable,
@@ -94,33 +106,81 @@ FROM
 proceso_proyecto
 INNER JOIN detalle_proceso_proyecto ON proceso_proyecto.idproceso_proyecto = detalle_proceso_proyecto.idproceso_proyecto
 INNER JOIN proyecto ON proyecto.idproyecto = detalle_proceso_proyecto.idproyecto
-WHERE detalle_proceso_proyecto.idproyecto=:p1
-");
-              $stmt2->bindValue(':p1', $id , PDO::PARAM_INT);
-              $stmt2->execute;
-              return $stmt2->fetchAll();
+WHERE detalle_proceso_proyecto.idproyecto=".$id);
+              //$stmt2->bindValue(':p1', $id , PDO::PARAM_INT);
+              $stmt->execute();
+              return $stmt->fetchAll();
     }
-    
+    function save_procesos($_P)
+    {
+       $sql2 = $this->Query("usp_detalle_procesos(:p1,:p2,:p3,:p4,1)");
+          $stmt = $this->db->prepare($sql2);
+       
+        try{
+ //$stmt->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  //$stmt->beginTransaction();
+
+              $stmt->bindValue(':p1', $_P["id_proyecto"] , PDO::PARAM_INT);
+              $stmt->bindValue(':p2', $_P['select_proceso'], PDO::PARAM_INT);
+              $stmt->bindValue(':p3', $_P['fecha_i'] , PDO::PARAM_STR);       
+              $stmt->bindValue(':p4', $_P['fecha_l'] , PDO::PARAM_STR); 
+              $stmt->execute();   
+              $p2 = $stmt->errorInfo();
+           //$stmt->db->commit();            
+             
+                            
+        $array= array("rep"=>1 , "msg"=>$p2);
+        }  catch (PDOException $e)
+        {
+           // $this->db->rollback();
+           // $stmt->rollBack();
+            $array= array("rep"=>2,"msg"=>$e->getMessage());
+        }
+        return $array;
+    }
+        function update_procesos($_P)
+    {
+       $sql2 = ("UPDATE detalle_proceso_proyecto set detalle_proceso_proyecto.fecha_finalizacion=:p3,detalle_proceso_proyecto.estado=2 ,
+           detalle_proceso_proyecto.descripcion=:p4
+where detalle_proceso_proyecto.idproyecto=:p1 and detalle_proceso_proyecto.idproceso_proyecto=:p2");
+          $stmt = $this->db->prepare($sql2);
+  
+
+              $stmt->bindValue(':p1', $_P["id_proyecto"] , PDO::PARAM_INT);
+              $stmt->bindValue(':p2', $_P['idproceso'], PDO::PARAM_INT);
+              $stmt->bindValue(':p3', $_P['fecha_e'], PDO::PARAM_STR);
+              $stmt->bindValue(':p4', $_P['obs'], PDO::PARAM_STR);
+              $stmt->execute();   
+              $p2 = $stmt->errorInfo();
+           //$stmt->db->commit();            
+             
+                            
+        $array= array("rep"=>1 , "msg"=>$p2);
+      
+        return $array;
+    }
         public  function ver_proyecto($id){
             $stmt2 = $this->db->prepare("SELECT nombre_proyecto,concat(profesores.NombreProfesor,' ',profesores.ApellidoPaterno) as docente from proyecto
 INNER JOIN detalle_profesor_proy_fun on(detalle_profesor_proy_fun.idproyecto=proyecto.idproyecto)
 INNER JOIN profesores on(profesores.CodigoProfesor=detalle_profesor_proy_fun.CodigoProfesor)
  WHERE proyecto.idproyecto=:p1");
               $stmt2->bindValue(':p1', $id , PDO::PARAM_INT);
-              $stmt2->execute;
+              $stmt2->execute();
               return $stmt2->fetchAll();
     }
     public  function lista_procesos_left($id)
     {
-         $stmt2 = $this->db->prepare("SELECT
+         $stmt2 = $this->db->prepare("
+             SELECT
 proceso_proyecto.idproceso_proyecto,
 proceso_proyecto.nombre,
-proceso_proyecto.responsable
+proceso_proyecto.responsable,
+$id idproyecto
 FROM
 proceso_proyecto
 left JOIN detalle_proceso_proyecto 
 ON detalle_proceso_proyecto.idproceso_proyecto = proceso_proyecto.idproceso_proyecto
-where proceso_proyecto.idproceso_proyecto <>(SELECT
+where proceso_proyecto.idproceso_proyecto not in(SELECT
 proceso_proyecto.idproceso_proyecto
 FROM
 proceso_proyecto
@@ -128,8 +188,32 @@ right JOIN detalle_proceso_proyecto
 ON detalle_proceso_proyecto.idproceso_proyecto = proceso_proyecto.idproceso_proyecto
 WHERE detalle_proceso_proyecto.idproyecto=:p1)");
               $stmt2->bindValue(':p1', $id , PDO::PARAM_INT);
-              $stmt2->execute;
+              $stmt2->execute();
               return $stmt2->fetchAll();   
+    }
+    public function lista_verificar_procesos_proyecto($idproyecto,$idproceso)
+    {
+        /**/
+             $stmt2 = $this->db->prepare("SELECT
+proceso_proyecto.idproceso_proyecto,
+proceso_proyecto.nombre,
+proceso_proyecto.responsable,
+proyecto.idproyecto,
+proyecto.nombre_proyecto,
+detalle_proceso_proyecto.fecha_ingreso,
+detalle_proceso_proyecto.fecha_plazo,
+detalle_proceso_proyecto.fecha_finalizacion,
+detalle_proceso_proyecto.descripcion,
+detalle_proceso_proyecto.estado
+FROM
+proceso_proyecto
+INNER JOIN detalle_proceso_proyecto ON proceso_proyecto.idproceso_proyecto = detalle_proceso_proyecto.idproceso_proyecto
+INNER JOIN proyecto ON proyecto.idproyecto = detalle_proceso_proyecto.idproyecto
+WHERE detalle_proceso_proyecto.idproyecto=:p1 and detalle_proceso_proyecto.idproceso_proyecto=:p2");
+              $stmt2->bindValue(':p1', $idproyecto , PDO::PARAM_INT);
+               $stmt2->bindValue(':p2', $idproceso , PDO::PARAM_INT);
+              $stmt2->execute();
+              return $stmt2->fetchAll();     
     }
     
 }

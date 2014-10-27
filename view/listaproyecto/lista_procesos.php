@@ -1,6 +1,4 @@
-<link href="../web/css/bootstrap.css" rel="stylesheet" type="text/css"/>
-<link href="../web/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-<script src='../web/js/bootstrap-modal.js'></script>
+
 <h6 class="ui-widget-header">Verificacion de los procesos del proyectos</h6>
 <div>
     <table>
@@ -9,7 +7,9 @@
                Nombre Proyecto:
             </td>
             <td>
-                <?php echo $proyecto[0]; ?>
+              <?php echo $proyecto[0][1]; ?>
+                <input type="hidden" id="idproyecto" name="idproyecto" value="<?php echo $proyecto[0][0];?>"/>
+               
             </td>
         </tr>
         <tr>
@@ -17,7 +17,7 @@
                 Jefe Proyecto:
             </td>
             <td>
-                <?php echo $proyecto[1]; ?>
+                <?php echo $proyecto[0][2]; ?>
             </td>
         </tr>
     </table>
@@ -30,15 +30,40 @@
             <th>Fecha Ingresos/inicio</th>
             <th>Fecha Plazo</th>
             <th>Fecha Entrega/Culminacion</th>
+            <th>Descripcion</th>
             <th>Estado</th>
+            <th>Acciones</th>
         </tr>
-    </table>
+    
     <?php 
+  // echo count($lista);
     if($lista!=null){
     foreach ($lista as $l)
     {
      echo "<tr>";
-     echo "<td>".$l[0]."</td>";
+    // echo "<td>".$l[0]."</td>";
+      echo "<td>".$l[1]."</td>";
+       echo "<td>".$l[2]."</td>";
+        echo "<td>".$l[3]."</td>";
+         echo "<td>".$l[4]."</td>";
+          echo "<td>".$l[5]."</td>";
+          echo "<td>".$l[6]."</td>";
+          if($l[7]==1)
+          {
+              if(date('Y-m-d')>$l[4]){
+              echo "<th>En proceso, con fecha retardada</th>";
+              }else{
+                 echo "<th>En proceso</th>";  
+              }
+          }else{
+              //echo "<th>Finalizado el proceso</th>"; 
+                if($l[5]>$l[4]){
+              echo "<th>Finalizado, con fecha retrasada</th>";
+              }else{
+                 echo "<th>Finalizado el proceso</th>";  
+              }
+          }
+          echo "<th><a class='procesos btn btn-info proyecto='".$proyecto[0][0]."' val='$l[0]' id='' href='#'>Verificar/culminar proceso</a></th>";
      echo '</tr>';
     }
     
@@ -48,6 +73,7 @@
     }
     
         ?>
+        </table>
 </div>
 <div>
     <a class="btn btn-default" id='agregar'>Agregar procesos al proyecto</a>
@@ -56,54 +82,53 @@
 
 
 <!-- modal de asignar nueva proceso-->
-<div id="procesos" class="modal hide fade" tabindex="-1" data-width="1020">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>Procesos </h3>
-  </div>
-  <div class="modal-body">
-    <div class="row-fluid">
-        
-        <div class="span6">
-            <label>Huesped a Facturar:</label>   
-            
-               <select name="cliente_a" id="cliente_a">
-                       
-                        </select>  
-            <button id="add_cliente" class="btn btn-info">+</button>
-            <label>CODIGO HAB:</label>
-            <input type="text" name="codh_a" id="codh_a" value="" readonly=""/>
-            <label>NUMERO HAB:</label>
-            <input type="text" name="nroh_a" id="nroh_a" value="" readonly=""/>
-            <label>DESCRIPCION:</label>
-            <input type="text" name="descriph_a" id="descriph_a" value="" readonly=""/>
-             </div>
-        
-        <div class=" span6">
-            <label>FECHA ENTRADA:</label>  
-            <input type="text" name="fechae_a" id="fechae_a" value="${fecha}" class="fechas_calculo">
-          
-              <label>FECHA SALIDA:</label>
-              <input type="text" name="fechas_a" id="fechas_a" value="${fecha}" class="fechas_calculo">
-              
-               <label>COSTO:</label>
-              <input type="hidden" name="costo_oculto" id="costo_oculto">
-              <input type="text" name="costo_a" id="costo_a" value="">
-              <br>
-              <br>
-             
+ <div id="emergente" >
+    
         
   </div>
-             
- 
-</div>
-</div>
 <!--en modal-->
 <script>
       $(function(){
-    $("#agregar").click(function(){
-      alert("hola");
-        $('#procesos').modal('show'); 
+          $(".procesos").click(function(e){
+              idproceso=$(this).attr("val");
+              idproyecto=$("#idproyecto").val();
+                e.preventDefault();
+                str="idproceso="+idproceso+"&idproyecto="+idproyecto;
+$("#emergente").load("index.php?controller=listaproyecto&action=get_verificar_procesos&"+str, function(){
+			
+			$.blockUI({
+                          //  overlayCSS: { backgroundColor: 'white' },
+				message: $("#emergente"),
+				css:{
+					top: '10%',
+					width: '77%',
+					height: '85%',
+					left: '15%'
+                                        //backgroundColor: '#5d881a'
+				}
+			}); 
+		});  
+    });
+   
+         
+    $("#agregar").click(function(e){
+        
+      e.preventDefault();
+$("#emergente").load("index.php?controller=listaproyecto&action=get_procesos&id="+$("#idproyecto").val(), function(){
+			//$.getScript('web/js/funciones.js');
+			//boquea la pantalla
+			$.blockUI({
+                            //overlayCSS: { backgroundColor: '#00f' }
+				message: $("#emergente"),
+				css:{
+					top: '10%',
+					width: '77%',
+					height: '80%',
+					left: '15%'
+                                       // backgroundColor: '#5d881a'
+				}
+			}); 
+		});  
     });
     });
 </script>
