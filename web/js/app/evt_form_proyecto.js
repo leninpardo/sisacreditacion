@@ -67,7 +67,7 @@ var validarForm = function ()
 {
 
 bval = true;
-    bval = bval && $( "#nombre_proyecto" ).required();
+    bval = bval && $( "#nombre_proyecto_ifr" ).required();
     bval = bval && $( "#idtipo_proyecto" ).required();
     bval = bval && $( "#departamento" ).required();
     bval = bval && $( "#provincia" ).required();
@@ -78,7 +78,7 @@ bval = true;
     bval = bval && $( "#idejetematico" ).required();
     bval = bval && $( "#idlinea_investigacion" ).required();
     bval = bval && $( "#Ubigeo" ).required();
-    //bval = bval && $( "#antecedentes_problema_ifr" ).required();
+    //bval = bval && $( "#antecedentes_problema" ).required();
     //bval = bval && $( "#definicion_problema" ).required();
     //bval = bval && $( "#formulacion_problema" ).required();
     //bval = bval && $( "#justificacion" ).required();
