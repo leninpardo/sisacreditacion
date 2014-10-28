@@ -52,11 +52,11 @@ tinymce.init({
     <input type="hidden" name="action" value="save" />
 
  <div class="tab-content col-md-12" style="height: auto;background-color: #F7F7F7; margin-bottom: 15px;font-family: Calibri;text-align: left;padding-left: 0; padding-right: 0; border-bottom:1px solid #ddd ; border-left: 1px solid #ddd;border-right:1px solid #ddd; border-bottom-left-radius: 4px;  border-bottom-right-radius: 4px;">
-               
+
          <br><div class="tab-pane active" id="1">
-                   
+
                    <div class="col-md-12">
-				   
+
 					<div class="col-md-4">
                     <div class="form-group">
 					<div class="col-md-12 colpad">
@@ -73,9 +73,9 @@ tinymce.init({
 					<div class="col-md-12 colpad">
                                         <?php echo $tipo_proyecto;?>
                     </div>
-					</div>                  
+					</div>
                     </div>
-					
+
 					<div class="col-md-8">
                     <div class="form-group">
 					<div class="col-md-12 colpad">
@@ -88,12 +88,12 @@ tinymce.init({
                     </div>
 					</div>
                     </div>
-                       
-					
-                    </div> 
-					
+
+
+                    </div>
+
                     <div class="col-md-12">
-					
+
 					<div class="col-md-4">
                     <div class="form-group">
 					<div class="col-md-12 colpad">
@@ -104,7 +104,7 @@ tinymce.init({
                     </div>
 					</div>
                     </div>
-					
+
 					<div class="col-md-4">
                     <div class="form-group">
 					<div class="col-md-12 colpad">
@@ -115,7 +115,7 @@ tinymce.init({
                     </div>
 					</div>
                     </div>
-					
+
 					<div class="col-md-4">
                     <div class="form-group">
 					<div class="col-md-12 colpad">
@@ -126,12 +126,27 @@ tinymce.init({
                     </div>
 					</div>
                     </div>
-		
-                          
+
+
+                        <table id="tablaubi" width="60%" class="tablaubigeo" border="2" style="display: none; border-radius: 4px 4px 0 0; " align="center">
+                                <tr style="font-size: 16px; color: #555;background: #e8dceb" >
+                                    <td width="20%" align="center">
+                                        DEPARTAMENTO
+                                    </td>
+                                    <td width="20%" align="center">
+                                        PROVINCIA
+                                    </td>
+                                    <td width="20%" align="center">
+                                      DISTRITO
+                                    </td>
+                                </tr>
+                            </table>
+                        <br>
+                        <br>
                     </div>
-					
+
                     <div class="col-md-12">
-					
+
 					<div class="col-md-4">
                     <div class="form-group">
 					<div class="col-md-12 colpad">
@@ -142,7 +157,7 @@ tinymce.init({
                     </div>
 					</div>
                     </div>
-					
+
 					<div class="col-md-4">
                     <div class="form-group">
 					<div class="col-md-12 colpad">
@@ -153,7 +168,7 @@ tinymce.init({
                     </div>
 					</div>
                     </div>
-					
+
 					<div class="col-md-4">
                     <div class="form-group">
 					<div class="col-md-12 colpad">
@@ -164,12 +179,12 @@ tinymce.init({
                     </div>
 					</div>
                     </div>
-					
+
                     </div>
-                    
+
                 <div class="col-md-12">
                     <div class="col-md-1"></div>
-					
+
 					<div class="col-md-5">
                     <div class="form-group">
 					<div class="col-md-12 colpad">
@@ -180,7 +195,7 @@ tinymce.init({
                     </div>
 					</div>
                     </div>
-					
+
                     <div class="col-md-5">
                     <div class="form-group">
 					<div class="col-md-12 colpad">
@@ -191,14 +206,14 @@ tinymce.init({
                     </div>
 					</div>
                     </div>
-		
+
                     <div class="col-md-1"></div>
-                </div> 
-                </div>  
-                    
-                <div class="tab-pane" id="2"> 
+                </div>
+                </div>
+
+                <div class="tab-pane" id="2">
                     <div class="col-md-12">
-					
+
 					<div class="col-md-12">
                     <div class="form-group">
 					<div class="col-md-12 colpad">
@@ -210,9 +225,9 @@ tinymce.init({
 					</div>
                     </div>
                         </div>
-                        
+
                         <div class="col-md-12">
-                        
+
 					<div class="col-md-12">
                     <div class="form-group">
 					<div class="col-md-12 colpad">
@@ -223,11 +238,11 @@ tinymce.init({
                     </div>
 					</div>
                     </div>
-					
+
                     </div>
-					
+
 					<div class="col-md-12">
-					
+
 					<div class="col-md-12">
                     <div class="form-group">
 					<div class="col-md-12 colpad">
@@ -238,7 +253,7 @@ tinymce.init({
                     </div>
 					</div>
                     </div>
-					
+
 					<div class="col-md-12">
                     <div class="form-group">
 					<div class="col-md-12 colpad">
@@ -249,11 +264,11 @@ tinymce.init({
                     </div>
 					</div>
                     </div>
-					
+
                     </div>
-					
+
 					<div class="col-md-12">
-					
+
 					<div class="col-md-12">
                     <div class="form-group">
 					<div class="col-md-12 colpad">
@@ -265,8 +280,8 @@ tinymce.init({
 					</div>
                     </div>
                                              </div>
-			<div class="col-md-12">	
-                                            
+			<div class="col-md-12">
+
 					<div class="col-md-12">
                     <div class="form-group">
 					<div class="col-md-12 colpad">
@@ -277,13 +292,13 @@ tinymce.init({
                     </div>
 					</div>
                     </div>
-					
+
                     </div>
-					
+
                 </div>
 				<div class="tab-pane" id="3">
                     <div class="col-md-12">
-					
+
 					<div class="col-md-12">
                     <div class="form-group">
 					<div class="col-md-12 colpad">
@@ -303,19 +318,19 @@ tinymce.init({
 					</div>
                         <div class="col-md-12 colpad" id="objesp">
                                             <textarea id="objetivos_especificos" name="objetivos_especificos" class="form-control" rows="4" placeholder="Objetivos Especificos"></textarea>
-                     
+
                         </div>
-                    
+
                     </div>
                     </div>
-					
+
                     </div>
-                        
+
                 </div>
-                
+
                 <div class="tab-pane" id="4">
 					<div class="col-md-12">
-					
+
 					<div class="col-md-12">
                     <div class="form-group">
 					<div class="col-md-12 colpad">
@@ -327,9 +342,9 @@ tinymce.init({
 					</div>
                     </div>
                                             </div>
-                                            
+
 			<div class="col-md-12">
-                                            
+
 					<div class="col-md-12">
                     <div class="form-group">
 					<div class="col-md-12 colpad">
@@ -340,11 +355,11 @@ tinymce.init({
                     </div>
 					</div>
                     </div>
-					
+
                     </div>
-					
+
 					<div class="col-md-12">
-					
+
 					<div class="col-md-12">
                     <div class="form-group">
 					<div class="col-md-12 colpad">
@@ -356,7 +371,7 @@ tinymce.init({
 					</div>
                     </div>
                                             </div>
-			<div class="col-md-12">		
+			<div class="col-md-12">
 					<div class="col-md-12">
                     <div class="form-group">
 					<div class="col-md-12 colpad">
@@ -367,11 +382,11 @@ tinymce.init({
                     </div>
 					</div>
                     </div>
-					
+
                     </div>
-					
+
                     <div class="col-md-12">
-					
+
                     <div class="col-md-12">
                     <div class="form-group">
 					<div class="col-md-12 colpad">
@@ -382,9 +397,9 @@ tinymce.init({
                     </div>
 					</div>
                     </div>
-                      </div>  
+                      </div>
                     <div class="col-md-12">
-					
+
                     <div class="col-md-12">
                     <div class="form-group">
 					<div class="col-md-12 colpad">
@@ -395,15 +410,15 @@ tinymce.init({
                     </div>
 					</div>
                     </div>
-					
+
                     </div>
-					
+
                 </div>
-                    
+
                 <div class="tab-pane" id="5">
-                    
+
                     <div class="col-md-12">
-					
+
                     <div class="col-md-12">
                     <div class="form-group">
 					<div class="col-md-12 colpad">
@@ -415,7 +430,7 @@ tinymce.init({
 					</div>
                     </div>
                         </div>
-		 <div class="col-md-12">		
+		 <div class="col-md-12">
                     <div class="col-md-12">
                     <div class="form-group">
 					<div class="col-md-12 colpad">
@@ -426,11 +441,11 @@ tinymce.init({
                     </div>
 					</div>
                     </div>
-					
+
                     </div>
-                    
+
                     <div class="col-md-12">
-					
+
                     <div class="col-md-12">
                     <div class="form-group">
 					<div class="col-md-12 colpad">
@@ -442,7 +457,7 @@ tinymce.init({
 					</div>
                     </div>
                          </div>
-		<div class="col-md-12">		
+		<div class="col-md-12">
                     <div class="col-md-12">
                     <div class="form-group">
 					<div class="col-md-12 colpad">
@@ -453,11 +468,11 @@ tinymce.init({
                     </div>
 					</div>
                     </div>
-					
+
                     </div>
-                    
+
                     <div class="col-md-12">
-					
+
                     <div class="col-md-12">
                     <div class="form-group">
 					<div class="col-md-12 colpad">
@@ -469,7 +484,7 @@ tinymce.init({
 					</div>
                     </div>
                         </div>
-                <div class="col-md-12">		
+                <div class="col-md-12">
                     <div class="col-md-12">
                     <div class="form-group">
 					<div class="col-md-12 colpad">
@@ -480,11 +495,11 @@ tinymce.init({
                     </div>
 					</div>
                     </div>
-					
+
                     </div>
-                    
+
                     <div class="col-md-12">
-					
+
                     <div class="col-md-12">
                     <div class="form-group">
 					<div class="col-md-12 colpad">
@@ -496,7 +511,7 @@ tinymce.init({
 					</div>
                     </div>
                         </div>
-			<div class="col-md-12">		
+			<div class="col-md-12">
                     <div class="col-md-12">
                     <div class="form-group">
 					<div class="col-md-12 colpad">
@@ -507,11 +522,11 @@ tinymce.init({
                     </div>
 					</div>
                     </div>
-					
+
                     </div>
-                    
+
                     <div class="col-md-12">
-					
+
                     <div class="col-md-12">
                     <div class="form-group">
 					<div class="col-md-12 colpad">
@@ -523,7 +538,7 @@ tinymce.init({
 					</div>
                     </div>
                         </div>
-		 <div class="col-md-12">			
+		 <div class="col-md-12">
                     <div class="col-md-12">
                     <div class="form-group">
 					<div class="col-md-12 colpad">
@@ -534,18 +549,18 @@ tinymce.init({
                     </div>
 					</div>
                     </div>
-					
+
                     </div>
-                   
-                    
-                        
+
+
+
                 </div>
-                    
+
                 <div class="tab-pane" id="6">
                     <div class="col-md-4">
                     </div>
                     <div class="col-md-8">
-					
+
 					<div class="col-md-4">
                     <div class="form-group">
 					<div class="col-md-12 colpad">
@@ -556,7 +571,7 @@ tinymce.init({
                     </div>
 					</div>
                     </div>
-                        
+
                         <div class="col-md-4">
                     <div class="form-group">
 					<div class="col-md-12 colpad">
@@ -566,13 +581,13 @@ tinymce.init({
                     <input id="financiamiento" name="financiamiento" type="text" class="form-control" placeholder="Financiamiento"  value="<?php echo $obj->financiamiento; ?>" />
                     </div>
 					</div>
-                    </div>	
+                    </div>
                     </div>
                     <div class="col-md-4">
                     </div>
-                    
+
                     <div class="col-md-12">
-					
+
                     <div class="col-md-12">
                     <div class="form-group">
 					<div class="col-md-12 colpad">
@@ -584,22 +599,22 @@ tinymce.init({
 					</div>
                     </div>
                         </div>
-                        
-                                      
-                    
+
+
+
             </div>
 				</div>
-				
+
 				<div class="form-group">
                             <div class="col-lg-6 col-lg-offset-3">
-                                
+
                         <a id="save" style="font-size: 10px;padding: 4px; " class="btn btn-success" onclick="validarForm()">GRABAR</a> <!--//tinyMCE.execCommand('mceSave')-->
                         <a href="index.php?controller=proyecto" style="color: #fff;background-color: #d9534f;border-color: #d43f3a;" class="button">ATRAS</a>
                         <button type="button" style="font-size: 10px;padding: 4px;" class="btn push_button_warning btn-warning" id="resetBtn">LIMPIAR FORM</button>
                             </div>
-                        </div>                
-                        
-                        
+                        </div>
+
+
                     </form>
                 </div>
             </section>

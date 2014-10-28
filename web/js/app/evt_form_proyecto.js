@@ -38,6 +38,25 @@ $(function() {
         });
     });
     
+    $("#distrito").change(function(){
+        
+        var ids=$(this).val();
+        var valor = $("#distrito option:selected").html();
+    
+        var departamento=$("#departamento").val();
+        var provincia=$("#provincia").val();
+        html="<tr><td>"+departamento+"</td><td>"+provincia+"</td><td>"+valor+"<input type='hidden' name='ubigeo' value='"+ids+"'/></td></tr>";
+        $("#tablaubi").append(html);
+        $("#tablaubi").attr({'style':' '});
+        var select1 = $('#departamento');
+        var select2 = $('#provincia');
+        var select3 = $('#distrito');
+select1.val($('option:first', select1).val());
+select2.val($('option:first', select2).val());
+select3.val($('option:first', select3).val());
+//alert(departamento+provincia+ids);
+    });
+    
     
     cont=1;
     $("#newobj").click(function(){
@@ -69,9 +88,9 @@ var validarForm = function ()
 bval = true;
     bval = bval && $( "#nombre_proyecto_ifr" ).required();
     bval = bval && $( "#idtipo_proyecto" ).required();
-    bval = bval && $( "#departamento" ).required();
-    bval = bval && $( "#provincia" ).required();
-    bval = bval && $( "#distrito" ).required();
+    //bval = bval && $( "#departamento" ).required();
+    //bval = bval && $( "#provincia" ).required();
+    //bval = bval && $( "#distrito" ).required();
     bval = bval && $( "#periodo_ejecucion" ).required();
     bval = bval && $( "#CodigoFacultad" ).required();
     bval = bval && $( "#CodigoEscuela" ).required();
