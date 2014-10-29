@@ -152,7 +152,7 @@ public function editar_estado() {
     public function calcular_fecha() {
         $fecha_inicio = $_REQUEST['fecha_inicio'];
         
-        $fecha_despues = self::operacion_fecha($fecha_inicio, 1);
+        $fecha_despues = self::operacion_fecha(self::validar_fecha2($fecha_inicio), $_REQUEST['n_dias']);
         $fechats = strtotime($fecha_despues); //a timestamp
 
 //el parametro w en la funcion date indica que queremos el dia de la semana
@@ -166,21 +166,19 @@ switch (date('w', $fechats)){
     case 5: $nd= "Viernes"; $ret=0; break;
     case 6: $nd= "Sabado"; $ret=2;break;
 }
-/*if($ret>0)
+if($ret>0)
 {
-    $fecha_despues=self::operacion_fecha($fecha, $ret);
-}*/
+    $fecha_despues=self::operacion_fecha(self::validar_fecha2($fecha_despues), $ret);
+}
 print_r((self::validar_fecha($fecha_despues)));
     }
 
     public function operacion_fecha($fecha, $dias) {
-        list ($ano, $mes, $dia) = explode("-", $fecha);
-        if (!checkdate($mes, $dia, $ano)) {
-            return false;
-        }
-        $dia = $dia + $dias;
-        $fecha = date("d-m-Y", mktime(0, 0, 0, $mes, $dia, $ano));
-        return $fecha;
+     list ($dia,$mes,$ano)=explode("-",$fecha); 
+if (!checkdate($mes,$dia,$ano)){return false;} 
+$dia=$dia+$dias; 
+$fecha=date( "d-m-Y", mktime(0,0,0,$mes,$dia,$ano) ); 
+return $fecha;  
     }
     function validar_fecha($fecha){
 $fecha = strtotime($fecha);
@@ -188,6 +186,13 @@ $anio = (date('Y',$fecha));
 $mes = (date('m',$fecha));
 $dia =(date('d',$fecha));
 return $anio.'-'.$mes.'-'.$dia;
+}
+    function validar_fecha2($fecha){
+$fecha = strtotime($fecha);
+$anio = (date('Y',$fecha));
+$mes = (date('m',$fecha));
+$dia =(date('d',$fecha));
+return $dia.'-'.$mes.'-'.$anio;
 }
 
 }
