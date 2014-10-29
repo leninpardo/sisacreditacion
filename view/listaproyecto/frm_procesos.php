@@ -55,7 +55,7 @@ and open the template in the editor.
         if(bval){
             $.post('index.php', 'controller=listaproyecto&action=calcular_fecha&' + str, function(data)
             {
-           alert(data);       
+              
         $("#fecha_l").val(data);
             });
         }
