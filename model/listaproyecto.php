@@ -186,7 +186,7 @@ FROM
 proceso_proyecto
 right JOIN detalle_proceso_proyecto 
 ON detalle_proceso_proyecto.idproceso_proyecto = proceso_proyecto.idproceso_proyecto
-WHERE detalle_proceso_proyecto.idproyecto=:p1)");
+WHERE detalle_proceso_proyecto.idproyecto=:p1) limit 1");
               $stmt2->bindValue(':p1', $id , PDO::PARAM_INT);
               $stmt2->execute();
               return $stmt2->fetchAll();   

@@ -149,7 +149,38 @@ public function editar_estado() {
         
 	}
        
-    
+    public function calcular_fecha() {
+        $fecha_inicio = $_REQUEST['fecha_inicio'];
+       echo $fecha_despues = self::operacion_fecha($fecha_inicio, 1);
+        $fechats = strtotime($fecha_despues); //a timestamp
+
+//el parametro w en la funcion date indica que queremos el dia de la semana
+//lo devuelve en numero 0 domingo, 1 lunes,....
+switch (date('w', $fechats)){
+    case 0: $nd= "Domingo"; $ret=1;break;
+    case 1: $nd= "Lunes"; $ret=0;break;
+    case 2: $nd= "Martes"; $ret=0; break;
+    case 3: $nd= "Miercoles"; $ret=0; break;
+    case 4: $nd= "Jueves"; $ret=0; break;
+    case 5: $nd= "Viernes"; $ret=0; break;
+    case 6: $nd= "Sabado"; $ret=2;break;
+}
+/*if($ret>0)
+{
+    $fecha_despues=self::operacion_fecha($fecha, $ret);
+}*/
+print_r(json_encode(array("fecha"=>$fecha_despues)));
+    }
+
+    public function operacion_fecha($fecha, $dias) {
+        list ($dia, $mes, $ano) = explode("-", $fecha);
+        if (!checkdate($mes, $dia, $ano)) {
+            return false;
+        }
+        $dia = $dia + $dias;
+        $fecha = date("d-m-Y", mktime(0, 0, 0, $mes, $dia, $ano));
+        return $fecha;
+    }
 
 }
 

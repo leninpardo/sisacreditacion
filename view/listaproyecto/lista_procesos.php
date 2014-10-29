@@ -32,7 +32,8 @@
             <th>Fecha Entrega/Culminacion</th>
             <th>Descripcion</th>
             <th>Estado</th>
-            <th>Acciones</th>
+            <th colspan="2">Acciones</th>
+            
         </tr>
     
     <?php 
@@ -64,20 +65,38 @@
               }
           }
           echo "<th><a class='procesos btn btn-info proyecto='".$proyecto[0][0]."' val='$l[0]' id='' href='#'>Verificar/culminar proceso</a></th>";
+          if($l[7]==2)
+          {
+          echo "<th>*.*</th>";
+          }  else {
+              ?>
+        <th>
+            <div>
+    <a class="btn btn-default" id='agregar'>Agregar</a>
+</div>
+        </th>
+        <?php 
+          }
      echo '</tr>';
     }
     
     }
     else{
-        echo "<tr><td>No se encontraron procesos en el proyecto agregue</td></tr>";
+        ?>
+        <tr>
+            <th colspan="8"></th>
+            <th>
+                <a class="btn btn-default" id='agregar'>Agregar</a>
+            </th>
+        </tr>
+        <?php 
+        ///echo "<tr><td>No se encontraron procesos en el proyecto agregue</td></tr>";
     }
     
         ?>
         </table>
 </div>
-<div>
-    <a class="btn btn-default" id='agregar'>Agregar procesos al proyecto</a>
-</div>
+
 
 
 

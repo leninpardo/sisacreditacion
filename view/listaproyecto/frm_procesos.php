@@ -27,6 +27,10 @@ and open the template in the editor.
                 <input class="text-info" type="text" name="fecha_i" id="fecha_i" />
             </div>
             <div>
+                <label>Cantidad(Dias):</label>
+                <input class="text-info" type="text" name="n_dias" id="n_dias" />
+            </div>
+            <div>
                 <label>Fecha Limite:</label>
                 <input class="text-primary" type="text" name="fecha_l" id="fecha_l" />
             </div>
@@ -44,7 +48,18 @@ and open the template in the editor.
 <script>
     $(function()
     {
-        
+        $("#n_dias").keyup(function(){
+                      bval = true;
+        bval = bval && $(this).required();
+        str="fecha_inicio="+$("#fecha_i").val()+"&n_dias="+$(this).val();
+        if(bval){
+            $.post('index.php', 'controller=listaproyecto&action=calcular_fecha&' + str, function(data)
+            {
+                $("#fecha_f").val(data.fecha);
+            });
+        }
+        return false;  
+        });
         $("#cancel").click(function() {
             $.unblockUI({
                 onUnblock: function() {
