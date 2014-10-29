@@ -128,16 +128,16 @@ tinymce.init({
                     </div>
 
 
-                        <table id="tablaubi" width="60%" class="tablaubigeo" border="2" style="display: none; border-radius: 4px 4px 0 0; " align="center">
+                        <table id="tablaubi" width="60%" class="tablaubigeo" border="0px" cellpadding="1px" cellspacing="1px" style="display: none;" align="center">
                                 <tr style="font-size: 16px; color: #555;background: #e8dceb" >
                                     <td width="20%" align="center">
-                                        DEPARTAMENTO
+                                       <b>DEPARTAMENTO</b>
                                     </td>
                                     <td width="20%" align="center">
-                                        PROVINCIA
+                                       <b>PROVINCIA</b>
                                     </td>
                                     <td width="20%" align="center">
-                                      DISTRITO
+                                      <b>DISTRITO</b>
                                     </td>
                                 </tr>
                             </table>

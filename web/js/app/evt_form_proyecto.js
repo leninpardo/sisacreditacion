@@ -45,7 +45,7 @@ $(function() {
     
         var departamento=$("#departamento").val();
         var provincia=$("#provincia").val();
-        html="<tr><td>"+departamento+"</td><td>"+provincia+"</td><td>"+valor+"<input type='hidden' name='ubigeo' value='"+ids+"'/></td></tr>";
+        html="<tr bgcolor='white' align='center'><td>"+departamento+"</td><td>"+provincia+"</td><td>"+valor+"<input type='hidden' name='ubigeo' value='"+ids+"'/></td></tr>";
         $("#tablaubi").append(html);
         $("#tablaubi").attr({'style':' '});
         var select1 = $('#departamento');
@@ -86,7 +86,7 @@ var validarForm = function ()
 {
 
 bval = true;
-    bval = bval && $( "#nombre_proyecto_ifr" ).required();
+    bval = bval && $( "#nombre_proyecto" ).required();
     bval = bval && $( "#idtipo_proyecto" ).required();
     //bval = bval && $( "#departamento" ).required();
     //bval = bval && $( "#provincia" ).required();
