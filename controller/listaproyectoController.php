@@ -151,7 +151,8 @@ public function editar_estado() {
        
     public function calcular_fecha() {
         $fecha_inicio = $_REQUEST['fecha_inicio'];
-       echo $fecha_despues = self::operacion_fecha($fecha_inicio, 1);
+        
+        $fecha_despues = self::operacion_fecha($fecha_inicio, 1);
         $fechats = strtotime($fecha_despues); //a timestamp
 
 //el parametro w en la funcion date indica que queremos el dia de la semana
@@ -169,11 +170,11 @@ switch (date('w', $fechats)){
 {
     $fecha_despues=self::operacion_fecha($fecha, $ret);
 }*/
-print_r(json_encode(array("fecha"=>$fecha_despues)));
+print_r((self::validar_fecha($fecha_despues)));
     }
 
     public function operacion_fecha($fecha, $dias) {
-        list ($dia, $mes, $ano) = explode("-", $fecha);
+        list ($ano, $mes, $dia) = explode("-", $fecha);
         if (!checkdate($mes, $dia, $ano)) {
             return false;
         }
@@ -181,6 +182,13 @@ print_r(json_encode(array("fecha"=>$fecha_despues)));
         $fecha = date("d-m-Y", mktime(0, 0, 0, $mes, $dia, $ano));
         return $fecha;
     }
+    function validar_fecha($fecha){
+$fecha = strtotime($fecha);
+$anio = (date('Y',$fecha));
+$mes = (date('m',$fecha));
+$dia =(date('d',$fecha));
+return $anio.'-'.$mes.'-'.$dia;
+}
 
 }
 
