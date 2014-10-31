@@ -139,6 +139,10 @@ tinymce.init({
                                     <td width="20%" align="center">
                                       <b>DISTRITO</b>
                                     </td>
+                                    <td width="20%" align="center">
+                                        <b>ELIMINAR</b>
+                                    </td>
+                                    
                                 </tr>
                             </table>
                         <br>
