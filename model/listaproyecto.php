@@ -91,7 +91,52 @@ WHERE proyecto.idproyecto=:id");
         return array($p1 , $p2[2]);
         
     }
-    
+    public function calcular_fecha($fecha,$n_dias) {
+        $fecha_inicio = $fecha;
+        
+        $fecha_despues = self::operacion_fecha(self::validar_fecha2($fecha_inicio), $n_dias);
+        $fechats = strtotime($fecha_despues); //a timestamp
+
+//el parametro w en la funcion date indica que queremos el dia de la semana
+//lo devuelve en numero 0 domingo, 1 lunes,....
+switch (date('w', $fechats)){
+    case 0: $nd= "Domingo"; $ret=1;break;
+    case 1: $nd= "Lunes"; $ret=0;break;
+    case 2: $nd= "Martes"; $ret=0; break;
+    case 3: $nd= "Miercoles"; $ret=0; break;
+    case 4: $nd= "Jueves"; $ret=0; break;
+    case 5: $nd= "Viernes"; $ret=0; break;
+    case 6: $nd= "Sabado"; $ret=2;break;
+}
+if($ret>0)
+{
+    $fecha_despues=self::operacion_fecha(self::validar_fecha2($fecha_despues), $ret);
+}
+return ((self::validar_fecha($fecha_despues)));
+    }
+
+    public function operacion_fecha($fecha, $dias) {
+     list ($dia,$mes,$ano)=explode("-",$fecha); 
+if (!checkdate($mes,$dia,$ano)){return false;} 
+$dia=$dia+$dias; 
+$fecha=date( "d-m-Y", mktime(0,0,0,$mes,$dia,$ano) ); 
+return $fecha;  
+    } 
+        public function validar_fecha($fecha){
+$fecha = strtotime($fecha);
+$anio = (date('Y',$fecha));
+$mes = (date('m',$fecha));
+$dia =(date('d',$fecha));
+return $anio.'-'.$mes.'-'.$dia;
+}
+       public function validar_fecha2($fecha){
+$fecha = strtotime($fecha);
+$anio = (date('Y',$fecha));
+$mes = (date('m',$fecha));
+$dia =(date('d',$fecha));
+return $dia.'-'.$mes.'-'.$anio;
+}
+
     public  function lista_procesos($id){
             $stmt = $this->db->prepare("SELECT
 proceso_proyecto.idproceso_proyecto,
@@ -106,7 +151,7 @@ FROM
 proceso_proyecto
 INNER JOIN detalle_proceso_proyecto ON proceso_proyecto.idproceso_proyecto = detalle_proceso_proyecto.idproceso_proyecto
 INNER JOIN proyecto ON proyecto.idproyecto = detalle_proceso_proyecto.idproyecto
-WHERE detalle_proceso_proyecto.idproyecto=".$id);
+WHERE detalle_proceso_proyecto.idproyecto=".$id."");
               //$stmt2->bindValue(':p1', $id , PDO::PARAM_INT);
               $stmt->execute();
               return $stmt->fetchAll();
@@ -158,11 +203,27 @@ where detalle_proceso_proyecto.idproyecto=:p1 and detalle_proceso_proyecto.idpro
               $stmt->bindValue(':p4', $_P['obs'], PDO::PARAM_STR);
               $stmt->execute();   
               $p2 = $stmt->errorInfo();
+                 $array= array("rep"=>1 , "msg"=>$p2);
+                 ////
+                $id_proceso=$_P['idproceso']+1;
+              $stmt4=  $this->db->prepare("select * from proceso_proyecto where idproceso_proyecto=".$id_proceso);
+              $stmt4->execute();
+              $datos_procesos=$stmt4->fetchAll();
+              
+              
+              //hacemos automaticamnte que siguiente proceso
+                   $fecha_limite = self:: calcular_fecha(date('Y-m-d'), $datos_procesos[0][4]);
+        $sql3 = $this->Query("usp_detalle_procesos(:p1,:p2,:p3,:p4,1)");
+        $stmt3 = $this->db->prepare($sql3);
+        $stmt3->bindValue(':p1', $_P["id_proyecto"], PDO::PARAM_INT);
+        $stmt3->bindValue(':p2', $id_proceso, PDO::PARAM_INT);
+        $stmt3->bindValue(':p3', date("Y-m-d"), PDO::PARAM_STR);
+        $stmt3->bindValue(':p4', $fecha_limite, PDO::PARAM_STR);
+        $stmt3->execute();
+        $p3 = $stmt3->errorInfo();
+        $array = array("rep" => 1, "msg" => $p3);
            //$stmt->db->commit();            
-             
-                            
-        $array= array("rep"=>1 , "msg"=>$p2);
-      
+           
         return $array;
     }
         public  function ver_proyecto($id){
@@ -192,7 +253,7 @@ FROM
 proceso_proyecto
 right JOIN detalle_proceso_proyecto 
 ON detalle_proceso_proyecto.idproceso_proyecto = proceso_proyecto.idproceso_proyecto
-WHERE detalle_proceso_proyecto.idproyecto=:p1) limit 1");
+WHERE detalle_proceso_proyecto.idproyecto=:p1)and proceso_proyecto.subprocesos=null limit 1");
               $stmt2->bindValue(':p1', $id , PDO::PARAM_INT);
               $stmt2->execute();
               return $stmt2->fetchAll();   

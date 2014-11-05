@@ -157,10 +157,10 @@ $("#emergente").load("index.php?controller=listaproyecto&action=get_verificar_pr
                           //  overlayCSS: { backgroundColor: 'white' },
 				message: $("#emergente"),
 				css:{
-					top: '10%',
-					width: '77%',
-					height: '85%',
-					left: '15%'
+					top: '0%',
+					width: '100%',
+					height: '100%',
+					left: '0%'
                                         //backgroundColor: '#5d881a'
 				}
 			}); 

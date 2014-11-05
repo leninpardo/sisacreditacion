@@ -42,7 +42,32 @@ and open the template in the editor.
         </fieldset>
         
     </div>
-    <div class="span10 form-actions">
+    <div class="span5">
+        <h3>Detalle de los sub-procesos</h3>
+        <table class="table table-hover table-bordered">
+            <tr>
+               <td> item</td>
+               <td>Sub-proceso</td>
+               <td>Docente</td>
+            </tr>
+            <?php 
+            $i=1;
+            foreach ($sub_procesos as $sbp)
+            {
+                ?>
+              <tr>
+                  <td><?php echo $i;?></td>
+                  <td><?php echo $sub_procesos->nombre; ?></td>
+                  <td><?php echo $select_docente;?> </td>
+              </tr>
+            <?php
+            $i++;
+            }
+            ?>
+          
+        </table>
+    </div>
+    <div class="span7 form-actions">
         <fieldset>
 
             <legend>Acciones</legend>
@@ -71,15 +96,17 @@ and open the template in the editor.
         });
      
         $("#guardar").click(function() {
+        
             str = $("#frm_procesos").serialize();
                 bval = true;
         
-        bval = bval && $("#fecha_e").required();
-        bval = bval && $("#obs").required();
+       // bval = bval && $("#fecha_e").required();
+        //bval = bval && $("#obs").required();
+        alert(str);
         if(bval){
             $.post('index.php', 'controller=listaproyecto&action=update_procesos&' + str, function(data)
             {
-                if (data.rep!=1) {
+                if (data.rep==1) {
                     alert("se Finalizo correctamente");
                     $.unblockUI({
                         onUnblock: function() {
@@ -88,9 +115,9 @@ and open the template in the editor.
                     });
                     location.reload();
                 } else {
-                    alert(data.rep);
+                    alert(data.rep.message);
                 }
-            });
+            },'json');
             }
             return false;
         });

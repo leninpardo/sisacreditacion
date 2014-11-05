@@ -23,6 +23,7 @@ class listaproyectoController extends Controller {
       
          echo $envio;
          }
+         
 public function editar_estado() {
     $obj=new listaproyecto();
     $data=array();
@@ -35,6 +36,7 @@ public function editar_estado() {
         $view->render();
   
          }  
+         
          public function get_procesos()
          {
             $obj=new listaproyecto();            
@@ -51,7 +53,6 @@ public function editar_estado() {
              $obj=new listaproyecto();
              print_r(json_encode($obj->get_procesos_all($_REQUEST['id'])));
          }
-
 
          public function save_procesos()
          {
@@ -187,6 +188,7 @@ $dia=$dia+$dias;
 $fecha=date( "d-m-Y", mktime(0,0,0,$mes,$dia,$ano) ); 
 return $fecha;  
     }
+    
     function validar_fecha($fecha){
 $fecha = strtotime($fecha);
 $anio = (date('Y',$fecha));
