@@ -6,6 +6,9 @@ require_once '../model/listaproyecto.php';
 
 class listaproyectoController extends Controller {
 
+    
+    
+   
     public function index() {
             
         $data['tabla2']=  $this->grilla_proyecto();
@@ -64,15 +67,40 @@ public function editar_estado() {
          {
                $obj=new listaproyecto();            
                $data=array();
-    $data['datos']=$obj->lista_verificar_procesos_proyecto($_REQUEST['idproyecto'],$_REQUEST['idproceso']);
+          
+    $datos=$obj->lista_verificar_procesos_proyecto($_REQUEST['idproyecto'],$_REQUEST['idproceso']);
+   $data['datos']=$datos;
+   // $data['sub_procesos']=$obj->lista_subprocesos($_REQUEST['idproceso']);
+    
+    $data_docentes=$obj->get_docente();
+    $select="<select name='docentes' id='docentes'><option value=''>::Seleccione::</option>";
+    foreach ($data_docentes as $d)
+    {
+    if($datos[0][10]==$d[0]){
+       $select.="<option selected value='$d[0]'>".utf8_encode($d[1])."</option>";
+    }else{
+     $select.="<option value='$d[0]'>".utf8_encode($d[1])."</option>";   
+    }
+    }
+    $select.="</select>";
+    
+   $data['select_docente']=$select;
       $view = new View();
         $view->setData($data);
+        if($datos[0][11]==0){
         $view->setTemplate('../view/listaproyecto/verificar_procesos.php');
+        }else{
+          $view->setTemplate('../view/listaproyecto/verificar_subprocesos.php');  
+        }
         echo $view->renderPartial();  
          }
          public function update_procesos(){
            $obj=new listaproyecto();
           print_r(json_encode($obj->update_procesos($_REQUEST)));
+         }
+          public function update_subprocesos(){
+           $obj=new listaproyecto();
+          print_r(json_encode($obj->update_subprocesos($_REQUEST)));
          }
          ///
         public function getDetalleProyecto ()

@@ -39,34 +39,11 @@ and open the template in the editor.
                 <label>Documento</label>
                 <input type="file" name="documento" id="documento" value=""/>
             </div>
+     
         </fieldset>
         
     </div>
-    <div class="span5">
-        <h3>Detalle de los sub-procesos</h3>
-        <table class="table table-hover table-bordered">
-            <tr>
-               <td> item</td>
-               <td>Sub-proceso</td>
-               <td>Docente</td>
-            </tr>
-            <?php 
-            $i=1;
-            foreach ($sub_procesos as $sbp)
-            {
-                ?>
-              <tr>
-                  <td><?php echo $i;?></td>
-                  <td><?php echo $sub_procesos->nombre; ?></td>
-                  <td><?php echo $select_docente;?> </td>
-              </tr>
-            <?php
-            $i++;
-            }
-            ?>
-          
-        </table>
-    </div>
+ 
     <div class="span7 form-actions">
         <fieldset>
 

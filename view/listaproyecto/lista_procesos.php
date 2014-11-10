@@ -1,4 +1,5 @@
 
+        
 <h6 class="ui-widget-header">Verificacion de los procesos del proyectos</h6>
 <div>
     <table>
@@ -63,7 +64,7 @@
     foreach ($lista as $k=>$l)
     {
      echo "<tr>";
-    // echo "<td>".$l[0]."</td>";
+   
       echo "<td>".$l[1]."</td>";
        echo "<td>".$l[2]."</td>";
         echo "<td>".$l[3]."</td>";
@@ -100,7 +101,8 @@
           echo "<th>*.*</th>";
           }  else {
                 echo "<th><a class='procesos btn btn-info glyphicon glyphicon-check' proyecto='".$proyecto[0][0]."' val='$l[0]' id='' href='#'></a></th>";
-              ?>
+              
+                ?>
         <th>
            
                 <?php if($k+1==count($lista)){?>
@@ -112,6 +114,81 @@
         <?php 
           }
      echo '</tr>';
+     ?>
+        <?php 
+           $model=new listaproyecto();
+          $datos_sub=$model->lista_subprocesos($l[0]);
+          if($datos_sub!=null){
+        ?>
+        <tr>
+            <td colspan="10">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $l[0]; ?>" aria-expanded="false" aria-controls="collapse<?php echo $l[0]; ?>">
+            Ver subprocesos de <?php echo $l[1];?>  
+        </a>
+      </h4>
+    </div>
+    <div id="collapse<?php echo $l[0]; ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<?php echo $l[0]; ?>">
+      <div class="panel-body">
+       <?php 
+           // require_once 'model/listaproyecto.php';
+           
+              if($datos_sub==null)
+              {
+               echo "no hay subprocesos";   
+              }else{
+              
+                  echo "<table class='table table-bordered table-hover table-responsive'>";
+                  foreach ($datos_sub as $ds)
+                  {
+                     echo "<tr>";
+                       echo "<td><input type='hidden' name='' id='' />" . $ds[1] . "</td>";
+                       echo "<td>" . $ds[2] . "</td>";
+                       echo "<td>" . $ds[3] . "</td>";
+                       echo "<td>" . $ds[4] . "</td>";
+                       echo "<td>" . $ds[5] . "</td>";
+                       echo "<td>" . $ds[6] . "</td>";
+                        if ($ds[7] == 1) {
+                           $dias = dias_transcurridos(date("Y-m-d"), $ds[4]);
+                           echo "<th>" . $dias['estado'] . " " . $dias['cantidad'] . " dias </th>";
+                           if (date('Y-m-d') > $ds[4]) {
+                               echo "<th><a class='btn btn-danger'>En proceso,Fecha Retrasada</a></th>";
+                           } else {
+                               echo "<th ><a class='btn btn-warning'>En proceso</a></th>";
+                           }
+                       } else {
+                           //echo "<th>Finalizado el proceso</th>"; 
+                           $dias = dias_transcurridos($ds[5], $ds[4]);
+                           echo "<th> Se culmino " . $dias['estado1'] . " " . $dias['cantidad'] . " Dias</th>";
+                           if ($ds[5] > $ds[4]) {
+                               echo "<th><a class='btn btn-success'>Finalizado,Fecha Retrasada</a></th>";
+                           } else {
+                               echo "<th><a class='btn btn-success'>Finalizado</a></th>";
+                           }
+                       }
+                       
+                          if ($ds[7] == 1) {
+                           echo "<th><span class='btn btn-info procesos btn glyphicon glyphicon-unchecked' form-control-feedback' proyecto='" . $proyecto[0][0] . "' val='$ds[0]' id='' href='#'></span></th>";
+                           echo "<th>*.*</th>";
+                       } else {
+                           echo "<th><a class='procesos btn btn-info glyphicon glyphicon-check' proyecto='" . $proyecto[0][0] . "' val='$ds[0]' id='' href='#'></a></th>";
+                       }
+                       echo "</tr>";
+                   }
+                   echo "</table>";
+               }
+       ?>
+      </div>
+    </div>
+  </div>
+        </div>
+            </td>
+        </tr>
+        <?php
+    }
     }
     
     }
@@ -131,10 +208,7 @@
         ?>
         </table>
 </div>
-
-
-
-
+	
 <!-- modal de asignar nueva proceso-->
  <div id="emergente" >
     
@@ -157,10 +231,10 @@ $("#emergente").load("index.php?controller=listaproyecto&action=get_verificar_pr
                           //  overlayCSS: { backgroundColor: 'white' },
 				message: $("#emergente"),
 				css:{
-					top: '0%',
-					width: '100%',
-					height: '100%',
-					left: '0%'
+					top: '3%',
+					width: '77%',
+					height: '80%',
+					left: '15%'
                                         //backgroundColor: '#5d881a'
 				}
 			}); 

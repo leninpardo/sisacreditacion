@@ -71,7 +71,7 @@
                 <th>ESCUELA</th>
                 <th>ESTADO</th>
                 <th >VER MAS</th>
-                <?php if (isset($_SESSION["perfil"]) && ($_SESSION["perfil"] == 'PRESIDENTE DE PROYECTO DE INVESTIGACION')) { ?>
+                <?php if (isset($_SESSION["perfil"]) && ($_SESSION["perfil"] == 'PRESIDENTE DE PROYECTO DE INVESTIGACION'||$_SESSION["idperil"] == 3)) { ?>
                     <th >MODIFICAR ESTADO</th>
                 <?php } ?>
                 <?php if (isset($_SESSION["perfil"]) && ($_SESSION["perfil"] == 'ALUMNO')) { ?>
@@ -119,7 +119,7 @@
 
                     </td>
                     
-                    <?php if (isset($_SESSION["perfil"]) && ($_SESSION["perfil"] == 'PRESIDENTE DE PROYECTO DE INVESTIGACION')) { ?>
+                    <?php if (isset($_SESSION["perfil"]) && ($_SESSION["perfil"] == 'PRESIDENTE DE PROYECTO DE INVESTIGACION'||$_SESSION["idperil"] == 3)) { ?>
                         <td>
                            
 <!--                            <div id="abrir2" style="margin-left: 20px;">-->

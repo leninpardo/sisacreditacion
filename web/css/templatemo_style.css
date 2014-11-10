@@ -6,7 +6,7 @@ body {
 	font-size: 11px;
 	color: #666;
 	background: #fff;
-	text-align: center;
+	/*text-align: center;*/
 }
 
 a:link, a:visited { color: #ffffff; text-decoration: none; font-weight: normal; } 

@@ -151,7 +151,7 @@ FROM
 proceso_proyecto
 INNER JOIN detalle_proceso_proyecto ON proceso_proyecto.idproceso_proyecto = detalle_proceso_proyecto.idproceso_proyecto
 INNER JOIN proyecto ON proyecto.idproyecto = detalle_proceso_proyecto.idproyecto
-WHERE detalle_proceso_proyecto.idproyecto=".$id."");
+WHERE detalle_proceso_proyecto.idproyecto=".$id." and proceso_proyecto.subprocesos=0");
               //$stmt2->bindValue(':p1', $id , PDO::PARAM_INT);
               $stmt->execute();
               return $stmt->fetchAll();
@@ -201,6 +201,7 @@ where detalle_proceso_proyecto.idproyecto=:p1 and detalle_proceso_proyecto.idpro
               $stmt->bindValue(':p2', $_P['idproceso'], PDO::PARAM_INT);
               $stmt->bindValue(':p3', $_P['fecha_e'], PDO::PARAM_STR);
               $stmt->bindValue(':p4', $_P['obs'], PDO::PARAM_STR);
+             // $stmt->bindValue(':p5', $_P['docentes'], PDO::PARAM_STR);
               $stmt->execute();   
               $p2 = $stmt->errorInfo();
                  $array= array("rep"=>1 , "msg"=>$p2);
@@ -222,19 +223,100 @@ where detalle_proceso_proyecto.idproyecto=:p1 and detalle_proceso_proyecto.idpro
         $stmt3->execute();
         $p3 = $stmt3->errorInfo();
         $array = array("rep" => 1, "msg" => $p3);
+        
+        ///verificamos si tiene subprocesos
+                $stmt5=  $this->db->prepare("select * from proceso_proyecto where subprocesos=".$id_proceso);
+              $stmt5->execute();
+              $datos_sub_procesos=$stmt5->fetchAll();
+              
+    if($datos_sub_procesos!=null)
+    {
+        foreach ($datos_sub_procesos as $ds)
+        {
+              //hacemos automaticamnte que siguiente proceso
+                   $fecha_limite = self:: calcular_fecha(date('Y-m-d'), $ds[4]);
+        $sql3 = $this->Query("usp_detalle_procesos(:p1,:p2,:p3,:p4,1)");
+        $stmt3 = $this->db->prepare($sql3);
+        $stmt3->bindValue(':p1', $_P["id_proyecto"], PDO::PARAM_INT);
+        $stmt3->bindValue(':p2', $ds[0], PDO::PARAM_INT);
+        $stmt3->bindValue(':p3', date("Y-m-d"), PDO::PARAM_STR);
+        $stmt3->bindValue(':p4', $fecha_limite, PDO::PARAM_STR);
+        $stmt3->execute();
+        //$p3 = $stmt3->errorInfo();
+        //$array = array("rep" => 1, "msg" => $p3);
+        }
+        
+    }
+    
            //$stmt->db->commit();            
            
         return $array;
     }
-        public  function ver_proyecto($id){
-            $stmt2 = $this->db->prepare("SELECT nombre_proyecto,concat(profesores.NombreProfesor,' ',profesores.ApellidoPaterno) as docente from proyecto
+    
+           function update_subprocesos($_P)
+    {
+       $sql2 = ("UPDATE detalle_proceso_proyecto set detalle_proceso_proyecto.fecha_finalizacion=:p3,detalle_proceso_proyecto.estado=2 ,
+           detalle_proceso_proyecto.descripcion=:p4,detalle_proceso_proyecto.ingeniero=:p5
+where detalle_proceso_proyecto.idproyecto=:p1 and detalle_proceso_proyecto.idproceso_proyecto=:p2");
+          $stmt = $this->db->prepare($sql2);
+  
+
+              $stmt->bindValue(':p1', $_P["id_proyecto"] , PDO::PARAM_INT);
+              $stmt->bindValue(':p2', $_P['idproceso'], PDO::PARAM_INT);
+              $stmt->bindValue(':p3', $_P['fecha_e'], PDO::PARAM_STR);
+              $stmt->bindValue(':p4', $_P['obs'], PDO::PARAM_STR);
+              $stmt->bindValue(':p5', $_P['docentes'], PDO::PARAM_STR);
+              $stmt->execute();   
+              $p2 = $stmt->errorInfo();
+                 $array= array("rep"=>1 , "msg"=>$p2);      
+           
+        return $array;
+    }
+        public function ver_proyecto($id) {
+        $stmt2 = $this->db->prepare("SELECT nombre_proyecto,concat(profesores.NombreProfesor,' ',profesores.ApellidoPaterno) as docente from proyecto
 INNER JOIN detalle_profesor_proy_fun on(detalle_profesor_proy_fun.idproyecto=proyecto.idproyecto)
 INNER JOIN profesores on(profesores.CodigoProfesor=detalle_profesor_proy_fun.CodigoProfesor)
  WHERE proyecto.idproyecto=:p1");
-              $stmt2->bindValue(':p1', $id , PDO::PARAM_INT);
-              $stmt2->execute();
-              return $stmt2->fetchAll();
+        $stmt2->bindValue(':p1', $id, PDO::PARAM_INT);
+        $stmt2->execute();
+        return $stmt2->fetchAll();
     }
+
+    public function get_docente()
+    {
+        /*SELECT  CodigoProfesor,concat(NombreProfesor,' ', ApellidoPaterno,'  '  ,ApellidoPaterno) as nombre  from profesores*/
+             $stmt2 = $this->db->prepare("SELECT  CodigoProfesor,concat(NombreProfesor,' ', ApellidoPaterno,'  '  ,ApellidoPaterno) as nombre  from profesores");
+      
+        $stmt2->execute();
+        return $stmt2->fetchAll();
+        
+    }
+    
+      public function lista_subprocesos($id) {
+       /* $stmt2 = $this->db->prepare("
+SELECT proceso_proyecto.* from proceso_proyecto INNER JOIN detalle_proceso_proyecto on(proceso_proyecto.idproceso_proyecto=detalle_proceso_proyecto.idproceso_proyecto)WHERE proceso_proyecto.subprocesos=$id
+UNION
+SELECT proceso_proyecto.*  from proceso_proyecto LEFT  JOIN detalle_proceso_proyecto on(proceso_proyecto.idproceso_proyecto=detalle_proceso_proyecto.idproceso_proyecto)WHERE proceso_proyecto.subprocesos=".$id);
+    */
+          $stmt2=  $this->db->prepare("SELECT
+proceso_proyecto.idproceso_proyecto,
+proceso_proyecto.nombre,
+proceso_proyecto.responsable,
+detalle_proceso_proyecto.fecha_ingreso,
+detalle_proceso_proyecto.fecha_plazo,
+detalle_proceso_proyecto.fecha_finalizacion,
+detalle_proceso_proyecto.descripcion,
+detalle_proceso_proyecto.estado
+FROM
+proceso_proyecto
+INNER JOIN detalle_proceso_proyecto ON proceso_proyecto.idproceso_proyecto = detalle_proceso_proyecto.idproceso_proyecto
+INNER JOIN proyecto ON proyecto.idproyecto = detalle_proceso_proyecto.idproyecto
+WHERE   proceso_proyecto.subprocesos=$id");
+          //$stmt2->bindValue(':p1', $id, PDO::PARAM_INT);
+        $stmt2->execute();
+        return $stmt2->fetchAll();
+    }
+    
     public  function lista_procesos_left($id)
     {
          $stmt2 = $this->db->prepare("
@@ -271,7 +353,9 @@ detalle_proceso_proyecto.fecha_ingreso,
 detalle_proceso_proyecto.fecha_plazo,
 detalle_proceso_proyecto.fecha_finalizacion,
 detalle_proceso_proyecto.descripcion,
-detalle_proceso_proyecto.estado
+detalle_proceso_proyecto.estado,
+detalle_proceso_proyecto.ingeniero,
+proceso_proyecto.subprocesos
 FROM
 proceso_proyecto
 INNER JOIN detalle_proceso_proyecto ON proceso_proyecto.idproceso_proyecto = detalle_proceso_proyecto.idproceso_proyecto

@@ -68,7 +68,11 @@ class proyecto extends Main{
         $stmt->bindValue(':p32', $_P['financiamiento'] , PDO::PARAM_INT);
         $stmt->bindValue(':p33', $_P['CodigoEscuela'] , PDO::PARAM_INT);
         $stmt->bindValue(':p34', 1, PDO::PARAM_INT);
-
+   ///
+   foreach ($_P['ubigeo'] as $u)
+   {
+      
+   }
         
         $p1 = $stmt->execute();
         $p2 = $stmt->errorInfo();
