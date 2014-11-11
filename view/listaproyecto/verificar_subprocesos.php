@@ -74,6 +74,33 @@ and open the template in the editor.
         $("#fecha_e").datepicker({
             dateFormat: 'yy-mm-dd',
         });
+        
+      $("#docentes").change(function() {
+        
+            str = $("#frm_procesos").serialize();
+                bval = true;
+        
+       // bval = bval && $("#fecha_e").required();
+        //bval = bval && $("#obs").required();
+        //alert(str);
+        if(bval){
+            $.post('index.php', 'controller=listaproyecto&action=update_docente&' + str, function(data)
+            {
+                if (data.rep==1) {
+                    alert("se Finalizo correctamente");
+                    $.unblockUI({
+                        onUnblock: function() {
+                            $("#emergente").html("");
+                        }
+                    });
+                    location.reload();
+                } else {
+                    alert(data.rep.message);
+                }
+            },'json');
+            }
+            return false;
+        });
      
         $("#guardar").click(function() {
         
@@ -82,7 +109,7 @@ and open the template in the editor.
         
        // bval = bval && $("#fecha_e").required();
         //bval = bval && $("#obs").required();
-        alert(str);
+        //alert(str);
         if(bval){
             $.post('index.php', 'controller=listaproyecto&action=update_subprocesos&' + str, function(data)
             {

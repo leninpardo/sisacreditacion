@@ -79,7 +79,7 @@ and open the template in the editor.
         
        // bval = bval && $("#fecha_e").required();
         //bval = bval && $("#obs").required();
-        alert(str);
+       // alert(str);
         if(bval){
             $.post('index.php', 'controller=listaproyecto&action=update_procesos&' + str, function(data)
             {

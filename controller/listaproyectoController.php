@@ -231,8 +231,10 @@ $mes = (date('m',$fecha));
 $dia =(date('d',$fecha));
 return $dia.'-'.$mes.'-'.$anio;
 }
-
+public function update_docente(){
+    $obj=new listaproyecto();
+    $datos=$obj->update_docentes($_REQUEST);
+    print_r(json_encode($datos));
 }
-
- 
+}
 ?>

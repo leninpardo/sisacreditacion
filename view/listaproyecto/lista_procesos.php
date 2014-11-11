@@ -94,7 +94,7 @@
               }
           }
           
-        
+        if($_SESSION['perfil']=="PRESIDENTE DE PROYECTO DE INVESTIGACION"){
           if($l[7]==1)
           {
                 echo "<th><span class='btn btn-info procesos btn glyphicon glyphicon-unchecked' form-control-feedback' proyecto='".$proyecto[0][0]."' val='$l[0]' id='' href='#'></span></th>";
@@ -112,7 +112,10 @@
            
         </th>
         <?php 
+        }
+        
           }
+          
      echo '</tr>';
      ?>
         <?php 
@@ -169,13 +172,18 @@
                                echo "<th><a class='btn btn-success'>Finalizado</a></th>";
                            }
                        }
-                       
+                       if($_SESSION['perfil']=="PRESIDENTE DE PROYECTO DE INVESTIGACION" || $_SESSION['idperil']==3){
+                           if($_SESSION['idusuario']==$ds[8]){
+                           //if($)
                           if ($ds[7] == 1) {
                            echo "<th><span class='btn btn-info procesos btn glyphicon glyphicon-unchecked' form-control-feedback' proyecto='" . $proyecto[0][0] . "' val='$ds[0]' id='' href='#'></span></th>";
                            echo "<th>*.*</th>";
                        } else {
                            echo "<th><a class='procesos btn btn-info glyphicon glyphicon-check' proyecto='" . $proyecto[0][0] . "' val='$ds[0]' id='' href='#'></a></th>";
+                           }
+                           
                        }
+                  }
                        echo "</tr>";
                    }
                    echo "</table>";

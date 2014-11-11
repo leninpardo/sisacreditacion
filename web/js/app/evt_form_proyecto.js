@@ -37,7 +37,16 @@ $(function() {
             $("#distrito").empty().append(data);
         });
     });
-    
+   $(".eliminar").click(function(){
+       alert("hola");
+        var td = $(this).parent();
+        var tr = td.parent();
+        //change the background color to red before removing
+       // tr.css("background-color","#FF3700");
+
+        //tr.fadeOut(400, function(){
+            tr.remove();
+   });
     $("#distrito").change(function(){
         
         var ids=$(this).val();
@@ -45,7 +54,7 @@ $(function() {
     
         var departamento=$("#departamento").val();
         var provincia=$("#provincia").val();
-        html="<tr bgcolor='white' align='center'><td>"+departamento+"</td><td>"+provincia+"</td><td>"+valor+"<input type='hidden' name='ubigeo' value='"+ids+"'/></td> <td><button type='button' style='font-size: 10px;padding: 4px;'>Eliminar</button></td> </tr>";
+        html="<tr bgcolor='white' align='center'><td>"+departamento+"</td><td>"+provincia+"</td><td>"+valor+"<input type='hidden' name='ubigeo[]' value='"+ids+"'/></td> <td><button  class='eliminar' type='button' style='font-size: 10px;padding: 4px;'>Eliminar</button></td> </tr>";
         $("#tablaubi").append(html);
         $("#tablaubi").attr({'style':' '});
         var select1 = $('#departamento');
