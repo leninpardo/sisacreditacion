@@ -129,18 +129,7 @@ bval = true;
     //bval = bval && $( "#asignacion_recursos" ).required();
     bval = bval && $( "#CodigoEscuela" ).required();
     if ( bval ) {
-        //$("#frm").submit();
-        str=$("#frm").serialize();
-        alert(str);
-        $.post("index.php","controller=proyecto&action=save&"+str,function(data){
-           if(data.rep==1){
-              alert("ok"); 
-           }else if(data.rep==2){
-               
-           }else{
-              alert(data.msg); 
-           }
-        },'json');
+        $("#frm").submit();
     }
     return false;
 }

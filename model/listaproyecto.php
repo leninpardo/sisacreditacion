@@ -29,6 +29,7 @@ WHERE proyecto.idproyecto=:id");
                         INNER JOIN profesores ON profesores.CodigoProfesor = detalle_profesor_proy_fun.CodigoProfesor
                         INNER JOIN control_proyecto ON proyecto.idproyecto = control_proyecto.idproyecto
                         INNER JOIN estado_proyecto ON control_proyecto.idestado_proyecto = estado_proyecto.idestado_proyecto
+                        
                         where detalle_profesor_proy_fun.idfuncion=2 AND ((proyecto.nombre_proyecto LIKE'%a%')or (proyecto.tema_proyecto LIKE'%a%')or (profesores.NombreProfesor 
 
                         LIKE'%a%') or (profesores.ApellidoPaterno LIKE'%a%') or (profesores.ApellidoMaterno LIKE'%a%'))
