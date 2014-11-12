@@ -60,9 +60,9 @@ class ProyectoController extends Controller {
     
     public function save(){
         $obj = new proyecto();
-        if ($_POST['idproyecto'] == '') {
-            $p = $obj->insert($_POST);
-            for($i=1;$i<=$_POST["conta"];$i++)
+        if ($_REQUEST['idproyecto'] == '') {
+            $p = $obj->insert($_REQUEST);
+            for($i=1;$i<=$_REQUEST["conta"];$i++)
             {
             $p = $obj->insert_ob_esp($_POST['objetivos_especificos'.$i]);   
             }
@@ -80,6 +80,7 @@ class ProyectoController extends Controller {
                 $view->setLayout('../template/Layout.php');
                 $view->render();
             }
+           //print_r (json_encode($p));
         } else {
             $p = $obj->update($_POST);
             for($i=1;$i<=$_POST["conta"];$i++)

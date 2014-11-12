@@ -120,7 +120,7 @@
      ?>
         <?php 
            $model=new listaproyecto();
-          $datos_sub=$model->lista_subprocesos($l[0]);
+          $datos_sub=$model->lista_subprocesos($l[0],$proyecto[0][0]);
           if($datos_sub!=null){
         ?>
         <tr>

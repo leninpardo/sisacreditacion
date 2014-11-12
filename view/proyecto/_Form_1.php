@@ -128,8 +128,9 @@ tinymce.init({
                     </div>
 
 
-                        <table id="tablaubi" width="60%" class="tablaubigeo" border="0px" cellpadding="1px" cellspacing="1px" style="display: none;" align="center">
-                                <tr style="font-size: 16px; color: #555;background: #e8dceb" >
+                        <table id="tablaubi" width="60%" class="tablaubigeo" border="0px" cellpadding="1px" cellspacing="1px" style="" align="center">
+                            <thead>   
+                            <tr style="font-size: 16px; color: #555;background: #e8dceb" >
                                     <td width="20%" align="center">
                                        <b>DEPARTAMENTO</b>
                                     </td>
@@ -144,6 +145,11 @@ tinymce.init({
                                     </td>
                                     
                                 </tr>
+                            </thead>
+                            <tbody id="datos">
+                                
+                            </tbody>
+                            
                             </table>
                         <br>
                         <br>

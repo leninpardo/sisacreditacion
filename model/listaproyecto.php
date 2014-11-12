@@ -304,7 +304,7 @@ INNER JOIN profesores on(profesores.CodigoProfesor=detalle_profesor_proy_fun.Cod
         
     }
     
-      public function lista_subprocesos($id) {
+      public function lista_subprocesos($id,$id_p) {
        /* $stmt2 = $this->db->prepare("
 SELECT proceso_proyecto.* from proceso_proyecto INNER JOIN detalle_proceso_proyecto on(proceso_proyecto.idproceso_proyecto=detalle_proceso_proyecto.idproceso_proyecto)WHERE proceso_proyecto.subprocesos=$id
 UNION
@@ -324,7 +324,7 @@ FROM
 proceso_proyecto
 INNER JOIN detalle_proceso_proyecto ON proceso_proyecto.idproceso_proyecto = detalle_proceso_proyecto.idproceso_proyecto
 INNER JOIN proyecto ON proyecto.idproyecto = detalle_proceso_proyecto.idproyecto
-WHERE   proceso_proyecto.subprocesos=$id");
+WHERE   proceso_proyecto.subprocesos=$id  and detalle_proceso_proyecto.idproyecto=".$id_p);
           //$stmt2->bindValue(':p1', $id, PDO::PARAM_INT);
         $stmt2->execute();
         return $stmt2->fetchAll();

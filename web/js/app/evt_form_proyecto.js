@@ -37,15 +37,8 @@ $(function() {
             $("#distrito").empty().append(data);
         });
     });
-   $(".eliminar").click(function(){
-       alert("hola");
-        var td = $(this).parent();
-        var tr = td.parent();
-        //change the background color to red before removing
-       // tr.css("background-color","#FF3700");
-
-        //tr.fadeOut(400, function(){
-            tr.remove();
+   $(".elimina").click(function(){
+       alert("hola");       
    });
     $("#distrito").change(function(){
         
@@ -54,8 +47,8 @@ $(function() {
     
         var departamento=$("#departamento").val();
         var provincia=$("#provincia").val();
-        html="<tr bgcolor='white' align='center'><td>"+departamento+"</td><td>"+provincia+"</td><td>"+valor+"<input type='hidden' name='ubigeo[]' value='"+ids+"'/></td> <td><button  class='eliminar' type='button' style='font-size: 10px;padding: 4px;'>Eliminar</button></td> </tr>";
-        $("#tablaubi").append(html);
+        html="<tr bgcolor='white' align='center'><td>"+departamento+"</td><td>"+provincia+"</td><td>"+valor+"<input type='hidden' name='ubigeo[]' value='"+ids+"'/></td> <td><a  class='elimina btn btn-danger'  style='font-size: 10px;padding: 4px;'>Eliminar</a></td> </tr>";
+        $("#datos").append(html);
         $("#tablaubi").attr({'style':' '});
         var select1 = $('#departamento');
         var select2 = $('#provincia');
@@ -136,7 +129,18 @@ bval = true;
     //bval = bval && $( "#asignacion_recursos" ).required();
     bval = bval && $( "#CodigoEscuela" ).required();
     if ( bval ) {
-        $("#frm").submit();
+        //$("#frm").submit();
+        str=$("#frm").serialize();
+        alert(str);
+        $.post("index.php","controller=proyecto&action=save&"+str,function(data){
+           if(data.rep==1){
+              alert("ok"); 
+           }else if(data.rep==2){
+               
+           }else{
+              alert(data.msg); 
+           }
+        },'json');
     }
     return false;
 }

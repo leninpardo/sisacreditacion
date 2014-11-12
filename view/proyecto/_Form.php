@@ -80,7 +80,7 @@
                                 }?>
                     </div>
                     <div class="col-md-4">
-                        <span class="input-group-addon"><strong for="distrito">DISTRITO:</strong></span>
+                        <span class="input-group-addon"><strong for="distrito">DISTRITO---:</strong></span>
                         <?php if(!isset($distrito)){ ?>
                         <select id="distrito" name="distrito" class="form-control" style="width: 100%;">
                             <option value="">...</option>

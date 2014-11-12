@@ -68,15 +68,25 @@ class proyecto extends Main{
         $stmt->bindValue(':p32', $_P['financiamiento'] , PDO::PARAM_INT);
         $stmt->bindValue(':p33', $_P['CodigoEscuela'] , PDO::PARAM_INT);
         $stmt->bindValue(':p34', 1, PDO::PARAM_INT);
+         $p1 = $stmt->execute();
+        $p2 = $stmt->errorInfo();
    ///
-   foreach ($_P['ubigeo'] as $u)
+  foreach ($_P['ubigeo'] as $u)
    {
-      
+      $stmt2=  $this->db->prepare("insert into detalle_proyecto_ubigeo(idproyecto,ubigeo)values(:p1,:p2)");
+      $stmt2->bindValue(":p1", $xd, PDO::PARAM_INT);
+      $stmt2->bindValue(":p2", $u, PDO::PARAM_STR);
+      $p1=$stmt2->execute();
+       $p2 = $stmt->errorInfo();
    }
         
-        $p1 = $stmt->execute();
-        $p2 = $stmt->errorInfo();
+        
+       
+        if($p2[0]==null){
+             return array($p1 , $p2[2]);
+        }else{
         return array($p1 , $p2[2]);
+        }
         
     }
     function insert_ob_esp($_P ) {
