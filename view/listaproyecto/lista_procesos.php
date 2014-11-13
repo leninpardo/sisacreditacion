@@ -1,48 +1,59 @@
+<style type="text/css">
 
-        
+
+    .oddrowcolor{
+        background-color:#ffffff;
+    }
+    .evenrowcolor{
+        background-color:#e2e4ff;
+    }
+
+</style>
 <h6 class="ui-widget-header">Verificacion de los procesos del proyectos</h6>
-<div>
-    <table>
-        <tr>
-            <td>
-               Nombre Proyecto:
+<div >
+    <p align="center" ><table >
+        <tr style="font-size: 14px;font-family: Consolas;">
+            <td >
+                &nbsp;&nbsp;&nbsp; <b>Nombre Proyecto:&nbsp; </b>
             </td>
             <td>
-              <?php echo $proyecto[0][1]; ?>
+                <?php echo $proyecto[0][1]; ?>
                 <input type="hidden" id="idproyecto" name="idproyecto" value="<?php echo $proyecto[0][0];?>"/>
-               
+
             </td>
         </tr>
-        <tr>
+        <tr style="font-size: 14px;font-family: Consolas;">
             <td>
-                Jefe Proyecto:
+                &nbsp;&nbsp;&nbsp; <b>Jefe Proyecto: </b>
             </td>
             <td>
                 <?php echo $proyecto[0][2]; ?>
             </td>
         </tr>
     </table>
+    </p>
 </div>
+<br/>
 <div class="container-fluid">
-    <table class="table table-bordered table-hover table-responsive">
-        <tr>
-            <th rowspan="2">Actividad</th>
-            <th rowspan="2">Responsable</th>
-            <th rowspan="2">Fecha Ingresos/inicio</th>
-            <th rowspan="2">Fecha Plazo</th>
-            <th rowspan="2">Fecha Entrega/Culminacion</th>
-            <th rowspan="2">Descripcion</th>
-            <th rowspan="2" >Dias restantes</th>
-            <th rowspan="2">Estado</th>
-            <th colspan="2">Acciones</th>
-            
+    <table  class="table table-bordered  table-responsive altrowstable " id="alternatecolor"  aria-describedby="datatables_info">
+        <tr >
+            <b><th rowspan="2" bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;">Actividad</th>
+                <th rowspan="2" bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;">Responsable</th>
+                <th rowspan="2"bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;">Fecha Ingresos/inicio</th>
+                <th rowspan="2"bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;">Fecha Plazo</th>
+                <th rowspan="2" bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;">Fecha Entrega/Culminacion</th>
+                <th rowspan="2"bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;">Descripcion</th>
+                <th rowspan="2" bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;">Dias restantes</th>
+                <th rowspan="2" bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;">Estado</th>
+                <th colspan="2"bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;">Acciones</th></b>
         </tr>
         <tr>
-            <th>Verificar</th>
-            <th>Siguiente proceso</th>
+            <th bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;">Verificar</th>
+            <th bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;">Siguiente proceso</th>
         </tr>
-    
-    <?php 
+
+
+        <?php
     function dias_transcurridos($fecha_i,$fecha_f)
 {
 	$dias	= (strtotime($fecha_f)-strtotime($fecha_i))/86400;// para sacar en dias los segundos
@@ -270,4 +281,22 @@ $("#emergente").load("index.php?controller=listaproyecto&action=get_procesos&id=
 		});  
     });
     });
+</script>
+<script type="text/javascript">
+    function altRows(id){
+        if(document.getElementsByTagName){
+            var table = document.getElementById(id);
+            var rows = table.getElementsByTagName("tr");
+            for(i = 0; i < rows.length; i++){
+                if(i % 2 == 0){
+                    rows[i].className = "evenrowcolor";
+                }else{
+                    rows[i].className = "oddrowcolor";
+                }
+            }
+        }
+    }
+    window.onload=function(){
+        altRows('alternatecolor');
+    }
 </script>
