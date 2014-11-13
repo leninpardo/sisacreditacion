@@ -30,8 +30,14 @@ class solicitaproyectos extends Main{
         $data['rowspag'] = $this->getRowPag($data['total'], $p );        
         return $data;
     }
-    
-    function insert($_P ) {                 
+    public function aprobar($id)
+    {
+              
+        $stmt2 = $this->db->prepare("UPDATE proyecto set situacion=1 WHERE idproyecto=".$id); 
+        return $stmt2->execute();
+       
+    }
+            function insert($_P ) {                 
         $sql2 = $this->Query("sp_det_proy_alum_iu(0,:p1,:p2,:p3,:p4,:p5,:p6)");     
         $stmt2 = $this->db->prepare($sql2);
         $fecha=date("Y-m-d");

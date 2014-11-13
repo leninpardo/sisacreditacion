@@ -16,7 +16,12 @@ class solicitaproyectosController extends Controller {
         $view->setLayout('../template/Layout.php');
         $view->render();
          }
-         
+         public function aprobar()
+         {
+             $ob=new solicitaproyectos();
+             $ob->aprobar($_REQUEST['id']);
+              header('Location:index.php?controller=solicitaproyectos');
+         }
         public function getDetalleProyecto ()
        {
         $codproyecto=$_POST['idproyecto'];

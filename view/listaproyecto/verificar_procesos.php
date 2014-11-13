@@ -30,7 +30,7 @@ and open the template in the editor.
                 <input  class="text-primary" type="text" name="fecha_e" id="fecha_e" value="<?php echo $datos[0][7]; ?>"/>
             </div>
             <div>
-                <label>Fecha observaciones:</label>
+                <label>Observaciones:</label>
                 <textarea id="obs" name="obs">
                 <?php echo $datos[0][8]; ?>
                 </textarea>

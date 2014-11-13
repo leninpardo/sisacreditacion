@@ -85,7 +85,7 @@
                 <tr>  
 
                     <td class="hidden"> 
-                        <?php echo strtoupper(utf8_encode($value[0])); ?>
+                        <?php echo strtoupper(utf8_encode($value['idproyecto'])); ?>
 
                     </td>
 
@@ -112,9 +112,9 @@
                     <td>
 
                         <div id="abrir" style="margin-left: 20px;">
-                            <a><li id="<?= strtoupper(utf8_encode($value[0]))?>" style="margin: 2px;position: relative;padding: 4px 0;cursor: pointer;float: left;list-style: none; font-family: Calibri;" class="ui-state-default ui-corner-all" title=".ui-icon-circle-plus" >
+                            <a><li id="<?= strtoupper(utf8_encode($value['idproyecto']))?>" style="margin: 2px;position: relative;padding: 4px 0;cursor: pointer;float: left;list-style: none; font-family: Calibri;" class="ui-state-default ui-corner-all" title=".ui-icon-circle-plus" >
                                     <span style="float: left; margin: 0 4px; background-image: url(css/images/ui-icons_2e83ff_256x240.png);"class="ui-icon ui-icon-circle-plus"
-                                          onclick="window.location='index.php?controller=listaproyecto&action=detalles_Pro&idproyecto=<?= strtoupper(utf8_encode($value[0]))?>'"></span></li></a>
+                                          onclick="window.location='index.php?controller=listaproyecto&action=detalles_Pro&idproyecto=<?= strtoupper(utf8_encode($value['idproyecto']))?>'"></span></li></a>
                         </div> 
 
                     </td>
@@ -125,7 +125,7 @@
 <!--                            <div id="abrir2" style="margin-left: 20px;">-->
                                 <li style="margin: 2px;position: relative;padding: 4px 0;cursor: pointer;float: left;list-style: none; font-family: Calibri;" class="ui-state-default ui-corner-all" title="OLA">
                                     <span style="float: left; margin: 0 4px; background-image: url(css/images/ui-icons_2e83ff_256x240.png);"class="ui-icon ui-icon-circle-check"
-                                          onclick="window.location='index.php?controller=listaproyecto&action=editar_estado&idproyecto=<?= strtoupper(utf8_encode($value[0]))?>'">
+                                          onclick="window.location='index.php?controller=listaproyecto&action=editar_estado&idproyecto=<?= strtoupper(utf8_encode($value['idproyecto']))?>'">
                                     </span>
 
                                 </li>
@@ -146,14 +146,14 @@
                             <div id="abrir2" style="margin-left: 20px;">
                                 <li style="margin: 2px;position: relative;padding: 4px 0;cursor: pointer;float: left;list-style: none; font-family: Calibri;" class="ui-state-default ui-corner-all" title=".ui-icon-circle-plus">
                                     <span style="float: left; margin: 0 4px; background-image: url(css/images/ui-icons_2e83ff_256x240.png);"class="ui-icon ui-icon-circle-check"
-                                          onclick="Unirse('<?= strtoupper(utf8_encode($value[0])) ?>')">
+                                          onclick="Unirse('<?= strtoupper(utf8_encode($value['idproyecto'])) ?>')">
                                     </span>
 
                                 </li>
                             </div> 
                             <?php }else {?>
                             <div style="margin-left: 20px;">
-                                <a><li id="<?= strtoupper(utf8_encode($value[0]))?>" style="margin: 2px;position: relative;padding: 4px 0;cursor: pointer;float: left;list-style: none; font-family: Calibri;" class="ui-state-default ui-corner-all" title=".ui-icon-circle-plus" >
+                                <a><li id="<?= strtoupper(utf8_encode($value['idproyecto']))?>" style="margin: 2px;position: relative;padding: 4px 0;cursor: pointer;float: left;list-style: none; font-family: Calibri;" class="ui-state-default ui-corner-all" title=".ui-icon-circle-plus" >
                                         <span style="float: left; margin: 0 4px; background-image: url(css/images/ui-icons_2e83ff_256x240.png);"class="ui-icon ui-icon-circle-check"
                                               onclick="alert('No puede unirse a un proyecto en marcha')"></span></li></a>
                             </div>

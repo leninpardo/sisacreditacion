@@ -704,9 +704,9 @@ Inner Join evento ON evento.idevento = detalle_asistencia_alumno_tutoria.idevent
                         linea_investigacion.nombre_linea,
                         eje_tematico.nombre_ejetematico,
                         grupo.nombre_grupo,
-                        `ubigeos$`.DISTRITO,
-                        `ubigeos$`.PROVINCIA,
-                        `ubigeos$`.DEPARTAM,
+                        0,
+                       0,
+                      0,
                         estado_proyecto.idestado_proyecto
                         FROM
                         proyecto
@@ -720,7 +720,7 @@ Inner Join evento ON evento.idevento = detalle_asistencia_alumno_tutoria.idevent
                         INNER JOIN linea_investigacion ON proyecto.idlinea_investigacion = linea_investigacion.idlinea_investigacion
                         INNER JOIN eje_tematico ON linea_investigacion.idejetematico = eje_tematico.idejetematico
                         INNER JOIN grupo ON eje_tematico.idgrupo = grupo.idgrupo
-                        INNER JOIN `ubigeos$` ON proyecto.Ubigeo = `ubigeos$`.UBIGEO
+                        
                         
                         where detalle_profesor_proy_fun.idfuncion=2 and proyecto.situacion=1
                         GROUP BY proyecto.idproyecto
@@ -752,9 +752,9 @@ Inner Join evento ON evento.idevento = detalle_asistencia_alumno_tutoria.idevent
                         linea_investigacion.nombre_linea,
                         eje_tematico.nombre_ejetematico,
                         grupo.nombre_grupo,
-                        `ubigeos$`.DISTRITO,
-                        `ubigeos$`.PROVINCIA,
-                        `ubigeos$`.DEPARTAM,
+                        0,
+                        0,
+                        0,
                         estado_proyecto.idestado_proyecto
                         FROM
                         proyecto
@@ -768,8 +768,7 @@ Inner Join evento ON evento.idevento = detalle_asistencia_alumno_tutoria.idevent
                         INNER JOIN linea_investigacion ON proyecto.idlinea_investigacion = linea_investigacion.idlinea_investigacion
                         INNER JOIN eje_tematico ON linea_investigacion.idejetematico = eje_tematico.idejetematico
                         INNER JOIN grupo ON eje_tematico.idgrupo = grupo.idgrupo
-                        INNER JOIN `ubigeos$` ON proyecto.Ubigeo = `ubigeos$`.UBIGEO
-                        
+                                          
                         where detalle_profesor_proy_fun.idfuncion=2 and proyecto.situacion=0
                         GROUP BY proyecto.idproyecto
                             ";

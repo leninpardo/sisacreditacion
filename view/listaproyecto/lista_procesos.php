@@ -173,7 +173,7 @@
                            }
                        }
                        if($_SESSION['perfil']=="PRESIDENTE DE PROYECTO DE INVESTIGACION" || $_SESSION['idperil']==3){
-                           if($_SESSION['idusuario']==$ds[8]){
+                           if($_SESSION['idusuario']==$ds[8]||$_SESSION['perfil']=="PRESIDENTE DE PROYECTO DE INVESTIGACION"){
                            //if($)
                           if ($ds[7] == 1) {
                            echo "<th><span class='btn btn-info procesos btn glyphicon glyphicon-unchecked' form-control-feedback' proyecto='" . $proyecto[0][0] . "' val='$ds[0]' id='' href='#'></span></th>";

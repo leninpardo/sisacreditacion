@@ -67,7 +67,7 @@ class proyecto extends Main{
         $stmt->bindValue(':p31', $_P['asignacion_recursos'] , PDO::PARAM_STR);
         $stmt->bindValue(':p32', $_P['financiamiento'] , PDO::PARAM_INT);
         $stmt->bindValue(':p33', $_P['CodigoEscuela'] , PDO::PARAM_INT);
-        $stmt->bindValue(':p34', 1, PDO::PARAM_INT);
+        $stmt->bindValue(':p34', 0, PDO::PARAM_INT);
          $p1 = $stmt->execute();
         $p2 = $stmt->errorInfo();
    ///
@@ -79,15 +79,28 @@ class proyecto extends Main{
       $p1=$stmt2->execute();
        $p2 = $stmt->errorInfo();
    }
-        
-        
-       
-        if($p2[0]==null){
+   ///    
+   $sent=  $this->db->prepare("select max(idcontrol_proyecto)+1 from control_proyecto");
+   $sent->execute();
+   $data=$sent->fetchAll();
+   
+   $stmt3 = $this->db->prepare("insert into control_proyecto(idcontrol_proyecto,CodigoProfesor,fecha,idestado_proyecto,idproyecto,observaciones)
+values(:p1,:p2,:p3,1,:p5,'Inicio del proyecto')");
+        $stmt3->bindValue(":p1", $data[0][0], PDO::PARAM_INT);
+        $stmt3->bindValue(":p2", $_SESSION['idusuario'], PDO::PARAM_INT);
+        $stmt3->bindValue(":p3", date('Y-m-d'), PDO::PARAM_STR);
+        /*$stmt3->bindValue(":p4", 1, PDO::PARAM_INT);*/
+        $stmt3->bindValue(":p5", $xd, PDO::PARAM_INT);
+        /*
+        $stmt3->bindValue(":p6", "", PDO::PARAM_INT);*/
+        $p1 = $stmt3->execute();
+        $p2 = $stmt3->errorInfo();
+        /*if($p2[0]==null){
              return array($p1 , $p2[2]);
         }else{
         return array($p1 , $p2[2]);
-        }
-        
+        }*/
+         return array($p1 , $p2);
     }
     function insert_ob_esp($_P ) {
         
