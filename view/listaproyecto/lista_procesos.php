@@ -149,7 +149,7 @@
                   {
                      echo "<tr>";
                        echo "<td><input type='hidden' name='' id='' />" . $ds[1] . "</td>";
-                       echo "<td>" . $ds[2] . "</td>";
+                       echo "<td>" . utf8_encode($ds[9]) . "</td>";
                        echo "<td>" . $ds[3] . "</td>";
                        echo "<td>" . $ds[4] . "</td>";
                        echo "<td>" . $ds[5] . "</td>";

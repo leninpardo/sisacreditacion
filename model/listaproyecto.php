@@ -190,19 +190,24 @@ WHERE detalle_proceso_proyecto.idproyecto=".$id." and proceso_proyecto.subproces
         }
         return $array;
     }
-            function update_docentes($_P)
-    {
-       $sql2 = ("UPDATE detalle_proceso_proyecto set detalle_proceso_proyecto.Ingeniero=:p3 
+    
+            function update_docentes($_P) {
+                $st=  $this->db->prepare("SELECT CONCAT(NombreProfesor,' ',ApellidoPaterno,' ', ApellidoMaterno) as docente from profesores where CodigoProfesor='".$_P['docentes']."'");
+                $st->execute();
+                $data=$st->fetchAll();
+        $sql2 = ("UPDATE detalle_proceso_proyecto set detalle_proceso_proyecto.Ingeniero=:p3,detalle_proceso_proyecto.nombre_ingeniero=:p4
 where detalle_proceso_proyecto.idproyecto=:p1 and detalle_proceso_proyecto.idproceso_proyecto=:p2");
-          $stmt = $this->db->prepare($sql2);
-          $stmt->bindValue(':p1', $_P["id_proyecto"] , PDO::PARAM_INT);
-              $stmt->bindValue(':p2', $_P['idproceso'], PDO::PARAM_INT);
-              $stmt->bindValue(':p3', $_P['docentes'], PDO::PARAM_STR);
-              $stmt->execute();
-               $p2 = $stmt->errorInfo();
-                return $array= array("rep"=>1 , "msg"=>$p2);
+        $stmt = $this->db->prepare($sql2);
+        $stmt->bindValue(':p1', $_P["id_proyecto"], PDO::PARAM_INT);
+        $stmt->bindValue(':p2', $_P['idproceso'], PDO::PARAM_INT);
+        $stmt->bindValue(':p3', $_P['docentes'], PDO::PARAM_STR);
+        $stmt->bindValue(':p4', $data[0][0], PDO::PARAM_STR);
+        $stmt->execute();
+        $p2 = $stmt->errorInfo();
+        return $array = array("rep" => 1, "msg" => $p2);
     }
-        function update_procesos($_P)
+
+    function update_procesos($_P)
     {
        $sql2 = ("UPDATE detalle_proceso_proyecto set detalle_proceso_proyecto.fecha_finalizacion=:p3,detalle_proceso_proyecto.estado=2 ,
            detalle_proceso_proyecto.descripcion=:p4
@@ -320,7 +325,8 @@ detalle_proceso_proyecto.fecha_plazo,
 detalle_proceso_proyecto.fecha_finalizacion,
 detalle_proceso_proyecto.descripcion,
 detalle_proceso_proyecto.estado,
-detalle_proceso_proyecto.ingeniero
+detalle_proceso_proyecto.ingeniero,
+detalle_proceso_proyecto.nombre_ingeniero
 FROM
 proceso_proyecto
 INNER JOIN detalle_proceso_proyecto ON proceso_proyecto.idproceso_proyecto = detalle_proceso_proyecto.idproceso_proyecto
