@@ -1096,10 +1096,8 @@ Inner Join evento ON evento.idevento = detalle_asistencia_alumno_tutoria.idevent
                         facultades.DescripcionFacultad,
                         linea_investigacion.nombre_linea,
                         eje_tematico.nombre_ejetematico,
-                        grupo.nombre_grupo,
-                        `ubigeos$`.DISTRITO,
-                        `ubigeos$`.PROVINCIA,
-                        `ubigeos$`.DEPARTAM
+                        grupo.nombre_grupo
+                     
                         FROM
                         proyecto
                         INNER JOIN detalle_profesor_proy_fun ON proyecto.idproyecto = detalle_profesor_proy_fun.idproyecto
@@ -1112,7 +1110,7 @@ Inner Join evento ON evento.idevento = detalle_asistencia_alumno_tutoria.idevent
                         INNER JOIN linea_investigacion ON proyecto.idlinea_investigacion = linea_investigacion.idlinea_investigacion
                         INNER JOIN eje_tematico ON linea_investigacion.idejetematico = eje_tematico.idejetematico
                         INNER JOIN grupo ON eje_tematico.idgrupo = grupo.idgrupo
-                        INNER JOIN `ubigeos$` ON proyecto.Ubigeo = `ubigeos$`.UBIGEO
+                       
 						
 			INNER JOIN detalleproyecto_matrixalumno ON proyecto.idproyecto=detalleproyecto_matrixalumno.idproyecto
                         INNER JOIN detalle_matricula ON detalleproyecto_matrixalumno.CodigoAlumno=detalle_matricula.CodigoAlumno
@@ -1158,10 +1156,8 @@ Inner Join evento ON evento.idevento = detalle_asistencia_alumno_tutoria.idevent
                                     facultades.DescripcionFacultad, 
                                     linea_investigacion.nombre_linea,
                                     eje_tematico.nombre_ejetematico, 
-                                    grupo.nombre_grupo,
-                                    `ubigeos$`.DISTRITO,
-                                    `ubigeos$`.PROVINCIA,
-                                    `ubigeos$`.DEPARTAM
+                                    grupo.nombre_grupo
+                                    
                         FROM
                         detalle_profesor_proy_fun
                         INNER JOIN proyecto ON proyecto.idproyecto = detalle_profesor_proy_fun.idproyecto
@@ -1174,7 +1170,7 @@ Inner Join evento ON evento.idevento = detalle_asistencia_alumno_tutoria.idevent
                         INNER JOIN linea_investigacion ON proyecto.idlinea_investigacion = linea_investigacion.idlinea_investigacion
                         INNER JOIN eje_tematico ON linea_investigacion.idejetematico = eje_tematico.idejetematico
                         INNER JOIN grupo ON eje_tematico.idgrupo = grupo.idgrupo
-                        INNER JOIN `ubigeos$` ON proyecto.Ubigeo = `ubigeos$`.UBIGEO
+                        
                                              
                         
                         where detalle_profesor_proy_fun.CodigoProfesor='" . $codigo . "' AND proyecto.situacion=1

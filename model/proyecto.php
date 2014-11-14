@@ -26,8 +26,8 @@ class proyecto extends Main{
         $stmt->execute();
         return $stmt->fetchObject();
     }
-    function insert($_P ) {
-        
+    
+    function insert($_P ) {        
         $sentencia=$this->db->query("SELECT MAX(idproyecto) as cant from proyecto");         
         $ct=$sentencia->fetch();      
         $xd=1+(int)$ct['cant'];
@@ -80,28 +80,78 @@ class proyecto extends Main{
        $p2 = $stmt->errorInfo();
    }
    ///    
-   $sent=  $this->db->prepare("select max(idcontrol_proyecto)+1 from control_proyecto");
-   $sent->execute();
-   $data=$sent->fetchAll();
-   
-   $stmt3 = $this->db->prepare("insert into control_proyecto(idcontrol_proyecto,CodigoProfesor,fecha,idestado_proyecto,idproyecto,observaciones)
+   $sent = $this->db->prepare("select max(idcontrol_proyecto)+1 from control_proyecto");
+        $sent->execute();
+        $data = $sent->fetchAll();
+
+        $stmt3 = $this->db->prepare("insert into control_proyecto(idcontrol_proyecto,CodigoProfesor,fecha,idestado_proyecto,idproyecto,observaciones)
 values(:p1,:p2,:p3,1,:p5,'Inicio del proyecto')");
         $stmt3->bindValue(":p1", $data[0][0], PDO::PARAM_INT);
         $stmt3->bindValue(":p2", $_SESSION['idusuario'], PDO::PARAM_INT);
         $stmt3->bindValue(":p3", date('Y-m-d'), PDO::PARAM_STR);
-        /*$stmt3->bindValue(":p4", 1, PDO::PARAM_INT);*/
         $stmt3->bindValue(":p5", $xd, PDO::PARAM_INT);
-        /*
-        $stmt3->bindValue(":p6", "", PDO::PARAM_INT);*/
         $p1 = $stmt3->execute();
         $p2 = $stmt3->errorInfo();
-        /*if($p2[0]==null){
-             return array($p1 , $p2[2]);
-        }else{
-        return array($p1 , $p2[2]);
-        }*/
-         return array($p1 , $p2);
+        ////
+         $fecha_limite = self:: calcular_fecha(date('Y-m-d'), $datos_procesos[0][4]);
+        $sql2 = $this->Query("usp_detalle_procesos(:p1,:p2,:p3,:p4,1)");
+        $stmt4 = $this->db->prepare($sql2);
+        $stmt4->bindValue(':p1', $xd, PDO::PARAM_INT);
+        $stmt4->bindValue(':p2', 1, PDO::PARAM_INT);
+        $stmt4->bindValue(':p3', date("Y-m-d"), PDO::PARAM_STR);
+        $stmt4->bindValue(':p4', $fecha_limite, PDO::PARAM_STR);
+        $stmt4->execute();
+        $p = $stmt4->errorInfo();
+    
+               $array= array("rep"=>1 , "msg"=>$p2);
+        return array($p1 , $p2);
     }
+    
+       public function calcular_fecha($fecha,$n_dias) {
+        $fecha_inicio = $fecha;
+        
+        $fecha_despues = self::operacion_fecha(self::validar_fecha2($fecha_inicio), $n_dias);
+        $fechats = strtotime($fecha_despues); //a timestamp
+
+//el parametro w en la funcion date indica que queremos el dia de la semana
+//lo devuelve en numero 0 domingo, 1 lunes,....
+switch (date('w', $fechats)){
+    case 0: $nd= "Domingo"; $ret=1;break;
+    case 1: $nd= "Lunes"; $ret=0;break;
+    case 2: $nd= "Martes"; $ret=0; break;
+    case 3: $nd= "Miercoles"; $ret=0; break;
+    case 4: $nd= "Jueves"; $ret=0; break;
+    case 5: $nd= "Viernes"; $ret=0; break;
+    case 6: $nd= "Sabado"; $ret=2;break;
+}
+if($ret>0)
+{
+    $fecha_despues=self::operacion_fecha(self::validar_fecha2($fecha_despues), $ret);
+}
+return ((self::validar_fecha($fecha_despues)));
+    }
+    
+       public function operacion_fecha($fecha, $dias) {
+     list ($dia,$mes,$ano)=explode("-",$fecha); 
+if (!checkdate($mes,$dia,$ano)){return false;} 
+$dia=$dia+$dias; 
+$fecha=date( "d-m-Y", mktime(0,0,0,$mes,$dia,$ano) ); 
+return $fecha;  
+    } 
+        public function validar_fecha($fecha){
+$fecha = strtotime($fecha);
+$anio = (date('Y',$fecha));
+$mes = (date('m',$fecha));
+$dia =(date('d',$fecha));
+return $anio.'-'.$mes.'-'.$dia;
+}
+       public function validar_fecha2($fecha){
+$fecha = strtotime($fecha);
+$anio = (date('Y',$fecha));
+$mes = (date('m',$fecha));
+$dia =(date('d',$fecha));
+return $dia.'-'.$mes.'-'.$anio;
+}
     function insert_ob_esp($_P ) {
         
         $sentencia=$this->db->query("SELECT MAX(idobjetivo_proyecto) as cant from objetivo_proyecto");         

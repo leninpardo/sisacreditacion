@@ -80,7 +80,7 @@ class ProyectoController extends Controller {
                 $view->setLayout('../template/Layout.php');
                 $view->render();
             }
-           //print_r (json_encode($p));
+          //print_r (json_encode($p2));
         } else {
             $p = $obj->update($_POST);
             for($i=1;$i<=$_POST["conta"];$i++)

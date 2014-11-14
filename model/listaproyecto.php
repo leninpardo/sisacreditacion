@@ -231,7 +231,7 @@ where detalle_proceso_proyecto.idproyecto=:p1 and detalle_proceso_proyecto.idpro
               
               
               //hacemos automaticamnte que siguiente proceso
-                   $fecha_limite = self:: calcular_fecha(date('Y-m-d'), $datos_procesos[0][4]);
+        $fecha_limite = self:: calcular_fecha(date('Y-m-d'), $datos_procesos[0][4]);
         $sql3 = $this->Query("usp_detalle_procesos(:p1,:p2,:p3,:p4,1)");
         $stmt3 = $this->db->prepare($sql3);
         $stmt3->bindValue(':p1', $_P["id_proyecto"], PDO::PARAM_INT);
