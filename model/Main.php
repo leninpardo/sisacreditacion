@@ -751,24 +751,25 @@ Inner Join evento ON evento.idevento = detalle_asistencia_alumno_tutoria.idevent
                         eje_tematico.nombre_ejetematico,
                         grupo.nombre_grupo,
                         0,
-                       0,
-                      0,
-                       proceso_proyecto.idproceso_proyecto
+                        0,
+                        0,
+                        proceso_proyecto.idproceso_proyecto
                         FROM
                         proyecto
                         INNER JOIN detalle_profesor_proy_fun ON proyecto.idproyecto = detalle_profesor_proy_fun.idproyecto
                         INNER JOIN profesores ON profesores.CodigoProfesor = detalle_profesor_proy_fun.CodigoProfesor
+
                         INNER JOIN proceso_proyecto on(proceso_proyecto.idproceso_proyecto=proyecto.estado_proyecto)
+
                         INNER JOIN escuelaprofesional ON proyecto.CodigoEscuela=escuelaprofesional.CodigoEscuela
                         INNER JOIN tipo_proyecto ON proyecto.idtipo_proyecto = tipo_proyecto.idtipo_proyecto
                         INNER JOIN facultades ON escuelaprofesional.CodigoFacultad = facultades.CodigoFacultad
                         INNER JOIN linea_investigacion ON proyecto.idlinea_investigacion = linea_investigacion.idlinea_investigacion
                         INNER JOIN eje_tematico ON linea_investigacion.idejetematico = eje_tematico.idejetematico
-                        INNER JOIN grupo ON eje_tematico.idgrupo = grupo.idgrupo               
-                        
-                        where detalle_profesor_proy_fun.idfuncion=2 and proyecto.situacion=1
-                        GROUP BY proyecto.idproyecto
-                            ";
+                        INNER JOIN grupo ON eje_tematico.idgrupo = grupo.idgrupo
+                                          
+                        where detalle_profesor_proy_fun.idfuncion=2 and proyecto.situacion=0
+                        GROUP BY proyecto.idproyecto";
 
         $sth = $this->db->prepare($query);
 //        $sth->bindValue(':criterio', $this->criterio, PDO::PARAM_STR);
