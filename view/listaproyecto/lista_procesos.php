@@ -12,9 +12,9 @@
 <h6 class="ui-widget-header">Verificacion de los procesos del proyectos</h6>
 <div >
     <p align="center" ><table >
-        <tr style="font-size: 14px;font-family: Consolas;">
+        <tr style="font-size: 14px;font-family: Calibri;">
             <td >
-                &nbsp;&nbsp;&nbsp; <b>Nombre Proyecto:&nbsp; </b>
+                &nbsp;&nbsp;&nbsp; <b>NOMBRE DEL PROYECTO:&nbsp; </b>
             </td>
             <td>
                 <?php echo $proyecto[0][1]; ?>
@@ -22,9 +22,9 @@
 
             </td>
         </tr>
-        <tr style="font-size: 14px;font-family: Consolas;">
+        <tr style="font-size: 14px;font-family: Calibri;">
             <td>
-                &nbsp;&nbsp;&nbsp; <b>Jefe Proyecto: </b>
+                &nbsp;&nbsp;&nbsp; <b>JEFE DEL PROYECTO: </b>
             </td>
             <td>
                 <?php echo $proyecto[0][2]; ?>
@@ -37,19 +37,19 @@
 <div class="container-fluid">
     <table  class="table table-bordered  table-responsive altrowstable " id="alternatecolor"  aria-describedby="datatables_info">
         <tr >
-            <b><th rowspan="2" bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;">Actividad</th>
-                <th rowspan="2" bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;">Responsable</th>
-                <th rowspan="2"bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;">Fecha Ingresos/inicio</th>
-                <th rowspan="2"bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;">Fecha Plazo</th>
-                <th rowspan="2" bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;">Fecha Entrega/Culminacion</th>
-                <th rowspan="2"bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;">Descripcion</th>
-                <th rowspan="2" bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;">Dias restantes</th>
-                <th rowspan="2" bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;">Estado</th>
-                <th colspan="2"bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;">Acciones</th></b>
+            <b><th rowspan="2" bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;"><b>ACTIVIDAD</th>
+                <th rowspan="2" bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;"><b>RESPONSABLE</th>
+                <th rowspan="2"bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;"><b>FECHA INGRESOS/INICIO</th>
+                <th rowspan="2"bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;"><b>FECHA PLAZO</th>
+                <th rowspan="2" bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;"><b>FECHA ENTREGA/Culminacion</th>
+                <th rowspan="2"bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;"><b>DESCRIPCIÓN</th>
+                <th rowspan="2" bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;"><b>DÍAS RESTANTES</th>
+                <th rowspan="2" bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;"><b>ESTADO</th>
+                <th colspan="2"bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;"><b>ACCIONES</th></b>
         </tr>
         <tr>
-            <th bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;">Verificar</th>
-            <th bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;">Siguiente proceso</th>
+            <th bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;"><b>VERIFICAR</th>
+            <th bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;"><b>SIGUIENTE PROCESO</th>
         </tr>
 
 

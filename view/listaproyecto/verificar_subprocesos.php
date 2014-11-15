@@ -5,10 +5,11 @@ and open the template in the editor.
 <!DOCTYPE html>
 <link type="text/css" href="bootstrap/css/bootstrap.css" rel="stylesheet" />
 <link type="text/css" href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<h4 class="ui-widget-header"><center>Datos de Registro de Procesos</center></h4>
 <form id="frm_procesos">
     <div class="span5">
         <fieldset>
-            <legend>Datos de Registro de procesos</legend>
+
             <div>
                 <label>lista de Procesos</label>
                 <input type="hidden" name="id_proyecto" id="id_proyecto" value="<?php echo $datos[0][3]; ?>">
@@ -52,11 +53,11 @@ and open the template in the editor.
 
             <legend>Acciones</legend>
             <?php if($datos[0][9]==1){ ?>
-            <a class="btn btn-default" id="guardar" >Dar por culminacion el proceso</a>
+            <a class="btn btn-info" id="guardar" >Dar por culminacion el proceso</a>
             <?php }else{?>
             <div class="message">El proceso se concluyo</div>
             <?php }?>
-            <a class="btn btn-default" id="cancel" value="cerrar">Cerrar</a>
+            <a class="btn btn-info" id="cancel" value="cerrar">Cerrar</a>
         </fieldset>
     </div>
 </form>
