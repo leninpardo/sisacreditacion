@@ -77,39 +77,10 @@ foreach ($rows as $key => $value) {
         <br><img src="../web/images/estado_proyecto/9.jpg"/><br>
 <?php } */ ?>
 
-    <fieldset  style="width:90%;border: 3px dashed #000099; margin: auto;">
+    <fieldset  style="width:100%;border: 0px; margin: auto; ">
     <h2 align="center"><p>UNIVERSIDAD NACIONAL DE SAN MARTIN - T</p></h2>
-    <h2 align="center">OFICINA DE INVESTIGACIÓN Y DESARROLLO</h2>
-
-            <?php
-            if ($idesta_proy==1)  {
-                echo '<br><img style="width: 800px;height: 100px;" src="../web/images/estado_proyecto/1.jpg"/><br>';
-            }
-            elseif($idesta_proy==2) {
-                echo '<br><img style="width: 800px;height: 100px;" src="../web/images/estado_proyecto/2.jpg"/><br>';
-            }
-            elseif($idesta_proy==3) {
-                echo '<br><img style="width: 800px;height: 100px;" src="../web/images/estado_proyecto/3.jpg"/><br>';
-            }
-            elseif($idesta_proy==4) {
-                echo '<br><img style="width: 800px;height: 100px;" src="../web/images/estado_proyecto/4.jpg"/><br>';
-            }
-            elseif ($idesta_proy==5) {
-                echo '<br><img style="width: 800px;height: 100px;" src="../web/images/estado_proyecto/5.jpg"/><br>';
-            }
-            elseif($idesta_proy==6) {
-                echo '<br><img style="width: 800px;height: 100px;" src="../web/images/estado_proyecto/6.jpg"/><br>';
-            }
-            elseif($idesta_proy==7) {
-                echo '<br><img style="width: 800px;height: 100px;" src="../web/images/estado_proyecto/7.jpg"/><br>';
-            }
-            elseif($idesta_proy==8) {
-                echo '<br><img style="width: 800px;height: 100px;" src="../web/images/estado_proyecto/8.jpg"/><br>';
-            }
-            else {
-                echo '<br><img style="width: 800px;height: 100px;" src="../web/images/estado_proyecto/9.jpg"/><br>';
-            }?>
-
+    <h3 align="center">OFICINA DE INVESTIGACIÓN Y DESARROLLO</h3>
+    <h4 align="center">Facultad de <?php echo strtoupper(utf8_encode($value[9])); ?></h4>
 
    <div align="left" >
    <div class="col-md-12">

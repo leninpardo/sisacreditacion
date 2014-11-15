@@ -10,46 +10,48 @@
 
 </style>
 <h6 class="ui-widget-header">Verificacion de los procesos del proyectos</h6>
-<div >
-    <p align="center" ><table >
-        <tr style="font-size: 14px;font-family: Calibri;">
-            <td >
-                &nbsp;&nbsp;&nbsp; <b>NOMBRE DEL PROYECTO:&nbsp; </b>
-            </td>
-            <td>
-                <?php echo $proyecto[0][1]; ?>
-                <input type="hidden" id="idproyecto" name="idproyecto" value="<?php echo $proyecto[0][0];?>"/>
-
-            </td>
-        </tr>
-        <tr style="font-size: 14px;font-family: Calibri;">
-            <td>
-                &nbsp;&nbsp;&nbsp; <b>JEFE DEL PROYECTO: </b>
-            </td>
-            <td>
-                <?php echo $proyecto[0][2]; ?>
-            </td>
-        </tr>
-    </table>
-    </p>
-</div>
 <br/>
 <div class="container-fluid">
-    <table  class="table table-bordered  table-responsive altrowstable " id="alternatecolor"  aria-describedby="datatables_info">
-        <tr >
-            <b><th rowspan="2" bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;"><b>ACTIVIDAD</th>
-                <th rowspan="2" bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;"><b>RESPONSABLE</th>
-                <th rowspan="2"bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;"><b>FECHA INGRESOS/INICIO</th>
-                <th rowspan="2"bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;"><b>FECHA PLAZO</th>
-                <th rowspan="2" bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;"><b>FECHA ENTREGA/Culminacion</th>
-                <th rowspan="2"bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;"><b>DESCRIPCIÓN</th>
-                <th rowspan="2" bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;"><b>DÍAS RESTANTES</th>
-                <th rowspan="2" bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;"><b>ESTADO</th>
-                <th colspan="2"bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;"><b>ACCIONES</th></b>
+    <div class="fg-toolbar ui-toolbar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix">
+       <table >
+            <tr style="font-size: 16px;font-family: Calibri;">
+                <td >
+                    &nbsp;&nbsp;&nbsp; <b style="color: #ffffff;">NOMBRE DEL PROYECTO&nbsp;:&nbsp;&nbsp; </b>
+                </td>
+                <td>
+                    <font style="text-transform: uppercase; color: #ffffff;"><?php echo $proyecto[0][1]; ?> </font>
+                    <input type="hidden" id="idproyecto" name="idproyecto" value="<?php echo $proyecto[0][0];?>"/>
+
+                </td>
+            </tr>
+            <tr style="font-size: 16px;font-family: Calibri;">
+                <td>
+                    &nbsp;&nbsp;&nbsp; <b style="color: #ffffff;">JEFE DEL PROYECTO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp; </b>
+                </td>
+                <td>
+                    <font style="text-transform: uppercase; color: #ffffff; "><?php echo $proyecto[0][2]; ?> </font>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+
+    <table  class=" table table-bordered  table-responsive altrowstable  " id="alternatecolor"  aria-describedby="datatables_info">
+        <tr>
+
+            <b><th rowspan="2" bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px; text-align: center; vertical-align: middle;"><b>ACTIVIDAD</b></th>
+                <th rowspan="2" bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px; text-align: center; vertical-align: middle;"><b>RESPONSABLE</b></th>
+                <th rowspan="2" bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px; text-align: center; vertical-align: middle;"><b>FECHA INGRESOS/<br>INICIO</b></th>
+                <th rowspan="2" bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px; text-align: center; vertical-align: middle;"><b>FECHA PLAZO</b></th>
+                <th rowspan="2" bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px; text-align: center; vertical-align: middle;"><b>FECHA ENTREGA/<br>CULMINACIÓN</b></th>
+                <th rowspan="2" bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px; text-align: center; vertical-align: middle;"><b>DESCRIPCIÓN</b></th>
+                <th rowspan="2" bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px; text-align: center; vertical-align: middle;"><b>DÍAS RESTANTES</b></th>
+                <th rowspan="2" bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;text-align: center; vertical-align: middle;"><b>ESTADO</b></th>
+
         </tr>
         <tr>
-            <th bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;"><b>VERIFICAR</th>
-            <th bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px;"><b>SIGUIENTE PROCESO</th>
+            <th bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px; text-align: center; vertical-align: middle;"><b>VERIFICAR</b></th>
+            <th bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px; text-align: center; vertical-align: middle;"><b>OTRO PROCESO</b></th>
         </tr>
 
 
@@ -90,7 +92,7 @@
               $dias=dias_transcurridos(date("Y-m-d"),$l[4]);
               echo "<th>".$dias['estado']." ".$dias['cantidad'] ." dias </th>";
               if(date('Y-m-d')>$l[4]){
-              echo "<th><a class='btn btn-danger'>En proceso,Fecha Retrasada</a></th>";
+              echo "<th><a class='btn btn-danger'>Proceso Retrasado</a></th>";
               }else{
                  echo "<th ><a class='btn btn-warning'>En proceso</a></th>";  
               }
@@ -99,7 +101,7 @@
               $dias=dias_transcurridos($l[5],$l[4]);
                echo "<th> Se culmino ".$dias['estado1']." ".$dias['cantidad'] ." Dias</th>";
                 if($l[5]>$l[4]){
-              echo "<th><a class='btn btn-success'>Finalizado,Fecha Retrasada</a></th>";
+              echo "<th><a class='btn btn-success'>Proceso Retrasado</a></th>";
               }else{
                  echo "<th><a class='btn btn-success'>Finalizado</a></th>";  
               }
@@ -134,14 +136,17 @@
           $datos_sub=$model->lista_subprocesos($l[0],$proyecto[0][0]);
           if($datos_sub!=null){
         ?>
-        <tr>
+
+              <tr>
             <td colspan="10">
+
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
   <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="headingTwo">
       <h4 class="panel-title">
+
         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $l[0]; ?>" aria-expanded="false" aria-controls="collapse<?php echo $l[0]; ?>">
-            Ver subprocesos de <?php echo $l[1];?>  
+            Ver subprocesos de <?php echo $l[1];?>
         </a>
       </h4>
     </div>
@@ -154,7 +159,7 @@
               {
                echo "no hay subprocesos";   
               }else{
-              
+
                   echo "<table class='table table-bordered table-hover table-responsive'>";
                   foreach ($datos_sub as $ds)
                   {
@@ -169,7 +174,7 @@
                            $dias = dias_transcurridos(date("Y-m-d"), $ds[4]);
                            echo "<th><div></div>". $dias['estado'] . " " . $dias['cantidad'] . " dias  </th>";
                            if (date('Y-m-d') > $ds[4]) {
-                               echo "<th><a class='btn btn-danger'>En proceso,Fecha Retrasada</a></th>";
+                               echo "<th><a class='btn btn-danger'>Proceso Retrasado</a></th>";
                            } else {
                                echo "<th><a class='btn btn-warning'>En proceso</a></th>";
                            }
@@ -207,12 +212,19 @@
                }
        ?>
       </div>
-        
+
     </div>
+
   </div>
+            <div class="fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix"><br><br></div>
+
         </div>
+
             </td>
+
+
         </tr>
+
         <?php
     }
     }
@@ -224,15 +236,18 @@
             <th colspan="8"></th>
             <th>
                 <a class="btn btn-default" id='agregar'><i class="glyphicon glyphicon-plus-sign"></i></a>
+
 </div></a>
+
             </th>
         </tr>
-        <?php 
-        ///echo "<tr><td>No se encontraron procesos en el proyecto agregue</td></tr>";
+        <?php
     }
-    
         ?>
+
         </table>
+
+
 </div>
 	
 <!-- modal de asignar nueva proceso-->
@@ -276,10 +291,10 @@ $("#emergente").load("index.php?controller=listaproyecto&action=get_verificar_pr
 				message: $("#emergente"),
 				css:{
 					top: '3%',
-					width: '77%',
+					width: '65%',
 					height: '80%',
 					left: '15%'
-                                        //backgroundColor: '#5d881a'
+                                       //backgroundColor: '#5d881a'
 				}
 			}); 
 		});  
