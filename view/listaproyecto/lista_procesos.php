@@ -154,7 +154,7 @@
               {
                echo "no hay subprocesos";   
               }else{
-              
+
                   echo "<table class='table table-bordered table-hover table-responsive'>";
                   foreach ($datos_sub as $ds)
                   {
