@@ -35,8 +35,10 @@
         </table>
 
     </div>
-    <table  class="table table-bordered  table-responsive altrowstable " id="alternatecolor"  aria-describedby="datatables_info">
+
+    <table  class=" table table-bordered  table-responsive altrowstable  " id="alternatecolor"  aria-describedby="datatables_info">
         <tr>
+
             <b><th rowspan="2" bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px; text-align: center; vertical-align: middle;"><b>ACTIVIDAD</b></th>
                 <th rowspan="2" bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px; text-align: center; vertical-align: middle;"><b>RESPONSABLE</b></th>
                 <th rowspan="2" bgcolor="#eaf4fd" class="ui-state-default" role="columnheader"  aria-controls="datatables" rowspan="1" colspan="1" style="width: 170px; text-align: center; vertical-align: middle;"><b>FECHA INGRESOS/<br>INICIO</b></th>
@@ -134,14 +136,17 @@
           $datos_sub=$model->lista_subprocesos($l[0],$proyecto[0][0]);
           if($datos_sub!=null){
         ?>
-        <tr>
+
+              <tr>
             <td colspan="10">
+
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
   <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="headingTwo">
       <h4 class="panel-title">
+
         <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $l[0]; ?>" aria-expanded="false" aria-controls="collapse<?php echo $l[0]; ?>">
-            Ver subprocesos de <?php echo $l[1];?>  
+            Ver subprocesos de <?php echo $l[1];?>
         </a>
       </h4>
     </div>
@@ -207,12 +212,19 @@
                }
        ?>
       </div>
-        
+
     </div>
+
   </div>
+            <div class="fg-toolbar ui-toolbar ui-widget-header ui-corner-bl ui-corner-br ui-helper-clearfix"><br><br></div>
+
         </div>
+
             </td>
+
+
         </tr>
+
         <?php
     }
     }
@@ -224,7 +236,9 @@
             <th colspan="8"></th>
             <th>
                 <a class="btn btn-default" id='agregar'><i class="glyphicon glyphicon-plus-sign"></i></a>
+
 </div></a>
+
             </th>
         </tr>
         <?php
