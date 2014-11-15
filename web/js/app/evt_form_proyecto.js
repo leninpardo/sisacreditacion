@@ -87,6 +87,8 @@ $(function () {
 
 
 
+
+});
 var validarForm = function ()
 {
 
@@ -136,7 +138,7 @@ var validarForm = function ()
     }
     return false;
 }
-});
+
 function elimina(id){
    $("#"+id).remove();
 }

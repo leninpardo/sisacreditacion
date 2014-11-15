@@ -75,7 +75,7 @@
     foreach ($lista as $k=>$l)
     {
      echo "<tr>";
-   
+   $idp=$$l[0];
       echo "<td>".$l[1]."</td>";
        echo "<td>".$l[2]."</td>";
         echo "<td>".$l[3]."</td>";
@@ -111,7 +111,7 @@
                 echo "<th><span class='btn btn-info procesos btn glyphicon glyphicon-unchecked' form-control-feedback' proyecto='".$proyecto[0][0]."' val='$l[0]' id='' href='#'></span></th>";
           echo "<th>*.*</th>";
           }  else {
-                echo "<th><a class='procesos btn btn-info glyphicon glyphicon-check' proyecto='".$proyecto[0][0]."' val='$l[0]' id='' href='#'></a></th>";
+                echo "<th><a  class='procesos btn btn-info glyphicon glyphicon-check' proyecto='".$proyecto[0][0]."' val='$l[0]' id='' href='#'></a></th>";
               
                 ?>
         <th>
@@ -159,7 +159,7 @@
                   foreach ($datos_sub as $ds)
                   {
                      echo "<tr>";
-                       echo "<td><input type='hidden' name='' id='' />" . $ds[1] . "</td>";
+                       echo "<td>" . $ds[1] . "</td>";
                        echo "<td>" . utf8_encode($ds[9]) . "</td>";
                        echo "<td>" . $ds[3] . "</td>";
                        echo "<td>" . $ds[4] . "</td>";
@@ -167,11 +167,11 @@
                        echo "<td>" . $ds[6] . "</td>";
                         if ($ds[7] == 1) {
                            $dias = dias_transcurridos(date("Y-m-d"), $ds[4]);
-                           echo "<th>" . $dias['estado'] . " " . $dias['cantidad'] . " dias </th>";
+                           echo "<th><div></div>". $dias['estado'] . " " . $dias['cantidad'] . " dias  </th>";
                            if (date('Y-m-d') > $ds[4]) {
                                echo "<th><a class='btn btn-danger'>En proceso,Fecha Retrasada</a></th>";
                            } else {
-                               echo "<th ><a class='btn btn-warning'>En proceso</a></th>";
+                               echo "<th><a class='btn btn-warning'>En proceso</a></th>";
                            }
                        } else {
                            //echo "<th>Finalizado el proceso</th>"; 
@@ -187,9 +187,15 @@
                            if($_SESSION['idusuario']==$ds[8]||$_SESSION['perfil']=="PRESIDENTE DE PROYECTO DE INVESTIGACION"){
                            //if($)
                           if ($ds[7] == 1) {
+                              ?>
+          <input type='hidden' name='cls' id=cls'' value='1' class='cls<?php echo $l[0];?>'/>
+          <?php
                            echo "<th><span class='btn btn-info procesos btn glyphicon glyphicon-unchecked' form-control-feedback' proyecto='" . $proyecto[0][0] . "' val='$ds[0]' id='' href='#'></span></th>";
                            echo "<th>*.*</th>";
                        } else {
+                           ?>
+          <input type="hidden" name="cls" id="" value="0" class="cls<?php echo $l[0]; ?>"/>
+                               <?php
                            echo "<th><a class='procesos btn btn-info glyphicon glyphicon-check' proyecto='" . $proyecto[0][0] . "' val='$ds[0]' id='' href='#'></a></th>";
                            }
                            
@@ -201,6 +207,7 @@
                }
        ?>
       </div>
+        
     </div>
   </div>
         </div>
@@ -240,9 +247,27 @@
              alert("Se encuentra finalizado");
           });
           $(".procesos").click(function(e){
+              t=0;f=0;
               idproceso=$(this).attr("val");
               idproyecto=$("#idproyecto").val();
+              fields = $("input[class='cls"+idproceso+"']").serializeArray();
+              $("input[class='cls"+idproceso+"']").each(function ()
+        {
+            if($(this).val()==1){
+                t=t+1;
+            }else{
+             f=f+1;   
+            }
+            //checked.push($(this).val());
+        });
+               /*fields = $("input[class='cls"+idproceso+"']").serializeArray();
+             for(i=0;i<fields.length;i++)
+             {
+                 alert(fields[i][0]);
+             }*/if(fields.length==0&t==fields.length)
+        {
                 e.preventDefault();
+                
                 str="idproceso="+idproceso+"&idproyecto="+idproyecto;
 $("#emergente").load("index.php?controller=listaproyecto&action=get_verificar_procesos&"+str, function(){
 			
@@ -258,6 +283,9 @@ $("#emergente").load("index.php?controller=listaproyecto&action=get_verificar_pr
 				}
 			}); 
 		});  
+            }else{
+                alert("los subprocesos aun no se terminan, por favor exija a los reponsables a terminar o espere");
+            }
     });
    
          
