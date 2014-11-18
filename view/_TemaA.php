@@ -1,57 +1,79 @@
+<script type="text/javascript" src="../web/lib/alertify1.js"></script>
+<link rel="stylesheet" href="../web/themes/alertify.core1.css"  type="text/css"/>
+<link rel="stylesheet" href= "../web/themes/alertify.default1.css"  type="text/css"/>
+<style>
+    .F textarea{
+        white-space:normal; 
+    }
+</style>
 
-<table class="table table-striped " align="justify">
-    <thead>
+<table class="table table-striped table-bordered" align="justify">
+    <thead class="mloencontre">
         <tr>
-            <td rowspan="2" vertical-align="middle"><b>Semana</b></td>
-            <td rowspan="2" vertical-align="middle"><b>Contenido</b></td>
-            
-            
+            <th vertical-align="middle"><b>Semana</b></th>
+            <th vertical-align="middle"><b>Contenido</b></th>
+            <th vertical-align="middle"><b>Concepto</b></th>
+            <th vertical-align="middle"><b>Procedimiento</b></th>
+            <th vertical-align="middle"><b>Actitudinal</b></th>
         </tr> 
-        
     </thead>
-    <?php foreach ($rows as $key => $value) { ?>
-        <tr >
-            <td><?php echo strtoupper(utf8_encode($value[0]));?></td>
-            <td><?php echo strtoupper(utf8_encode($value[1]));?></td>
-            <td>
-               
-                <input type="hidden" class="idunidadT" value="<?php echo $value[7]?>"/>
-                 <input type="hidden" class="fechaC" value="<?php echo $value[8]?>"/>
-                <input type="hidden" class="idtemaC" value="<?php echo $value[9]?>"/>
-                <input type="hidden" id="idclaseC" value="<?php echo $value[10]?>"/>
+    <tbody style="background-color: #f5f5f5 ;">
+    <?php $fi=1; foreach ($rows as $key => $value) { ?>
 
-                     <?php date_default_timezone_set('UTC');
-          $fechaA= date("Y-m-d");$fechaAsis=$value[8];
-//          echo $fechaA;?>
-            <?php if(isset($fechaAsis)){?>
-                    <?php if ($fechaA==$fechaAsis){?>
-                <input type="button" value="Asistencia" onclick="TemasClase(<?php echo $value[6];?>,<?php echo $value[10];?>)" class="idtemas" style="background: #008000;"/>
-                    <?php }else{?>
-                        <?php if ($fechaAsis>$fechaA){?>
-                <input type="button" value="Asistencia" onclick="TemasClase('todavia')" class="idtemas" style="background: #DBFF70;"/>
-                        <?php }else{if($fechaAsis<$fechaA){?>
-                                            <input type="button" value="Asistencia" onclick="TemasClase('paso')" class="idtemas" style="background: #0063DC;"/>
+        <tr class="F F<?php echo $fi ?>" >
 
-                            <?php }?>
-                    <?php }}?>
-            <?php }else{?>
-                       
-                             <input type="button" value="Asistencia" class="idtemas" style="background: #900000;"/><br>
-                             <div>No tiene fecha la clase</div>
-                <?php }?>
+            <td ><?php echo (utf8_encode($value[0]));?></td>
+            <td class="F<?php echo $fi?>C1">
+                <input class="Tem" type="hidden" value="<?php echo $value[5];?>"> 
+                <input class="Cam" type="hidden" value="contenido"> 
+                <textarea id="F<?php echo $fi?>C1" name="txta" cols="40%" rows="5" style="background-color: #f9f9f9; ;border:none; resize: none;">
+                    <?php echo $value[1];?>
+                </textarea> 
             </td>
+
+            <td class="F<?php echo $fi?>C2">
+                <input class="Tem" type="hidden" value="<?php echo $value[5];?>"> 
+                <input class="Cam" type="hidden" value="conceptual"> 
+                <textarea name="" id="F<?php echo $fi?>C2" cols="40%" rows="5" style="background-color: #f9f9f9; border:none; resize: none;">
+                <?php echo $value[2];?>
+                </textarea> 
+            </td>
+
+            <td class="F<?php echo $fi?>C3">
+                <input class="Tem" type="hidden" value="<?php echo $value[5];?>"> 
+                <input class="Cam" type="hidden" value="procedimental"> 
+                <textarea name="" id="F<?php echo $fi?>C3" cols="40%" rows="5" style="background-color: #f9f9f9; border:none; resize: none;">
+                <?php echo $value[3];?>
+                </textarea> 
+            </td>
+
+            <td class="F<?php echo $fi?>C4">
+                <input class="Tem" type="hidden" value="<?php echo $value[5];?>"> 
+                <input class="Cam" type="hidden" value="actitudinal"> 
+                <textarea name="" id="F<?php echo $fi?>C4" cols="40%" rows="5" style="background-color: #f9f9f9; border:none; resize: none;">
+                <?php echo $value[4];?>
+                </textarea> 
+            </td>
+
+
         </tr> 
-                       
-        <?php } ?>
-<br>
+        <?php $fi++; } ?>
+    </tbody>
 </table>
 
-<div id="verclase">
-    
-</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        //alert($('tbody .F').length);
+        $('.F textarea').blur(function(){
+            Edit= $(this).val();
+            abc= $(this).attr('id');
+            Cam= $('.'+abc+' .Cam').val();
+            Tem= $('.'+abc+' .Tem').val();
+           $.post('index.php', 'controller=cursosemestre&action=editarTema&Campo=' +Cam+'&Tema='+Tem+'&Editar='+Edit, function(data) {
+           
+            alertify.success("Se guardaron sus cambios"); 
+             });
+        });
 
-
-
-
-
-  
+    });
+</script>

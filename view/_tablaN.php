@@ -1,96 +1,120 @@
-<br>
+<script type="text/javascript" src="lib/alertify.js"></script>
+<link rel="stylesheet" href="themes/alertify.core.css" />
+<link rel="stylesheet" href="themes/alertify.default.css" />
+<style>
+	 #ola .tnota{
+		padding: 0px;
+		width: 38px; 
+		
+	}
+	#ola .tnota input{
+		font-size: 10px;
+		padding: 1px 8px;
+		height: 30px;
+		border: none;
+	}
+</style>
 <div class="row">
-                    
-
-    <div class="col-md-10" id="aumentar">
-<br>
-<br>  
-<div class='container-fluid' style="overflow-y: auto; height:270px; width: 635px" id="grande">
-     <form id="formnotas" method="post">
-         
-   
-
- 
-        <table class="table table-hover table-bordered" id="ola" >
-           
-            <thead>
-   
-      <tr   style="background-color:#eaf8fc;" > 
-          <td padding="25px 20px" rowspan="2">CODIGO</td>
-          <td padding="25px 20px" rowspan="2">NOMBRE</td>
-          <?php $cont=0;foreach ($rows2 as $key => $value) { ?>
-          <td padding="25px 20px" rowspan="2"><?php echo $value[7]?></td>
-          <?php $cont=$cont+1;}?>
-          <td padding="25px 20px" rowspan="2">Promedio</td>
-          
-          
-            
-    </tr>
+    <div class="col-md-12" id="aumentar">
+		<div class='container-fluid' id="grande">
+			<form id="formnotas" method="post">
+				<table class="table table-hover table-bordered" id="ola" >
+					<thead>   
+						<tr style="background-color:#eaf8fc;" > 
+							<th>Código</th>
+							<th >NOMBRE</th>
+							<?php $cont=0;foreach ($rows2 as $key => $value) { ?>
+							<th>
+								<?php 
+									/*$new_array=explode(' ',$value[7]);
+									$acr='';
+									$contad=count($new_array);
+									if($contad>1){
+										foreach($new_array as $key=>$val){											
+											echo $val[0];
+										}
+									}else{
+										echo substr($value[7],0,3);
+									}*/
+									echo $cont+1;
+								?>
+							</th>
+							<?php $cont=$cont+1;}?>
+							<th padding="25px 20px" >Promedio</th>
+						</tr>
        
-  </thead>
-   <?php foreach ($rows as $key => $value) { ?>
-    <tr>    
-        <td> 
-            <?php echo $value[0]; $alumI=$value[0];?>
-            <input type="hidden" class="codalumno" name="idalumno[]" value="<?php echo $value[0];?>"/>
-             
-                        
-            
-        </td>
-        <td>
-            <?php echo strtoupper(utf8_encode($value[1]));?>
-        </td>
-        <?php if (isset($rows2)){?>
-        
-         <?php foreach ($rows2 as $key => $value) { ?>
-        <td class="campotext<?php echo $value[3]?>" name="<?php echo $value[3]?>">
-            
-            <div class="campo<?php echo $value[3]?>">
-                
-            </div>
-               <?php foreach ($rows3 as $key => $value2) { ?>
-                    <?php if($alumI==$value[0]){?>
-             <?php echo $value2[1]?>
-             
-                    <?php } } ?>
-            <div id="oli"></div>
-                
-             <input type="hidden" class="codevento" name="idevaluacion"value="<?php echo $value[3];?>" style=""/>
-            <input type="hidden" class="codcurso" value="<?php echo $value[4];?>"/>
-            <input type="hidden" class="codsemestre" value="<?php echo $value[5];?>"/>
-            
-            <div class="editarnota<?php echo $value[3];$notita="notita".$value[3];?>"></div>
-           
-            </td>
-            
-            
-            
-         <?php }?>
-   <?php }else {?>
-            
-   <?php }?>
-        <td>
+					</thead>
+					<tbody style="width:100%;">
+						<?php foreach ($rows as $key => $value) { ?>
+						<tr> 
+							<td>
+								<?php echo strtoupper(utf8_encode($value[2]));?>
+								<input type="hidden" name="idalumno[]" value="<?php echo $value[0] ?>" >
+							</td>   
+							<td style="font-size:11px;" align="left">
+								<?php echo strtoupper(utf8_encode($value[1]));?>
+							</td>
 
-            promedio
-        </td>
-       
-    </tr>  
-   
-  <?php } ?>
+							<?php $alum= $value[0];
+								if (isset($rows2)){
+									foreach ($rows2 as $key => $value) {  $ie= $value[3];?>
+										<td class="campo<?php echo $value[3];?> tnota" name="<?php echo $value[3];?>">
+											<?php if (isset($rows3)){
+											 foreach ($rows3 as $key => $value) { ?>
+											 	<?php if (($value[0]==$alum) && ($value[2]==$ie)){ ?>
+											 	<input type='text' maxlength='2'  pattern='{0-9}+'  class='form-control nota' type="number" id="<?php echo $alum;?>,<?php echo $ie;?>" value="<?php echo $value[1];?>" onblur='hi(this)'/>	
+											<?php } } } ?>
+										</td>
+							<?php   }
+								}
+							?>
+							<td>
+								falta
+							</td>
+						</tr>
+					<?php } ?>
+					</tbody>
+					<!---
+					<tfoot style="display: inline-block;width:100%">
+						<tr>
+							<td style="border:0;">
+								<div class="button" id="enviarn">Enviar</div>
+							</td>
+						</tr>
+					</tfoot>
+   					-->
+				</table>
+			</form>
+		</div>
+    </div>             
+</div>
+<script>
+	function hi(control){
+		//alert(control.value);
+		cl2= $(control).attr('id');
+		myArray = cl2.split(',');
+		idAlumno=myArray[0];
+		idTipEvaluacion=myArray[1];
+		campoInput= $(control).val();
 
- <tr>
-        <td colspan="11">
+		$.post('index.php', 'controller=cursosemestre&action=editarNota&CodAlumno=' +idAlumno+'&CodTipEvaluacion='+idTipEvaluacion+'&campo='+campoInput, function(data) {
+        });
 
-<!--            <input  type="button" class="btn btn-primary btn-sm" class="enviarn" value="Enviar"/>-->
-            <div class="button" id="enviarn">
-                Enviar
-            </div>
-        </td>
-    </tr>
-    
-   
-</table>
-         </form>
-      </div>
-      </div>             
-    </div>
+       curso= $('#tablaevaluaciones .pn4 .codcurso').val();
+    VerRegistro(curso);
+    alertify.log("se inserto nota");
+		/*
+        $.post('index.php','controller=cursosemestre&action=getCalificaciones&idsemestre='+codsemestre+'&idcurso='+codcurso+'&idalumno='+idAlumno, function(data) {
+        $(".vernot").empty().append(data);
+        $(".vernot input[type=number]").css("display","");
+	    });*/
+	}
+/*
+	$('#ola .tnota').click(function(){
+		cl= $(this).attr('id');
+		$('input[type=text]').attr('id',''+cl);
+		$('<div class="vernot"></div>').appendTo(''+this);
+
+	});
+*/
+</script>

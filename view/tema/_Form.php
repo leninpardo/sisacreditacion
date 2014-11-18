@@ -11,13 +11,9 @@
                
             <fieldset class="ui-corner-all" >
                 <legend>Datos</legend>
-                <label for="idtema" class="labels" style=" width: 70px; text-align: left;">Codigo:</label>
-                <input id="idtema" name="idtema" class="text ui-widget-content ui-corner-all" style=" width: 50px; text-align: left;" value="<?php echo $obj->idtema; ?>" readonly />
-                 
-                             
+           
                 <label for="nombreunidad" class="labels" style="width: 180px;">Unidad:</label>
-                <?php echo $unidad; ?>
-                
+                <?php echo  $unidad; ?>
                 <br>
                 
                 <label for="semana" class="labels" style="width: 65px;">Semana:</label>

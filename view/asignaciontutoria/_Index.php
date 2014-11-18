@@ -1,21 +1,19 @@
-<?php include("../lib/functions.php"); ?>
 <script type="text/javascript" src="js/app/evt_form_asignaciontutoria.js" ></script>
-<script type="text/javascript" src="js/validateradiobutton.js"></script>
 <h6 class="ui-widget-header">Asignaciones</h6>
 <!--<input type="text" id='idfacultad'>-->
 SEMESTRE : <div style="width:160px;display: inline-block;"><?php echo $semestreacademico; ?></div>
-<br> 
+<br>
 <div class="container-fluid">   
     <div class="row">  
         <div  class="col-sm-12 col-md-12 ">
             <div id="alumnos">
-            <iframe id="iframe_buscar_alumno"src="index.php?controller=alumno&action=search_por_facultad&fac=<?php echo $idfacultad;?>&sinCab=true" width="900" height="530"  marginwidth="0" noresize scrolling="No" frameborder="0">
-            
-            
+            <iframe id="iframe_buscar_alumno"src="index.php?controller=alumno&action=search_por_facultad&fac=<?php echo $idfacultad;?>&sinCab=true" width="900" height="520"  marginwidth="0" noresize scrolling="No" frameborder="0">      
             </iframe>
             </div>
         </div>
     </div>
+    <div align="right"><button id="agregar_lista" class="btn btn-success btn-xs" style="margin-right: 35px;display: none;">Agregar a la lista </button></div>
+    <input type="hidden" id="array_click2" name="array_click2" >
     <div class="row">  
         <div class="col-sm-6 col-md-6 ">
             <div id="lista_profesores"><span style="color:blue;font-size: 18px;">LISTA DE DOCENTES:</span>
@@ -45,12 +43,12 @@ SEMESTRE : <div style="width:160px;display: inline-block;"><?php echo $semestrea
                             <input type="hidden" id="Codigo_Semestre" name="Codigo_Semestre">
                             DOCENTE: <span type="text" name="prof"id="prof">&nbsp;</span><br>
                             <input id="CodigoAlumno" name="CodigoAlumno" type="hidden" value="<?php echo $obj->NombreAlumno; ?>" />
-                            Alumno: <input id="NombreAlumno" name="NombreAlumno" class="text ui-widget-content ui-corner-all" style=" width: 280px; text-align: left;" value="<?php echo strtoupper(utf8_encode($obj->NombreAlumno)); ?>" readonly="" />                        
-                            <a title="Agregar Alumno" href="javascript:" id="btnadd"><img src="images/add.png"/></a>
+                            <!--Alumno: <input id="NombreAlumno" name="NombreAlumno" class="text ui-widget-content ui-corner-all" style=" width: 280px; text-align: left;" value="<?php // echo strtoupper(utf8_encode($obj->NombreAlumno)); ?>" readonly="" />-->                        
+<!--                            <a title="Agregar Alumno" href="javascript:" id="btnadd"><img src="images/add.png"/></a>
                             <span id="lupa" >
 
-                            </span>
-                            <div class="contain">
+                            </span>-->
+                            <div class="contain" id="tdetalle">
                                 <table id="detalle" class="ui-widget ui-widget-content" style="width: 380px; margin: 0 auto; " >
                                     <thead class="ui-widget ui-widget-content">
                                         <tr class="ui-widget-header" style="height: 20px">                            

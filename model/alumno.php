@@ -19,9 +19,13 @@ class alumno extends Main{
         $data['rowspag'] = $this->getRowPag($data['total'], $p );        
         return $data;
     }
+       function borar_chek() {
+        $this->db->query("truncate table estado_chek_asignacion_tutoria ");
+    }
     //
  function indexBuscarAlumno($query,$p,$c,$fac) 
     { //echo $fCac;
+
         $semestre=$this->db->query("SELECT
                                     distinct
                                     max(detalle_matricula.CodigoSemestre) as semestre_actual

@@ -75,6 +75,20 @@ class evaluacion extends Main{
         $p2 = $stmt->errorInfo();
         return array($p1 , $p2[2]); 
     }
+
+    //aki toy
+    function actualizar_evaluacion_tipo($_P) {
+        echo "<pre>"; print_r ($_P);
+        $eva=$_P["Evaluacion"];
+        $cam= $_P["Campo"];
+        $edit= $_P["Editar"];
+
+        $stmt = $this->db->prepare("UPDATE evaluacion SET ".$cam." = :p2
+                                    WHERE idevaluacion = :p1");
+        $stmt->bindValue(':p1', $eva, PDO::PARAM_INT);
+        $stmt->bindValue(':p2', $edit, PDO::PARAM_STR);
+        $p1 = $stmt->execute();
+    }
 }
 ?>
 

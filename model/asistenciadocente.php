@@ -4,7 +4,7 @@ include_once("../lib/dbfactory.php");
 
 class asistenciadocente extends Main {
 
-    function index($query, $p, $c,$semestre_ultimo) {
+      function index($query, $p, $c,$semestre_ultimo) {
         $sql = "        SELECT
                         evento.idevento,
                         evento.tema,

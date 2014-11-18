@@ -1,15 +1,21 @@
 
+$(function() {
+iii = $("#semestreacademico").val();
+      $.post('index.php','controller=alumnocurso&action=getCursos&CodigoSemestre=' + iii, function(data) {
+                  console.log(data);
+                  $("#cursoalumno").empty().append(data);
+      });
+});
+
  $("#semestreacademico").live("change",function() {
         $("#silabus").css("display","none");
         $("#ola").css("display","none");
- 
+        $(".silaboo").css("display","");
      var ids = $(this).val();
-
+ //alert(ids);
         $.post('index.php','controller=alumnocurso&action=getCursos&CodigoSemestre=' + ids, function(data) {
             console.log(data);
             $("#cursoalumno").empty().append(data);
-            
-            
         });
 
     });
@@ -32,6 +38,7 @@ function Ver(id) {
     var idsemestre = $("#semestreacademico").attr("value");
 
 //    console.log(id);
+$(".silaboo").css("display","none");
 $("#silabus").css("display","");
 $("#cursos").css("display","none");
  $("#datos").css("display","");
@@ -108,7 +115,7 @@ function VerSyllabus(idalumno,idcurso){
     
     var idsemestre=$(".semestre").attr("value");
     
-
+$(".silaboo").css("display","none");
     $("#notas").css("display","");
      $("#datos").css("display","");
      $("#datos").css("display","");

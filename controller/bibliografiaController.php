@@ -22,6 +22,7 @@ class bibliografiaController extends Controller {
         $view = new View();
         $view->setData($data);
         $view->setTemplate( '../view/bibliografia/_Index.php' );
+        $view->setTemplate('../view/cursosemestre/_Index.php');
         $view->setLayout( '../template/Layout.php' );
         $view->render();
     }

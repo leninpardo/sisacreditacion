@@ -21,7 +21,7 @@ class unidadController extends Controller {
         $data['data'] = $obj->index($_GET['q'], $_GET['p'], $_GET['criterio']);
         $data['query'] = $_GET['q'];
         $data['pag'] = $this->Pagination(array('rows' => $data['data']['rowspag'], 'url' => 'index.php?controller=unidad&action=index', 'query' => $_GET['q']));
-        $cols = array("Codigo", "Cod. Silabus", "Nombre", "Descripcion", "Duracion", "Sumilla", "Competencia");
+        $cols = array("Codigo", "Cod. Silabus", "Nombre", "Descripcion", "Duracion", "Sumilla", "Competencia", "porcentaje");
         $opt = array("unidad.nombreunidad" => "Nombre Unidad", "silabus.sumilla" => "Sumilla");
         $data['grilla'] = $this->grilla("unidad", $cols, $data['data']['rows'], $opt, $data['pag'], true, true);
         $view = new View();

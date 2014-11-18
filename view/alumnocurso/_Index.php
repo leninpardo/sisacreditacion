@@ -6,22 +6,17 @@
 <div class="div_container">
     <div class="row">
         
-        <div  class="col-md-4" id="cursos">
-         
-        <div class=" panel-body" >
-            
-            <div> Semestre: <?php echo $semestreacademico; ?></div>
-            <br>
-            <div class="container-fluid" style="overflow-y: auto; height:356px;">
-            <ul id="cursoalumno" style="padding-left:0px;">
+              <!-- IZQUIERDA-->
+        <div  class="col-md-3 toggler" >
+            <div id="cursoalumno">
                 <?php echo $cursoalumno; ?>
-            </br>
-            </ul>  
-        </div>       
-        </div>
-            </div>
+            </div>       
+        </div> 
+
+        <!-- DERECHA-->
         
-        <div class="col-md-8" id="datos" >
+        <div class="col-md-9" style="margin-left: -90px;" id="datos" >
+        <?php echo $semestreacademico; ?>
             <div id="silabus">
                 
             </div>
@@ -29,7 +24,7 @@
             <div id="notas">
                 
             </div>
-                   
+            <img src="http://carpenoctem2012.files.wordpress.com/2012/03/silabo2.jpeg" class="silaboo" style="margin-bottom: -250px;" >
         </div>
     
 </div>

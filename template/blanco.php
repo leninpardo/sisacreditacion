@@ -1,11 +1,8 @@
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta http-equiv="expires" content="0" />
+<meta charset="UTF-8" />
 <title>POPUS</title>
 <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
-
 
 <link type="text/css" href="css/jquery-ui-1.8.13.custom.css" rel="stylesheet" />
 <link type="text/css" href="css/layout.css" rel="stylesheet" />

@@ -12,8 +12,144 @@ class Controller {
         throw new ControllerException("Error! El método {$name}  no está definido.");
     }
 
-    public function Select($p) {
+    public function PaginationPOST($p) {
+        $data = array();
+        $data['rows'] = $p['rows'];
+        $data['query'] = $p['query'];
+        $data['url'] = $p['url'];
+        $view = new View();
+        $view->setData($data);
+        $view->setTemplate('../view/_PaginationPOST.php');
+        return $view->renderPartial();
+    }
+
+    public function grilla_solicitudes_ps($p) {
+        $obj = new Main();
+        $data = array();
+        $data['rows'] = $obj->getDatos_grilla_solicitudes_ps();
+        $data['name'] = $p['name'];
+        $data['id'] = $p['id'];
+        $data['code'] = $p['code'];
+        $data['disabled'] = $p['disabled'];
+        $view = new View();
+        $view->setData($data);
+        $view->setTemplate('../view/solicitudes_ps.php');
+        return $view->renderPartial();
+    }
+
+    
+    public function grilla_solicitudes_eu($p) {
+        $obj = new Main();
+        $data = array();
+        $data['rows'] = $obj->getDatos_grilla_solicitudes_eu();
+        $data['name'] = $p['name'];
+        $data['id'] = $p['id'];
+        $data['code'] = $p['code'];
+        $data['disabled'] = $p['disabled'];
+        $view = new View();
+        $view->setData($data);
+        $view->setTemplate('../view/solicitudes_eu.php');
+        return $view->renderPartial();
         
+        
+        
+    }
+    public function grilla_solicitudes_docentes_ps($p) {
+        $obj = new Main();
+        $data = array();
+        $data['rows'] = $obj->getDatos_grilla_solicitudes_docentes_ps();
+        $data['name'] = $p['name'];
+        $data['id'] = $p['id'];
+        $data['code'] = $p['code'];
+        $data['disabled'] = $p['disabled'];
+        $view = new View();
+        $view->setData($data);
+        $view->setTemplate('../view/solicitudes_docentes_ps.php');
+        return $view->renderPartial();
+     
+    }
+     public function grilla_solicitudes_docentes_eu($p) {
+        $obj = new Main();
+        $data = array();
+        $data['rows'] = $obj->getDatos_grilla_solicitudes_docentes_eu();
+        $data['name'] = $p['name'];
+        $data['id'] = $p['id'];
+        $data['code'] = $p['code'];
+        $data['disabled'] = $p['disabled'];
+        $view = new View();
+        $view->setData($data);
+        $view->setTemplate('../view/solicitudes_docentes_eu.php');
+        return $view->renderPartial();
+     
+    }
+    
+        public function grilla_notificaciones_docentes_ps($p) {
+        $obj = new Main();
+        $data = array();
+        $data['rows'] = $obj->getDatos_grilla_notificaciones_docentes_ps();
+        $data['name'] = $p['name'];
+        $data['id'] = $p['id'];
+        $data['code'] = $p['code'];
+        $data['disabled'] = $p['disabled'];
+        $view = new View();
+        $view->setData($data);
+        $view->setTemplate('../view/notificaciones_docentes_ps.php');
+        return $view->renderPartial();
+        
+        
+        
+    }
+     public function grilla_notificaciones_docentes_eu($p) {
+        $obj = new Main();
+        $data = array();
+        $data['rows'] = $obj->getDatos_grilla_notificaciones_docentes_eu();
+        $data['name'] = $p['name'];
+        $data['id'] = $p['id'];
+        $data['code'] = $p['code'];
+        $data['disabled'] = $p['disabled'];
+        $view = new View();
+        $view->setData($data);
+        $view->setTemplate('../view/notificaciones_docentes_eu.php');
+        return $view->renderPartial();
+        
+        
+        
+    }
+    public function grilla_notificaciones_alumnos_ps($p) {
+        $obj = new Main();
+        $data = array();
+        $data['rows'] = $obj->getDatos_grilla_notificaciones_alumnos_ps();
+        $data['name'] = $p['name'];
+        $data['id'] = $p['id'];
+        $data['code'] = $p['code'];
+        $data['disabled'] = $p['disabled'];
+        $view = new View();
+        $view->setData($data);
+        $view->setTemplate('../view/notificaciones_alumnos_ps.php');
+        return $view->renderPartial();
+        
+        
+        
+    }
+    
+     public function grilla_notificaciones_alumnos_eu($p) {
+        $obj = new Main();
+        $data = array();
+        $data['rows'] = $obj->getDatos_grilla_notificaciones_alumnos_eu();
+        $data['name'] = $p['name'];
+        $data['id'] = $p['id'];
+        $data['code'] = $p['code'];
+        $data['disabled'] = $p['disabled'];
+        $view = new View();
+        $view->setData($data);
+        $view->setTemplate('../view/notificaciones_alumnos_eu.php');
+        return $view->renderPartial();
+        
+        
+        
+    }
+    public function Select($p) {
+
         $obj = new Main();
         $obj->table = $p['table'];
         $data = array();
@@ -28,7 +164,8 @@ class Controller {
         $view->setTemplate('../view/_Select.php');
         return $view->renderPartial();
     }
-	public function Select_ajax_string_prov($p) {
+
+    public function Select_ajax_string_prov($p) {
         $obj = new Main();
         $obj->table = $p['table'];
         $obj->filtro = $p['filtro'];
@@ -41,16 +178,53 @@ class Controller {
         $data['disabled'] = $p['disabled'];
         $view = new View();
         $view->setData($data);
-        if($p['ajax']){
+        if ($p['ajax']) {
             $view->setTemplate('../view/_Select_ajax.php');
-        }else{
+        } else {
             $view->setTemplate('../view/_Select.php');
         }
         return $view->renderPartial();
     }
-	
-	
-    
+
+    public function leer_sub_eventos($idevento = "", $tipo_eve = "", $ubi = "") {
+
+
+        $obj = new main();
+        $view = new View();
+        $data['ubigeo'] = $ubi;
+        $data['id_even'] = $tipo_eve;
+        $data['rows'] = $obj->get_sub_eventos($idevento);
+        $data['idevento'] = $idevento;
+        $view->setData($data);
+        $view->setTemplate('../view/evento_proyeccion_social/_sub_eventos.php');
+        return $view->renderPartial();
+    }
+
+    public function leer_pre_actividades($idevento) {
+
+        $obj = new main();
+        $view = new View();
+        $data = array();
+        $data['id_evnt'] = $idevento;
+        $datos = $data['rows'] = $obj->get_pre_actividades($idevento);
+//        print_r($datos);exit;
+        $view->setData($data);
+        $view->setTemplate('../view/evento_proyeccion_social/_pre_actividades.php');
+        return $view->renderPartial();
+    }
+
+    public function leer_pre_actividades_sinUpdate($idevento) {
+
+        $obj = new main();
+        $view = new View();
+        $data = array();
+        $datos = $data['rows'] = $obj->get_pre_actividades($idevento);
+//        print_r($datos);exit;
+        $view->setData($data);
+        $view->setTemplate('../view/evento_proyeccion_social/_pre_actividades.php');
+        return $view->renderPartial();
+    }
+
     public function SelectActual($p) {
         $obj = new Main();
 //        $obj->table = $p['table'];
@@ -66,6 +240,7 @@ class Controller {
         $view->setTemplate('../view/_Select.php');
         return $view->renderPartial();
     }
+
     public function cinco_ultimos_semestres($p) {
         $obj = new Main();
 //        $obj->table = $p['table'];
@@ -81,7 +256,8 @@ class Controller {
         $view->setTemplate('../view/_Select.php');
         return $view->renderPartial();
     }
-     public function Datos_grilla($p) {
+
+    public function Datos_grilla($p) {
         $obj = new Main();
 //        $obj->table = $p['table'];
 //        $obj->criterio = $p['criterio1'];
@@ -91,7 +267,7 @@ class Controller {
         $data = array();
 
         $data['rows'] = $obj->getDatos_grilla();
-        
+
         $data['name'] = $p['name'];
         $data['id'] = $p['id'];
         $data['code'] = $p['code'];
@@ -102,13 +278,12 @@ class Controller {
         return $view->renderPartial();
     }
 
-    
-  
-     public function mostrar_semestre_ultimo(){
+    public function mostrar_semestre_ultimo() {
         $obj = new Main();
-        $semestre_ultimo= $obj->mostrar_semestre_ultimo();
-        return  $semestre_ultimo;
+        $semestre_ultimo = $obj->mostrar_semestre_ultimo();
+        return $semestre_ultimo;
     }
+
     public function Datos_grilla_facultad($p) {
         $obj = new Main();
         $obj->criterio = $p['criterio'];
@@ -116,41 +291,40 @@ class Controller {
         $obj->criterio2 = $p['criterio2'];
         $obj->filtro2 = $p['filtro2'];
         $data = array();
-        
+
         $data['rows'] = $obj->getDatos_grilla_facultad();
-        
+
         $data['name'] = $p['name'];
         $data['id'] = $p['id'];
         $data['code'] = $p['code'];
         $data['disabled'] = $p['disabled'];
-        $data['modovista']=$p['modovista'];
+        $data['modovista'] = $p['modovista'];
         $view = new View();
         $view->setData($data);
-        $view->setTemplate('../view/_tabla.php');    
+        $view->setTemplate('../view/_tabla.php');
         return $view->renderPartial();
     }
-    
-   
-     public function mostrar_mis_asistencias_eventos_tutoria_alumno($p) {
-        
+
+    public function mostrar_mis_asistencias_eventos_tutoria_alumno($p) {
+
         $obj = new Main();
 
         $obj->criterio = $p['criterio'];
         $obj->criterio2 = $p['criterio2'];
         $data = array();
-        
+
         $data['rows'] = $obj->get_mostrar_mis_asistencias_eventos_tutoria_alumno();
-        
         $data['name'] = $p['name'];
         $data['id'] = $p['id'];
         $data['code'] = $p['code'];
         $data['disabled'] = $p['disabled'];
         $view = new View();
         $view->setData($data);
-        $view->setTemplate('../view/_tabla_mis_asistencias_alumno.php');    
+        $view->setTemplate('../view/_tabla_mis_asistencias_alumno.php');
         return $view->renderPartial();
     }
-     public function Pagination2($p) {
+
+    public function Pagination2($p) {
         $data = array();
         $data['rows'] = $p['rows'];
         $data['query'] = $p['query'];
@@ -162,8 +336,8 @@ class Controller {
         $view->setTemplate('../view/_Pagination2.php');
         return $view->renderPartial();
     }
-    
-     public function Lista($p) {
+
+    public function Lista($p) {
         $obj = new Main();
 //        $obj->table = $p['table'] no uso tabla;
         $data = array();
@@ -178,7 +352,8 @@ class Controller {
         $view->setTemplate('../view/_Lista.php');
         return $view->renderPartial();
     }
-     public function grilla($name, $columns, $rows, $options, $pag, $edit, $view, $select = false, $new = true,$asig,$chek,$presidente) {
+
+    public function grilla($name, $columns, $rows, $options, $pag, $edit, $view, $select = false, $new = true, $asig, $chek, $presidente) {
         $obj = new Main();
         $data = array();
         $data['nr'] = $obj->getnr();
@@ -200,6 +375,31 @@ class Controller {
         $view->setLayout('../template/Layout.php');
         return $view->renderPartial();
     }
+
+    public function grilla2($name, $columns, $rows, $options, $pag, $edit, $view, $select = false, $new = true, $asig, $chek, $presidente, $cheket_estado_asignacion = false) {
+        $obj = new Main();
+        $data = array();
+        $data['nr'] = $obj->getnr();
+        $data['cols'] = $columns;
+        $data['rows'] = $rows;
+        $data['edit'] = $edit;
+        $data['view'] = $view;
+        $data['select'] = $select;
+        $data['name'] = $name;
+        $data['pag'] = $pag;
+        $data['new'] = $new;
+        $data['asig'] = $asig;
+        $data['chek'] = $chek;
+        $data['presidente'] = $presidente;
+        $data['cheket_estado_asignacion'] = $cheket_estado_asignacion;
+        $data['combo_search'] = $this->Combo_Search($options);
+        $view = new View();
+        $view->setData($data);
+        $view->setTemplate('../view/_grilla_asig_tuto.php');
+        $view->setLayout('../template/Layout.php');
+        return $view->renderPartial();
+    }
+
     public function Select1($p) {
         $obj = new Main();
 //        $obj->table = $p['table'];
@@ -207,7 +407,7 @@ class Controller {
         $data = array();
         $data['rows'] = $obj->getSemestre();
         $data['name'] = $p['name'];
-        
+
         $data['id'] = $p['id'];
         $data['code'] = $p['code'];
         $data['disabled'] = $p['disabled'];
@@ -216,25 +416,25 @@ class Controller {
         $view->setTemplate('../view/_Select.php');
         return $view->renderPartial();
     }
-    
-     public function SelectD($p) {
+
+    public function SelectD($p) {
         $obj = new Main();
 //        $obj->table = $p['table'];
         $obj->filtro = $p['filtro'];
         $data = array();
         $data['rows'] = $obj->getSemestreD();
         $data['name'] = $p['name'];
-        
+
         $data['id'] = $p['id'];
         $data['code'] = $p['code'];
         $data['disabled'] = $p['disabled'];
         $view = new View();
         $view->setData($data);
-        $view->setTemplate('../view/_Select.php');
+        $view->setTemplate('../view/_Selectlista.php');
         return $view->renderPartial();
     }
-    
-   public function Select_ajax($p) {
+
+    public function Select_ajax($p) {
         $obj = new Main();
         $obj->table = $p['table'];
         $obj->filtro = $p['filtro'];
@@ -249,8 +449,22 @@ class Controller {
         $view->setTemplate('../view/_Select_ajax.php');
         return $view->renderPartial();
     }
-    
-    
+
+    public function Select_tipo_biblio($p) {
+        $obj = new Main();
+        $obj->table = $p['table'];
+        $obj->filtro = 0;
+        $obj->criterio = 0;
+        $data = array();
+        $data['rows'] = $obj->getList_ajax();
+        $data['name'] = $p['name'];
+        $data['id'] = $p['id'];
+        $data['disabled'] = $p['disabled'];
+        $view = new View();
+        $view->setData($data);
+        $view->setTemplate('../view/_Edit_Silabo_biblio.php');
+        return $view->renderPartial();
+    }
 
     public function Select_ajax_string($p) {
         $obj = new Main();
@@ -268,12 +482,12 @@ class Controller {
         return $view->renderPartial();
     }
 
-         public function lista_recibir($p) {
+    public function lista_recibir($p) {
         $obj = new Main();
 //        $obj->table = $p['table'];
         $obj->filtro = $p['filtro'];
         $obj->criterio = $p['criterio'];
-         $obj->filtro1 = $p['filtro1'];
+        $obj->filtro1 = $p['filtro1'];
         $obj->criterio1 = $p['criterio1'];
         $data = array();
         $data['rows'] = $obj->getLista();
@@ -285,9 +499,10 @@ class Controller {
         $view->setTemplate('../view/_Lista_ajax.php');
         return $view->renderPartial();
     }
+
     //lista de alumnos del curso seleccionado x el docente
-    
-     public function grilla_notasproyecto($p) {
+
+    public function grilla_notasproyecto($p) {
         $obj = new Main();
 //        $obj->table = $p['table'];
 ////        $obj->criterio = $p['criterio1'];
@@ -306,20 +521,20 @@ class Controller {
         $view->setTemplate('../view/notasproyecto.php');
         return $view->renderPartial();
     }
-    
-     public function Lista_recibir_A($p) {
+
+    public function Lista_recibir_A($p) {
         $obj = new Main();
 //        $obj->table = $p['table'];
         $obj->filtro = $p['filtro'];
         $obj->criterio = $p['criterio'];
-         $obj->filtro1 = $p['filtro1'];
+        $obj->filtro1 = $p['filtro1'];
         $obj->criterio1 = $p['criterio1'];
-           $obj->opt=$p['opcion'];
+        $obj->opt = $p['opcion'];
         $data = array();
-        if ($obj->opt=="A"){
-             $data['opcion']="normal";
-        }else{
-            $data['opcion']="asistencia";
+        if ($obj->opt == "A") {
+            $data['opcion'] = "normal";
+        } else {
+            $data['opcion'] = "asistencia";
         }
         $data['rows'] = $obj->getListaA();
 //        $data['name'] = $p['name'];
@@ -327,11 +542,12 @@ class Controller {
         $data['disabled'] = $p['disabled'];
         $view = new View();
         $view->setData($data);
-        
-       $view->setTemplate('../view/_tablaA.php');
+
+        $view->setTemplate('../view/_tablaA.php');
         return $view->renderPartial();
     }
-          public function FiltroEditar_P($p) {
+
+    public function FiltroEditar_P($p) {
         $obj = new Main();
         $obj->criterio = $p['criterio'];
         $data = array();
@@ -342,8 +558,7 @@ class Controller {
         $view->setTemplate('../view/_filtroEditar.php');
         return $view->renderPartial();
     }
-    
-    
+
 //    public function Nombre_curso($p) {
 //        
 //        $obj = new Main();
@@ -361,75 +576,95 @@ class Controller {
 //       $view->setTemplate('../view/_Silabo.php');
 //        return $view->renderPartial();
 //    }
-    
-    
+
+    public function genSilabo($p) {
+        $obj = new Main();
+//        $obj->table = $p['table'];
+        $obj->filtro = 0;
+        $obj->criterio = 0;
+        $obj->filtro1 = $p['filtro1'];
+        $obj->filtro2 = $p['filtro2'];
+
+        $data = array();
+        $data['rows'] = $obj->silDG();
+        $data['rows2'] = $obj->silUni();
+        $data['rows3'] = $obj->getTema();
+        $data['rows4'] = $obj->getBibliografiaS();
+        $data['disabled'] = $p['disabled'];
+        $view = new View();
+        $view->setData($data);
+        $view->setTemplate('../view/_generarSilabo.php');
+        return $view->renderPartial();
+    }
+
     public function Lista_recibir_A2($p) {
         $obj = new Main();
 //        $obj->table = $p['table'];
         $obj->filtro = $p['filtro'];
         $obj->criterio = $p['criterio'];
-         $obj->filtro1 = $p['filtro1'];
+        $obj->filtro1 = $p['filtro1'];
         $obj->criterio1 = $p['criterio1'];
         $data = array();
         $data['rows'] = $obj->getListaA();
         $data['rows2'] = $obj->getSyllabus_P();
-        
+        $data['rows3'] = $obj->getRetornoN();
+
 //        $data['name'] = $p['name'];
 //        $data['id'] = $p['id'];
         $data['disabled'] = $p['disabled'];
         $view = new View();
         $view->setData($data);
-       $view->setTemplate('../view/_tablaN.php');
+        $view->setTemplate('../view/_tablaN.php');
         return $view->renderPartial();
     }
-    
+
     public function Syllabus_P($p) {
         $obj = new Main();
 //        $obj->table = $p['table'];
         $obj->filtro = $p['filtro'];
         $obj->criterio = $p['criterio'];
-         $obj->filtro1 = $p['filtro1'];
+        $obj->filtro1 = $p['filtro1'];
         $obj->criterio1 = $p['criterio1'];
         $data = array();
         $data['rows'] = $obj->getSyllabus_P();
         $data['rows2'] = $obj->getNombre();
-        
+
 //        $data['name'] = $p['name'];
 //        $data['id'] = $p['id'];
         $data['disabled'] = $p['disabled'];
         $view = new View();
         $view->setData($data);
-       $view->setTemplate('../view/_Silabo.php');
+        $view->setTemplate('../view/_Silabo.php');
         return $view->renderPartial();
     }
+
     public function Lista_notas($p) {
         $obj = new Main();
-//        $obj->table = $p['table'];
-        
         $obj->criterio = $p['criterio'];
         $obj->criterio1 = $p['criterio1'];
+        $obj->criterio2 = $p['criterio2'];
         $data = array();
-        $data['rows3'] = $obj->getRetornoN();
-        
-        
-//        $data['name'] = $p['name'];
-//        $data['id'] = $p['id'];
+        $data['rows'] = $obj->getRetornoN();
         $data['disabled'] = $p['disabled'];
         $view = new View();
         $view->setData($data);
-       $view->setTemplate('../view/_tablaN.php');
+        $view->setTemplate('../view/_nota.php');
         return $view->renderPartial();
     }
+
+    //holaaaaaaaaaa
 // mando la lista de los cursos del docente x la carga academica segun el semestre seleccionado
     public function lista_recibir_D($p) {
         $obj = new Main();
 //        $obj->table = $p['table'];
         $obj->filtro = $p['filtro'];
         $obj->criterio = $p['criterio'];
-         $obj->filtro1 = $p['filtro1']; 
+        $obj->filtro1 = $p['filtro1'];
         $obj->criterio1 = $p['criterio1'];
         $data = array();
+        $data["id"] = $p['criterio'];
         $data['rows'] = $obj->getListaD();
+        $data['rows2'] = $obj->estadoSil();
 //        $data['name'] = $p['name'];
 //        $data['id'] = $p['id'];
         $data['disabled'] = $p['disabled'];
@@ -438,16 +673,15 @@ class Controller {
         $view->setTemplate('../view/_Lista_ajax.php');
         return $view->renderPartial();
     }
-    
-    
-     public function silabus_recibir($p) {
+
+    public function silabus_recibir($p) {
         $obj = new Main();
 //        $obj->table = $p['table'];
         $obj->filtro = $p['filtro'];
         $obj->criterio = $p['criterio'];
-         $obj->filtro1 = $p['filtro1'];
+        $obj->filtro1 = $p['filtro1'];
         $obj->criterio1 = $p['criterio1'];
-        
+
         $data = array();
         $data['rows'] = $obj->getSilabu();
 
@@ -457,17 +691,20 @@ class Controller {
         $view->setTemplate('../view/_Silabo.php');
         return $view->renderPartial();
     }
-    
-     public function detalle_silabus($p) {
+
+    public function detalle_silabus($p) {
+
         $obj = new Main();
 //        $obj->table = $p['table'];
         $obj->filtro = $p['filtro'];
         $obj->criterio = $p['criterio'];
-         $obj->filtro1 = $p['filtro1'];
+        $obj->filtro1 = $p['filtro1'];
         $obj->criterio1 = $p['criterio1'];
-        
+
         $data = array();
         $data['rows'] = $obj->getdatos_Silabu();
+        $data['rows2'] = $obj->getBibliografia();
+
 
         $data['disabled'] = $p['disabled'];
         $view = new View();
@@ -475,66 +712,75 @@ class Controller {
         $view->setTemplate('../view/_Edit_Silabo.php');
         return $view->renderPartial();
     }
-    
-     public function unidad_recibir($p) {
+
+    public function bibliografia_silabus($p) {
+
+        $obj = new Main();
+        $datab = array();
+        $datab['rows22'] = $obj->getBibliografia();
+        //print_r(($datab['rows22']));
+        $datab['disabled'] = $p['disabled'];
+        $view = new View();
+        $view->setData($datab);
+        $view->setTemplate('../view/_Edit_Silabo_biblio.php');
+        return $view->renderPartial();
+    }
+
+    public function unidad_recibir($p) {
         $obj = new Main();
 //        $obj->table = $p['table'];
         $obj->filtro = $p['filtro'];
         $obj->criterio = $p['criterio'];
-         $obj->filtro1 = $p['filtro1'];
+        $obj->filtro1 = $p['filtro1'];
         $obj->criterio1 = $p['criterio1'];
         $obj->opt = $p['option'];
-        
-        
+
+
+
         $data = array();
         $data['rows'] = $obj->getUnidad();
-        if($obj->opt=='dsa'){
-            $data['rows2']="boton";
-        }else{
-            $data['rows2']="";
-            
+        if ($obj->opt == 'dsa') {
+            $data['rows2'] = "boton";
+        } else {
+            $data['rows2'] = "";
         }
-        
+
         $data['disabled'] = $p['disabled'];
         $view = new View();
         $view->setData($data);
-        
-       if ($obj->opt=='S'){
-        $view->setTemplate('../view/_SinUnidad.php');
-        
-       }else{
-           
-           $view->setTemplate('../view/_Unidad.php');
-           
-           
-       }
-        return $view->renderPartial();
-        
+
+        if ($obj->opt == 'S') {
+            $view->setTemplate('../view/_SinUnidad.php');
+        } else {
+
+            $view->setTemplate('../view/_Unidad.php');
         }
-        
-        public function unidad_recibirid($p) {
+        return $view->renderPartial();
+    }
+
+    public function unidad_recibirid($p) {
         $obj = new Main();
 //        $obj->table = $p['table'];
         $obj->filtro = $p['filtro'];
         $obj->criterio = $p['criterio'];
-         $obj->filtro1 = $p['filtro1'];
+        $obj->filtro1 = $p['filtro1'];
         $obj->criterio1 = $p['criterio1'];
-       
-        
-        
+
+
+
         $data = array();
         $data['rows'] = $obj->getUnidadid();
 
         $data['disabled'] = $p['disabled'];
         $view = new View();
         $view->setData($data);
-       
+
         $view->setTemplate('../view/_Sipdf.php');
-        
-       
+
+
         return $view->renderPartial();
-        
-        }
+    }
+
 //         public function silabus_recibirid($p) {
 //        $obj = new Main();
 ////        $obj->table = $p['table'];
@@ -557,18 +803,18 @@ class Controller {
 //        return $view->renderPartial();
 //        
 //        }
-        
-    
+
+
     public function notas_alumno($p) {
         $obj = new Main();
 //        $obj->table = $p['table'];
-        $obj->filtro2= $p['filtro2'];
-        $obj->criterio2= $p['criterio2'];
-        $obj->criterio1= $p['criterio1'];
+        $obj->filtro2 = $p['filtro2'];
+        $obj->criterio2 = $p['criterio2'];
+        $obj->criterio1 = $p['criterio1'];
         $obj->criterio = $p['criterio'];
-        $obj->filtro= $p['filtro'];
-        $obj->filtro1= $p['filtro1'];
-        
+        $obj->filtro = $p['filtro'];
+        $obj->filtro1 = $p['filtro1'];
+
         $obj->opcion = $p['opcion'];
         $data = array();
         $data['rows2'] = $obj->getSyllabus_P2();
@@ -578,20 +824,20 @@ class Controller {
         $data['disabled'] = $p['disabled'];
         $view = new View();
         $view->setData($data);
-        
-            $view->setTemplate('../view/_tablaM.php');
-            
-      
-        
+
+        $view->setTemplate('../view/_tablaM.php');
+
+
+
         return $view->renderPartial();
     }
-    
+
     public function tema_recibir($p) {
         $obj = new Main();
 //        $obj->table = $p['table'];
         $obj->filtro = $p['filtro'];
         $obj->criterio = $p['criterio'];
-        
+
         $obj->opcion = $p['opcion'];
         $data = array();
         $data['rows'] = $obj->getTema();
@@ -599,27 +845,38 @@ class Controller {
         $data['disabled'] = $p['disabled'];
         $view = new View();
         $view->setData($data);
-        if ($obj->opcion =='A'){
-        $view->setTemplate('../view/_SinTema.php');
-        }else{
-            
-             if ($obj->opcion =='B'){
-        $view->setTemplate('../view/_TemaA.php');
-        }else{
-            $view->setTemplate('../view/_Tema.php');
+        if ($obj->opcion == 'A') {
+            $view->setTemplate('../view/_SinTema.php');
+        } else {
+
+            if ($obj->opcion == 'B') {
+                $view->setTemplate('../view/_TemaA.php');
+            } else {
+                $view->setTemplate('../view/_Tema.php');
+            }
         }
-        }
-        
+
         return $view->renderPartial();
     }
-    
-    
-     public function tema_recibirF($p) {
+
+    public function evaluacion_recibir($p) {
+        $obj = new Main();
+        $obj->criterio = $p['criterio'];
+        $data = array();
+        $data['rows'] = $obj->getEvaluacion();
+        $data['disabled'] = $p['disabled'];
+        $view = new View();
+        $view->setData($data);
+        $view->setTemplate('../view/_evaluacion.php');
+        return $view->renderPartial();
+    }
+
+    public function tema_recibirF($p) {
         $obj = new Main();
 //        $obj->table = $p['table'];
         $obj->filtro = $p['filtro'];
         $obj->criterio = $p['criterio'];
-        
+
         $obj->opcion = $p['opcion'];
         $data = array();
         $data['rows2'] = $obj->getTema();
@@ -627,15 +884,13 @@ class Controller {
         $data['disabled'] = $p['disabled'];
         $view = new View();
         $view->setData($data);
-       
+
         $view->setTemplate('../view/_Sipdf.php');
-        
-        
+
+
         return $view->renderPartial();
     }
-    
-    
-    
+
 //     public function Clase_recibir($p) {
 //        $obj = new Main();
 ////        $obj->table = $p['table'];
@@ -655,16 +910,16 @@ class Controller {
 //        
 //        return $view->renderPartial();
 //    }
-    
-    
-    
-    
+
+
+
+
     public function bibliografia_recibir($p) {
         $obj = new Main();
 //        $obj->table = $p['table'];
         $obj->filtro = $p['filtro'];
         $obj->criterio = $p['criterio'];
-        
+
         $obj->opcion = $p['opcion'];
         $data = array();
         $data['rows4'] = $obj->getBiblio();
@@ -672,20 +927,14 @@ class Controller {
         $data['disabled'] = $p['disabled'];
         $view = new View();
         $view->setData($data);
-        
-        
+
+
         $view->setTemplate('../view/_Edit_Silabo.php');
-        
-        
+
+
         return $view->renderPartial();
     }
-        
-    
-    
-    
-    
-    
-    
+
 //     public function Datos_grilla($p) {
 //        $obj = new Main();
 ////        $obj->table = $p['table'];
@@ -703,7 +952,7 @@ class Controller {
 //        $view->setTemplate('../view/_Silabo.php');
 //        return $view->renderPartial();
 //    }
- 
+
     public function Select_ajax_string_dis($p) {
         $obj = new Main();
         $obj->table = $p['table'];
@@ -717,9 +966,9 @@ class Controller {
         $data['disabled'] = $p['disabled'];
         $view = new View();
         $view->setData($data);
-        if($p['ajax']){
+        if ($p['ajax']) {
             $view->setTemplate('../view/_Select_ajax.php');
-        }else{
+        } else {
             $view->setTemplate('../view/_Select.php');
         }
         return $view->renderPartial();
@@ -736,6 +985,38 @@ class Controller {
         return $view->renderPartial();
     }
 
+    public function grilla_E_PS_EU($name, $columns, $rows, $options, $pag, $edit, $view, $select = false, $new = true, $ver_detalles = false, $unirse = false, $unirse_profesor = false) {
+        $obj = new Main();
+        $data = array();
+        $data['nr'] = $obj->getnr();
+        $data['cols'] = $columns;
+        $data['rows'] = $rows;
+        $data['edit'] = $edit;
+        $data['view'] = $view;
+        $data['select'] = $select;
+        $data['name'] = $name;
+        $data['pag'] = $pag;
+        $data['new'] = $new;
+        $data['ver_detalles'] = $ver_detalles;
+        $data['unirse'] = $unirse;
+        $data['unirse_profesor'] = $unirse_profesor;
+        $data['combo_search'] = $this->Combo_Search($options);
+        $view = new View();
+        $view->setData($data);
+        $view->setTemplate('../view/_grilla_E_PS_EU.php');
+        $view->setLayout('../template/Layout.php');
+        return $view->renderPartial();
+    }
+
+    public function getFiels($p) {
+        $obj = new Main();
+        $obj->tabla = $p['tabla'];
+        $obj->campo = $p['campo'];
+        $obj->idtabla = $p['idtabla'];
+        $datos = $obj->getFiels($p);
+        return $datos;
+    }
+
     public function Combo_Search($options) {
         $data = array();
         $data['options'] = $options;
@@ -745,8 +1026,6 @@ class Controller {
         return $view->renderPartial();
     }
 
-  
-    
     public function grilla_proyecto($p) {
         $obj = new Main();
 //        $obj->table = $p['table'];
@@ -769,7 +1048,7 @@ class Controller {
         $view->setTemplate('../view/_tabla2.php');
         return $view->renderPartial();
     }
-    
+
     public function grilla_solicitaproyecto($p) {
         $obj = new Main();
 //        $obj->table = $p['table'];
@@ -780,7 +1059,7 @@ class Controller {
         $data = array();
 
         $data['rows'] = $obj->getDatos_grilla_solicitaproyectos();
-        
+
         $data['name'] = $p['name'];
         $data['id'] = $p['id'];
         $data['code'] = $p['code'];
@@ -790,8 +1069,7 @@ class Controller {
         $view->setTemplate('../view/_tabla4.php');
         return $view->renderPartial();
     }
-    
-    
+
     public function grilla_miproyecto($p) {
         $obj = new Main();
 //        $obj->table = $p['table'];
@@ -802,7 +1080,7 @@ class Controller {
         $data = array();
 
         $data['rows'] = $obj->getDatos_grilla_miproyecto();
-        
+
         $data['name'] = $p['name'];
         $data['id'] = $p['id'];
         $data['code'] = $p['code'];
@@ -812,8 +1090,7 @@ class Controller {
         $view->setTemplate('../view/_tabla3.php');
         return $view->renderPartial();
     }
-    
-    
+
     public function pdf_proyecto($p) {
         $obj = new Main();
 //        $obj->table = $p['table'];
@@ -824,7 +1101,7 @@ class Controller {
         $data = array();
 
         $data['rows'] = $obj->getDetalle_proyecto();
-        $data['rows2'] =  $obj->getDatos_grilla_objetivos();
+        $data['rows2'] = $obj->getDatos_grilla_objetivos();
         $data['rows3'] = $obj->getDatos_grilla_docentes();
         $data['rows4'] = $obj->getDatos_grilla_alumnos();
         $data['name'] = $p['name'];
@@ -836,7 +1113,7 @@ class Controller {
         $view->setTemplate('../view/_Pdf.php');
         return $view->renderPartial();
     }
-    
+
     public function Detalle_Proyecto_P($p) {
         $obj = new Main();
         $obj->criterio = $p['criterio'];
@@ -846,11 +1123,9 @@ class Controller {
         $view = new View();
         $view->setData($data);
         $view->setTemplate('../view/_Detalle.php');
-        $view->setLayout('../template/Layout.php');
-        return $view->render();
-       
-    } 
-    
+        return $view->renderPartial();
+    }
+
     public function Detalle_Proyecto1_P($p) {
         $obj = new Main();
         $obj->criterio = $p['criterio'];
@@ -863,50 +1138,50 @@ class Controller {
         $view->setTemplate('../view/_Detalle1.php');
         return $view->renderPartial();
     }
-    
-     public function Calificaiones($p) {
+
+    public function Calificaiones($p) {
         $obj = new Main();
 //        $obj->table = $p['table'];
         $obj->alumno = $p['alumno'];
-        $obj->nota=$p['notas'];
-         $obj->evaluacion = $p['evaluacion'];
-       
-        
+        $obj->nota = $p['notas'];
+        $obj->evaluacion = $p['evaluacion'];
+
+
 //         var_dump($obj->nota);
 //         exit();
-         
+
         $data = array();
         $data['rows'] = $obj->Insertar();
 
         $data['disabled'] = $p['disabled'];
-        $mensaje='Se inserto correctamente';
-        
+        $mensaje = 'Se inserto correctamente';
+
         return $mensaje;
     }
-    
-     public function Asistencia($p) {
+
+    public function Asistencia($p) {
         $obj = new Main();
 //        $obj->table = $p['table'];
         $obj->alumno = $p['alumno'];
-        
-        $obj->asistencia=$p['asistencia'];
-        
-         $obj->clase = $p['clase'];
-       
-        
+
+        $obj->asistencia = $p['asistencia'];
+
+        $obj->clase = $p['clase'];
+
+
 //         var_dump($obj->asistencia);
 //         exit();
-         
+
         $data = array();
         $data['rows'] = $obj->InsertarA();
 
         $data['disabled'] = $p['disabled'];
-        $mensaje='Se inserto correctamente';
-        
+        $mensaje = 'Se inserto correctamente';
+
         return $data;
     }
 
-     public function grilla_informativo($p) {
+    public function grilla_informativo($p) {
         $obj = new Main();
 //        $obj->table = $p['table'];
 ////        $obj->criterio = $p['criterio1'];
@@ -916,7 +1191,7 @@ class Controller {
         $data = array();
 
         $data['rows'] = $obj->getDatos_web_informativo();
-        $data['rows2'] =  $obj->getDatos_web_evento();
+        $data['rows2'] = $obj->getDatos_web_evento();
         $data['rows3'] = $obj->getDatos_web_noticias();
         $data['rows4'] = $obj->getDatos_web_contenido();
         $data['rows5'] = $obj->getDatos_web_desarrolladores();
@@ -929,8 +1204,8 @@ class Controller {
         $view->setTemplate('../contenido.php');
         return $view->renderPartial();
     }
-    
-public function ListaProyecto_P($p) {
+
+    public function ListaProyecto_P($p) {
         $obj = new Main();
         $obj->criterio = $p['criterio'];
         $data = array();
@@ -941,8 +1216,8 @@ public function ListaProyecto_P($p) {
         $view->setTemplate('../view/_Proyecto.php');
         return $view->renderPartial();
     }
-    
-     public function Marco_P($p) {
+
+    public function Marco_P($p) {
         $obj = new Main();
         $obj->criterio = $p['criterio'];
         $data = array();
@@ -953,6 +1228,7 @@ public function ListaProyecto_P($p) {
         $view->setTemplate('../view/_Marco.php');
         return $view->renderPartial();
     }
+
     public function Metodologia_P($p) {
         $obj = new Main();
         $obj->criterio = $p['criterio'];
@@ -964,6 +1240,7 @@ public function ListaProyecto_P($p) {
         $view->setTemplate('../view/_Metodologia.php');
         return $view->renderPartial();
     }
+
     public function Aspectos_P($p) {
         $obj = new Main();
         $obj->criterio = $p['criterio'];
@@ -975,7 +1252,8 @@ public function ListaProyecto_P($p) {
         $view->setTemplate('../view/_Aspectos.php');
         return $view->renderPartial();
     }
-         public function ListaAlumno_P($p) {
+
+    public function ListaAlumno_P($p) {
         $obj = new Main();
         $obj->criterio = $p['criterio'];
         $data = array();
@@ -986,7 +1264,7 @@ public function ListaProyecto_P($p) {
         $view->setTemplate('../view/_Alumno.php');
         return $view->renderPartial();
     }
-    
+
     public function ListaAlumno1_P($p) {
         $obj = new Main();
         $obj->criterio = $p['criterio'];
@@ -998,7 +1276,8 @@ public function ListaProyecto_P($p) {
         $view->setTemplate('../view/_Alumno1.php');
         return $view->renderPartial();
     }
-          public function ListaDocente_P($p) {
+
+    public function ListaDocente_P($p) {
         $obj = new Main();
         $obj->criterio = $p['criterio'];
         $data = array();
@@ -1009,7 +1288,7 @@ public function ListaProyecto_P($p) {
         $view->setTemplate('../view/_Docente.php');
         return $view->renderPartial();
     }
-    
+
     public function ListaPdf_P($p) {
         $obj = new Main();
         $obj->criterio = $p['criterio'];
@@ -1022,7 +1301,7 @@ public function ListaProyecto_P($p) {
         return $view->renderPartial();
     }
 
-        public function Actividad_P($p) {
+    public function Actividad_P($p) {
         $obj = new Main();
         $obj->criterio = $p['criterio'];
         $data = array();
@@ -1033,7 +1312,7 @@ public function ListaProyecto_P($p) {
         $view->setTemplate('../view/_Actividad.php');
         return $view->renderPartial();
     }
-    
+
     public function Notas_P($p) {
         $obj = new Main();
         $obj->criterio = $p['criterio'];
@@ -1045,10 +1324,8 @@ public function ListaProyecto_P($p) {
         $view->setTemplate('../view/_Notas.php');
         return $view->renderPartial();
     }
-	
-	
-	
-	public function grilla_solicitudes($p) {
+
+    public function grilla_solicitudes($p) {
         $obj = new Main();
 //        $obj->table = $p['table'];
 ////        $obj->criterio = $p['criterio1'];
@@ -1067,8 +1344,96 @@ public function ListaProyecto_P($p) {
         $view->setTemplate('../view/solicitudes.php');
         return $view->renderPartial();
     }
+    //MIUTCHELL
+    public function grilla_cca($name,$name2,$accion, $columns, $rows, $options, $pag, $boton1,$boton2,$edit, $view, $select = false, $new = true,$asig,$chek,$presidente) {
+        $obj = new Main();
+        $data = array();
+        $data['nr'] = $obj->getnr();
+        $data['cols'] = $columns;
+        $data['rows'] = $rows;
+        $data['boton1']=$boton1;
+        $data['boton2']=$boton2;
+        $data['edit'] = $edit;
+        $data['view'] = $view;
+        $data['select'] = $select;
+        $data['name'] = $name;
+        $data['name2']=$name2;
+        $data['accion']=$accion;
+        $data['pag'] = $pag;
+        $data['new'] = $new;
+        $data['asig'] = $asig;
+        $data['chek'] = $chek;
+        $data['presidente'] = $presidente;
+        $data['combo_search'] = $this->Combo_Search($options);
+        $view = new View();
+        $view->setData($data);
+        $view->setTemplate('../view/_grilla_cca.php');
+        $view->setLayout('../template/Layout.php');
+        return $view->renderPartial();
+    }
+          
+    public function lista_cca($name, $columns, $rows, $options, $pag,$pension,$requisitos, $detallar,$edit, $view, $select = false, $new = true,$asig,$chek,$presidente) {
+        $obj = new Main();
+        $data = array();
+        $data['nr'] = $obj->getnr();
+        $data['cols'] = $columns;
+        $data['rows'] = $rows;
+        $data['pension']=$pension;
+        $data['requisitos']=$requisitos;
+        $data['detallar']=$detallar;
+        $data['edit'] = $edit;
+        $data['view'] = $view;
+        $data['select'] = $select;
+        $data['name'] = $name;
+        $data['pag'] = $pag;
+        $data['new'] = $new;
+        $data['asig'] = $asig;
+        $data['chek'] = $chek;
+        $data['presidente'] = $presidente;
+        $data['combo_search'] = $this->Combo_Search($options);
+        $view = new View();
+        $view->setData($data);
+        $view->setTemplate('../view/comision_cca/_Lista.php');
+        $view->setLayout('../template/Layout.php');
+        return $view->renderPartial();
+    }
+    
+     public function SelectAsig($p) {
+    
+        $obj = new Main();
+        $obj->table = $p['table'];
+        $obj->idp = $p['idp'];
+        $data = array();
+
+        $data['rows'] = $obj->getListAsig();
+        $data['name'] = $p['name'];
+        $data['id'] = $p['id'];
+        $data['code'] = $p['code'];
+        $data['disabled'] = $p['disabled'];
+        $view = new View();
+        $view->setData($data);
+        $view->setTemplate('../view/_Select.php');
+        return $view->renderPartial();
+    }
+    
+    public function SelectTipoEva($p) {
+    
+        $obj = new Main();
+        $obj->table = $p['table'];
+        $obj->idp = $p['idp'];
+        $data = array();
+
+        $data['rows'] = $obj->getListTipoEva();
+        $data['name'] = $p['name'];
+        $data['id'] = $p['id'];
+        $data['code'] = $p['code'];
+        $data['disabled'] = $p['disabled'];
+        $view = new View();
+        $view->setData($data);
+        $view->setTemplate('../view/_Select.php');
+        return $view->renderPartial();
+    }
+
 }
-
-
 
 ?>

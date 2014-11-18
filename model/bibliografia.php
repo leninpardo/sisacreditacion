@@ -66,5 +66,33 @@ class bibliografia extends Main{
         $p2 = $stmt->errorInfo();
         return array($p1 , $p2[2]);
     }
+
+    //aki toy
+    function actualizar_bibliografia($_P) {
+        echo "<pre>"; print_r ($_P);
+        $biblio=$_P["Bibliografia"];
+        $cam= $_P["Campo"];
+        $edit= $_P["Editar"];
+
+        $stmt = $this->db->prepare("UPDATE bibliografia SET ".$cam." = :p2
+                                    WHERE idbibliografia = :p1");
+        $stmt->bindValue(':p1', $biblio, PDO::PARAM_INT);
+        $stmt->bindValue(':p2', $edit, PDO::PARAM_STR);
+        $p1 = $stmt->execute();
+    }
+
+    //aki toy
+    function actualizar_bibliografia_tipo($_P) {
+        echo "<pre>"; print_r ($_P);
+        $biblio=$_P["Bibliografia"];
+        $cam= $_P["Campo"];
+        $edit= $_P["Editar"];
+
+        $stmt = $this->db->prepare("UPDATE bibliografia SET ".$cam." = :p2
+                                    WHERE idbibliografia = :p1");
+        $stmt->bindValue(':p1', $biblio, PDO::PARAM_INT);
+        $stmt->bindValue(':p2', $edit, PDO::PARAM_STR);
+        $p1 = $stmt->execute();
+    }
 }
 ?>

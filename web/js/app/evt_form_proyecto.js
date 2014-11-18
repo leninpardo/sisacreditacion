@@ -1,8 +1,6 @@
 $(function () {
     
-   /* $(".elimina").click(function () {
-        alert("hola");
-    });*/
+ 
     var codigofacultad = $("#CodigoFacultad");
     var codigofaculta = $("#idejetematico");
 

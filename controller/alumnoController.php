@@ -24,11 +24,8 @@ class alumnoController extends Controller {
         $data['query'] = $_GET['q'];
         $data['pag'] = $this->Pagination(array('rows' => $data['data']['rowspag'], 'url' => 'index.php?controller=alumno&action=index', 'query' => $_GET['q']));
         $cols = array("CODIGO", "Nombre", "Apellidos", "Documentos", "Fecha Ingreso", "CodAlumnoSira");
-
         $opt = array("NombreAlumno" => "Nombre Alumno", "CodAlumnoSira" => "Codigo Sira ");
-
         $data['grilla'] = $this->grilla("alumno", $cols, $data['data']['rows'], $opt, $data['pag'], true, true);
-        
       
         $view = new View();
         $view->setData($data);
@@ -157,9 +154,8 @@ class alumnoController extends Controller {
         echo $ofic;
     }
     
-    
    public function search_por_facultad()
-    {  
+    { 
          if (!isset($_GET['p'])){$_GET['p']=1;}
          $obj = new alumno();
         $data = array();
@@ -170,8 +166,10 @@ class alumnoController extends Controller {
         }
         $fac=$_GET['fac'];if(empty($fac)){$fac=$_POST['fac'];}
         $data['sinCab']=$_POST['sinCab'];
-        $data['data'] = $obj->indexBuscarAlumno($_GET['q'],$_GET['p'],$_GET['criterio'],$fac);
-        
+                                           
+        // recive lo del imput, pagina, criterio del campo 
+        $obj->borar_chek();
+        $count=$data['data'] = $obj->indexBuscarAlumno($_GET['q'],$_GET['p'],$_GET['criterio'],$fac);
         $data['query'] = $_GET['q'];
         
         
@@ -179,7 +177,7 @@ class alumnoController extends Controller {
         $cols = array();
          $cols = array("CODIGO", "Nombre", "Apellidos", "Documentos", "Fecha Ingreso", "CodAlumnoSira","Estado");
         $opt = array("NombreAlumno" => "Nombre Alumno", "CodAlumnoSira" => "Codigo Sira ");
-         $data['grilla'] = $this->grilla("alumno", $cols, $data['data']['rows'], $opt, $data['pag'], false, false,true,false);
+         $data['grilla'] = $this->grilla2("alumno", $cols, $data['data']['rows'], $opt, $data['pag'], false, false,true,false,false,false,false,true);
 
         $view = new View();
         $view->setData($data);

@@ -1,10 +1,10 @@
-<script type="text/javascript" src="js/jquery.dataTables.js"></script>
+<!--<script type="text/javascript" src="js/jquery.dataTables.js"></script>
 <link href="css/demo_table.css" rel="stylesheet" type="text/css" />
 <link href="css/demo_table_jui.css" rel="stylesheet" type="text/css" />
 <link href="css/demo_page.css" rel="stylesheet" type="text/css" />
 <link href="css/jquery.dataTables_themeroller.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.js"></script>
-<script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>-->
 <script type="text/javascript" charset="utf-8">
             $(document).ready(function(){
                 $('#datatables').dataTable({

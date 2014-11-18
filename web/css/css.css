@@ -1,0 +1,198 @@
+ .nav a{
+        color:#428bca; 
+ }
+
+.dur{
+  width: 90px;
+}
+.fech{
+  width: 100px;
+  border: 1px solid skyblue;
+  border-radius: 10px 10px 10px 10px;
+  text-align: center;
+  color: green;
+}
+
+.descripcion_u{
+  width: 540px;
+}
+
+.agregar_t { 
+  color: #FFFFFF; 
+  background-color: #7D038B; 
+  border-color: #FFF; 
+  border-radius: 13px;
+  width:170px;
+  height:30px;
+} 
+ 
+.agregar_t:hover, 
+.agregar_t:focus, 
+.agregar_t:active, 
+.agregar_t.active, 
+.open .dropdown-toggle.agregar_t { 
+  color: #FFFFFF; 
+  background-color: #49247A; 
+  border-color: #130269; 
+} 
+ 
+.agregar_t:active, 
+.agregar_t.active, 
+.open .dropdown-toggle.agregar_t { 
+  background-image: none; 
+} 
+ 
+.agregar_t.disabled, 
+.agregar_t[disabled], 
+fieldset[disabled] .agregar_t, 
+.agregar_t.disabled:hover, 
+.agregar_t[disabled]:hover, 
+fieldset[disabled] .agregar_t:hover, 
+.agregar_t.disabled:focus, 
+.agregar_t[disabled]:focus, 
+fieldset[disabled] .agregar_t:focus, 
+.agregar_t.disabled:active, 
+.agregar_t[disabled]:active, 
+fieldset[disabled] .agregar_t:active, 
+.agregar_t.disabled.active, 
+.agregar_t[disabled].active, 
+fieldset[disabled] .agregar_t.active { 
+  background-color: #7D038B; 
+  border-color: #130269; 
+} 
+ 
+.agregar_t .badge { 
+  color: #7D038B; 
+  background-color: #FFFFFF;
+}
+
+/* A*/
+#alk{
+  background-color: #8B1596;
+}
+/* B*/
+
+/* C*/
+.canck{
+  background-color: #8B1596;
+}
+
+
+/* D*/
+
+.duracion_u{
+  width: 100px;
+}
+  
+  
+/* E*/
+
+/* F*/
+
+/* G*/
+        .gensil{
+          border-radius: 50%;
+          height: 50px;
+          width: 50px; 
+          color:black;
+          background-image: url('../images/pdf-icon.png');
+          background-size: 50px 50px;
+        }
+        .gensil:hover{
+          box-shadow: purple 1px 1px 1px 1px;
+          transition: 0.2s;
+            -webkit-transform: scale(1.7);
+            -moz-transform: scale(1.7);
+            -o-transform: scale(1.7);
+            -ms-transform: scale(1.7);
+            transform: scale(1.7);
+        }
+/* H*/
+
+/* I*/
+
+/* J*/
+
+/* K*/
+.kmodal-header {
+padding: 15px;
+border-bottom: 2px solid #428BCA;
+min-height: 16.42857143px;
+background: #EAF8FC;
+height: 50px;
+}
+
+.kmodal-content{
+  background: #fff;
+  border: 3px;
+  box-shadow: 5px 5px 20px skyblue;
+  -webkit-box-shadow: 3px 5px 20px skyblue;
+  border-radius: 5px;
+
+}
+.modal-body textarea{
+  border:none;
+}
+
+.kmodal-footer{
+margin-top: 15px; 
+padding: 10px 10px 10px;
+text-align: right;
+border-top: 2px solid #428BCA;
+background: #EAF8FC;
+}
+
+.ktd1{
+  margin: 0px;
+  padding: 0px;
+}
+
+/* L*/
+
+/* M*/
+.mheading{
+border-color: #F23333;
+padding: 10px 15px;
+border-bottom: 1px solid transparent;
+border-top-right-radius: 3px;
+border-top-left-radius: 3px;
+}
+
+.mloencontre{
+  background-color: #EAF8FC;
+}
+/* N*/
+
+/* O*/
+
+/* P*/
+
+/* Q*/
+
+/* R*/
+
+/* S*/
+
+/* T*/
+
+.textk{
+  width:20%;
+}
+#tabla{
+  width: 840px;
+  margin-left: -80px;
+}
+
+
+
+/* U*/
+
+/* V*/
+
+/* W*/
+
+/* X*/
+
+/* Y*/
+
+/* Z*/

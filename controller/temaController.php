@@ -135,5 +135,6 @@ class temaController extends Controller {
         $ofic = $this->Select_ajax(array('id'=>'idcriterio','name'=>'idcriterio','table'=>'vista_tema','filtro'=>'idunidad','criterio'=>$_POST['idunidad']));
         echo $ofic;
     }
+
 }
 ?>

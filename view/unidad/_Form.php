@@ -55,6 +55,12 @@
                             <td>
                                  <input id="competencia" maxlength="255" name="competencia" class="text ui-widget-content ui-corner-all" style=" width: 200px; text-align: left;" value="<?php echo $obj->competencia; ?>" />
                             </td>
+                            <td align="right">
+                                 <label for="porcentaje" class="labels">porcentaje:</label>
+                            </td>
+                            <td>
+                                 <input id="porcentaje" maxlength="255" name="porcentaje" class="text ui-widget-content ui-corner-all" style=" width: 200px; text-align: left;" value="<?php echo $obj->porcentaje; ?>" />
+                            </td>
 
                     </table>
              </fieldset>

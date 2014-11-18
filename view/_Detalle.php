@@ -299,7 +299,7 @@ foreach ($rows as $key => $value) {
     <div>
         <button onclick="window.location='index.php?controller=listaproyecto'" class="btn btn-success">Regresar</button>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a style="color: #ffffff; " class="btn btn-primary btn-sm" href="proyecto.pdf" TARGET="_blanc">PDF PROYECTO</a>
+        <button><a  class="btn btn-primary btn-sm" href="proyecto.pdf" TARGET="_blanc">PDF PROYECTO</a></button>
     </div>
 
     </fieldset>

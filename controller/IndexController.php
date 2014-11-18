@@ -24,15 +24,5 @@ class IndexController extends Controller {
         print_r(json_encode($objsistema->menu()));
     }
     
-    public  function Submenu($p){
-        
-        $idpadre=$p;
-        
-        $objsistema = new Sistema();
-        $datosMenu=array();
-        $datosMenu=$objsistema->submenu($idpadre);
-        
-    }
-    
 }
 ?>

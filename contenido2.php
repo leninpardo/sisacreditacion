@@ -164,8 +164,8 @@ Este es el detalle de proyecto
                                                 </div>
            </div>';
         }
- echo '</div>';
 
+ echo '</div>';
 echo '
 		<div class="col-md-5" style=" height:390px; padding-left: 3px;">
 			 <div><div id="bloque_2_titgen" class="col-md-12">

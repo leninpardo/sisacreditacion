@@ -12,9 +12,8 @@
 </select>
 <?php }else{?>
 
-
-<select name="<?php echo $name; ?>" id="<?php echo $id; ?>" <?php echo $disabled; ?>  class="form-control" style="width: 100%;" >
-    <option value="">......</option>
+<select name="<?php echo $name; ?>" id="<?php echo $id; ?>" <?php echo $disabled; ?>  class="form-control sls" >
+<option value="">......</option>
     <?php foreach ($rows as $key => $value) { ?>
         <?php if ($code != $value[0] ) { ?>
     <option value="<?php echo $value[0]; ?>"> <?php echo strtoupper(utf8_encode($value[1])) ?> </option>
@@ -25,4 +24,4 @@
 </select>
 
 <?php } ?>
-
+<input type="hidden" id="idsemeestreacademicoescondido" name="idsemeestreacademicoescondido" />

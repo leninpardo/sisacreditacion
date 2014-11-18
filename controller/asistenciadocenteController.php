@@ -6,7 +6,7 @@ require_once '../model/asistenciadocente.php';
 
 class asistenciadocenteController extends Controller {
 
-    public function index() {
+    public function index() { 
         if (!isset($_GET['p'])) {
             $_GET['p'] = 1;
         }
@@ -37,7 +37,6 @@ class asistenciadocenteController extends Controller {
      
     }
     public function mostrar_lista_docentes_tutoria() {
-        
         if (!isset($_GET['p'])) {
             $_GET['p'] = 1;
         }
@@ -45,7 +44,7 @@ class asistenciadocenteController extends Controller {
             $_GET['q'] = "";
         }
         
-        $idevento=$_POST['idevento'];
+        $idevento=$_REQUEST['idevento'];
         $obj = new asistenciadocente();
         $idfacultad = $obj->mostrar_Facultad_idUsusario($_SESSION['idusuario']);
         $sem = $obj->mostrar_semestre_ultimo();
@@ -54,22 +53,18 @@ class asistenciadocenteController extends Controller {
         $data = array();
         $lista=$data['data'] = $obj->docentes_asignados($_GET['q'], $_GET['p'],$idfacultad,$sem,$idevento);
         $data['query'] = $_GET['q'];
-        $data['pag'] = $this->Pagination2(array('rows' => $data['data']['rowspag'], 'url' => 'index.php?controller=asistenciadocente&action=mostrar_lista_docentes_tutoria', 'query' => $_GET['q']));
+        $data['pag'] = $this->PaginationPOST(array('rows' => $data['data']['rowspag'], 'url' => 'controller=asistenciadocente&action=mostrar_lista_docentes_tutoria', 'query' => $_GET['q']));
         $cols = array("CODIGO", "Nombre y Apellidos","Sexo","Fecha Ingreso");
-        $data['grilla'] = $this->grilla("alumno", $cols, $data['data']['rows'], $opt, $data['pag'], false, false, false, false,false,true);
+        $data['grilla'] = $this->grilla2("alumno", $cols, $data['data']['rows'], $opt, $data['pag'], false, false, false, false,false,true);
 
         $data['semestre']=$sem;
         $data['control']=$chekeos;
         $data['lista']=$lista;
         $view = new View();
         $view->setData($data);
-        if($_GET['p']>=2){$view->setTemplate('../view/asistenciadocente/_Lista2.php');
-         $view->setLayout('../template/Layout.php');
-        $view->render();}
-        else{
         $view->setTemplate('../view/asistenciadocente/_Lista2.php');
-        $view->setLayout('../template/Vacia.php');
-        $view->render();}
+//        $view->setLayout('../template/Vacia.php');
+        echo $view->renderPartial();
     }
      public function save() {
         $obj = new asistenciadocente();

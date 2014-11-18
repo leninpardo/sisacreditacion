@@ -71,5 +71,18 @@ class tema extends Main{
         $p2 = $stmt->errorInfo();
         return array($p1 , $p2[2]);
     }
+    
+    function actualizar_tema($_P) {
+        echo "<pre>"; print_r ($_P);
+        $tem=$_P["Tema"];
+        $cam= $_P["Campo"];
+        $edit= $_P["Editar"];
+
+        $stmt = $this->db->prepare("UPDATE tema SET ".$cam." = :p2
+                                    WHERE idtema = :p1");
+        $stmt->bindValue(':p1', $tem, PDO::PARAM_INT);
+        $stmt->bindValue(':p2', $edit, PDO::PARAM_STR);
+        $p1 = $stmt->execute();
+    }
 }
 ?>

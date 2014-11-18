@@ -4,19 +4,23 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="keywords" content="free templates, Business Website, Free CSS Template, CSS, HTML" />
 <meta name="description" content="Business Template is a free css template provided by templatemo.com" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Acreditacion UNSM</title>
 
+
+<script src="web/css/specs/jquery.mosaicflow.js"></script>
 <link href="web/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="web/css/mosaico.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="web/js/bootstrap.min.js"></script>
 <link href="web/css/templatemo_style.css" rel="stylesheet" type="text/css" />
 <link href="web/css/bloques.css" rel="stylesheet" type="text/css" />
 <link href="web/css/jquery.ennui.contentslider.css" rel="stylesheet" type="text/css" media="screen,projection" />
-<link type="text/css" href="web/css/menu.css" rel="stylesheet" />
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="web/css/specs/jquery.mosaicflow.js"></script>
+<link href='web/css/images_eapisi/libro.jpg' rel='shortcut icon' type='image/jpg'>
+<script type="text/javascript" src="web/js/jquery.js"></script>
 <script type="text/javascript" src="web/js/menu_estatico.js"></script>
-<script type="text/javascript" src="web/js/bootstrap.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link type="text/css" href="web/css/menu.css" rel="stylesheet" />
+<link type="text/css" href="web/css/jquery-ui-1.8.13.custom.css" rel="stylesheet" />
+<script type="text/javascript" src="web/js/jquery-ui-1.8.13.custom.min.js"></script> 
 <script language="javascript" type="text/javascript">
 function clearText(field)
 {

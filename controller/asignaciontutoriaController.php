@@ -12,22 +12,47 @@ class asignaciontutoriaController extends Controller {
         $data['semestreacademico'] = $this->cinco_ultimos_semestres(array('id' => 'CodigoSemestre', 'name' => 'CodigoSemestre', 'table' => 'semestreacademico', 'code' => $obj->CodigoSemestre));
         $data['idfacultad']=$idfacultad;
         $view = new View();
-        $view->setData($data);
-        
-     
-
-
+        $view->setData($data);  
         $view->setTemplate('../view/asignaciontutoria/_Index.php');
 
         $view->setLayout('../template/Layout.php');
 
         $view->render();
     }
+    public function edit(){
+      $obj = new asignaciontutoria();
+        $data=array();
+        $sem = $obj->mostrar_semestre_ultimo();
+        $data['rows']=$obj->edit_asignados($_POST['CodigoProfesor'],$sem);
+        $view = new View();
+        $view->setData($data);  
+        $view->setTemplate('../view/asignaciontutoria/_lista_editar.php');
+        $view->setLayout('../template/Vacia.php');
+        $view->render();
+    }
+
+    public function asignar_estado_temporal_asignacion() {
+        $obj = new asignaciontutoria();
+        $p = $obj->asignar_estado_temporal_asignacion($_POST);//va a hacer una consulta en model asignaciontutoria 
+        if ($p[0]) {
+                echo "ok";
+            } else {
+                $data = array();
+                $view = new View();
+                $data['msg'] = $p[1];
+                $data['url'] = 'index.php?controller=asignaciontutoria';
+                $view->setData($data);
+                $view->setTemplate('../view/_Error_App.php');
+                echo $view->renderPartial();
+            }
+    }
 
 public function save() { 
         $obj = new asignaciontutoria();
         $sem = $obj->mostrar_semestre_ultimo();
+        $obj->vaciar($_POST,$sem);
         $p = $obj->insert($_POST,$sem);
+        $obj->vaciar_estado_chek_asignacion_tutoria();
         
         if ($p[0]) {
             die("<script> window.location='index.php?controller=asignaciontutoria'; </script>");
@@ -48,15 +73,17 @@ public function save() {
         $semestre = $obj->mostrar_semestre_ultimo();
         $semestre2=$semestre;
         $idfacultad = $obj->mostrar_Facultad_idUsusario($_SESSION['idusuario']);
-        $idsemestre=$_POST['sem'];
+        $idsemestre=$_POST['sem'];    
         
         if(!empty($idsemestre)){$semestre=$idsemestre;$modovista=true; }
         else{$modovista=false;}
         if($semestre2==$idsemestre){$modovista=false;}        
         
-        $envio = $this->Datos_grilla_facultad(array('filtro' => 'CodigoFacultad', 'criterio' => $idfacultad, 'filtro2' => 'CodigoSemestre', 'criterio2' => $semestre,'modovista'=>$modovista));
+        $envio = $this->Datos_grilla_facultad(array('filtro' => 'CodigoFacultad', 'criterio' => $idfacultad, 'filtro2' => 'CodigoSemestre', 'criterio2' => $semestre,'modovista'=>$modovista,'idfacultad'=>$idfacultad));
         echo $envio;
     }
+    
+    
 
     public function mostrarLupa() {
         $obj = new asignaciontutoria();

@@ -1,12 +1,12 @@
 <style type="text/css">
 
 
-    .oddrowcolor{
+    /*.oddrowcolor{
         background-color:#ffffff;
-    }
-    .evenrowcolor{
+    }*/
+    /*.evenrowcolor{
         background-color:#e2e4ff;
-    }
+    }*/
 
 </style>
 <h6 class="ui-widget-header">Verificacion de los procesos del proyectos</h6>
@@ -16,20 +16,20 @@
        <table >
             <tr style="font-size: 16px;font-family: Calibri;">
                 <td >
-                    &nbsp;&nbsp;&nbsp; <b style="color: #ffffff;">NOMBRE DEL PROYECTO&nbsp;:&nbsp;&nbsp; </b>
+                    &nbsp;&nbsp;&nbsp; <b >NOMBRE DEL PROYECTO&nbsp;:&nbsp;&nbsp; </b>
                 </td>
                 <td>
-                    <font style="text-transform: uppercase; color: #ffffff;"><?php echo $proyecto[0][1]; ?> </font>
+                    <font style="text-transform: uppercase; "><?php echo $proyecto[0][1]; ?> </font>
                     <input type="hidden" id="idproyecto" name="idproyecto" value="<?php echo $proyecto[0][0];?>"/>
 
                 </td>
             </tr>
             <tr style="font-size: 16px;font-family: Calibri;">
                 <td>
-                    &nbsp;&nbsp;&nbsp; <b style="color: #ffffff;">JEFE DEL PROYECTO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp; </b>
+                    &nbsp;&nbsp;&nbsp; <b >JEFE DEL PROYECTO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp; </b>
                 </td>
                 <td>
-                    <font style="text-transform: uppercase; color: #ffffff; "><?php echo $proyecto[0][2]; ?> </font>
+                    <font style="text-transform: uppercase; "><?php echo $proyecto[0][2]; ?> </font>
                 </td>
             </tr>
         </table>
@@ -279,7 +279,7 @@
              for(i=0;i<fields.length;i++)
              {
                  alert(fields[i][0]);
-             }*/if(fields.length==0&t==fields.length)
+             }*/if(fields.length==0||f==fields.length)
         {
                 e.preventDefault();
                 
