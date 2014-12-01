@@ -46,6 +46,13 @@ public function editar_estado() {
       //  $view->setLayout('../template/Layout.php');
         echo $view->renderPartial();
          }
+         
+         public function get_procesos_all(){
+             $obj=new listaproyecto();
+             print_r(json_encode($obj->get_procesos_all($_REQUEST['id'])));
+         }
+
+
          public function save_procesos()
          {
              $obj=new listaproyecto();

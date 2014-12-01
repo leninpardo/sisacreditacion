@@ -6,9 +6,9 @@ and open the template in the editor.
 <link type="text/css" href="bootstrap/css/bootstrap.css" rel="stylesheet" />
 <link type="text/css" href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 <form id="frm_procesos">
-    <div class="form">
+    <div class="span5">
         <fieldset>
-            <legend>Datos de registro de procesos</legend>
+            <legend>Datos de Registro de procesos</legend>
             <div>
                 <label>lista de Procesos</label>
                 <input type="hidden" name="id_proyecto" id="id_proyecto" value="<?php echo $datos[0][3]; ?>">
@@ -23,6 +23,8 @@ and open the template in the editor.
                 <label>Fecha Limite/plazo:</label>
                 <input readonly class="text-primary" type="text" name="fecha_l" id="fecha_l" value="<?php echo $datos[0][6]; ?>"/>
             </div>
+    </div>
+    <div class="span5">
             <div>
                 <label>Fecha Entrega:</label>
                 <input  class="text-primary" type="text" name="fecha_e" id="fecha_e" value="<?php echo $datos[0][7]; ?>"/>
@@ -33,10 +35,14 @@ and open the template in the editor.
                 <?php echo $datos[0][8]; ?>
                 </textarea>
             </div>
+             <div>
+                <label>Documento</label>
+                <input type="file" name="documento" id="documento" value=""/>
+            </div>
         </fieldset>
         
     </div>
-    <div class="">
+    <div class="span10 form-actions">
         <fieldset>
 
             <legend>Acciones</legend>

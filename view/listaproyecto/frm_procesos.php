@@ -5,8 +5,9 @@ and open the template in the editor.
 <!DOCTYPE html>
 <link type="text/css" href="bootstrap/css/bootstrap.css" rel="stylesheet" />
 <link type="text/css" href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<div class="">
 <form id="frm_procesos">
-    <div class="form">
+    <div class="span6">
         <fieldset>
             <legend>Datos de registro de procesos</legend>
             <div>
@@ -24,7 +25,7 @@ and open the template in the editor.
             </div>
             <div>
                 <label>Fecha inicio:</label>
-                <input class="text-info" type="text" name="fecha_i" id="fecha_i" />
+                <input readonly="" value="<?php echo date("Y-m-d");?>"class="text-info" type="text" name="fecha_i" id="fecha_i" />
             </div>
             <div>
                 <label>Cantidad(Dias):</label>
@@ -34,9 +35,26 @@ and open the template in the editor.
                 <label>Fecha Limite:</label>
                 <input class="text-primary" type="text" name="fecha_l" id="fecha_l" />
             </div>
+           
         </fieldset>
     </div>
-    <div class="">
+    <div class="span5">
+    <div>
+        <label>
+            Responsable del Proceso:
+        </label>
+        <span class="h3" id="responsable"></span>
+    </div>
+  
+    <div>
+        <label>
+            Cantidad(<span id="medicion_fecha"></span>):
+        </label>
+        <span class="h3" id="numero"></span>
+    </div>
+    
+</div>
+    <div class="span8 form-actions">
         <fieldset>
 
             <legend>Acciones</legend>
@@ -45,6 +63,8 @@ and open the template in the editor.
         </fieldset>
     </div>
 </form>
+</div>
+
 <script>
     $(function()
     {
@@ -75,15 +95,24 @@ and open the template in the editor.
             dateFormat: 'yy-mm-dd',
         });
         $("#guardar").click(function() {
+       /*var file = $("#documento")[0].files[0];
+       
+        var fileName = file.name;*/
+      /*  var fileInput = document.getElementById ("documento");
+          var file = fileInput.files[0].mozFullPath;*/
+          
             str = $("#frm_procesos").serialize();
+         //str=str+"&documento="+file.name;
+             //(str);
                    bval = true;
         bval = bval && $("#select_proceso" ).required();
         bval = bval && $("#fecha_i" ).required();
         bval = bval && $("#fecha_l" ).required();
+       
         if(bval){
             $.post('index.php', 'controller=listaproyecto&action=save_procesos&' + str, function(data)
             {
-                if (data.rep!=1) {
+                if (data.rep==1) {
                     alert("se guardo correctamente");
                     $.unblockUI({
                         onUnblock: function() {
@@ -94,10 +123,30 @@ and open the template in the editor.
                 } else {
                     alert(data.msg);
                 }
-            });
+            },'json');
         }
         return false;
         });
+        $("#select_proceso").change(function(){
+             $.post('index.php', 'controller=listaproyecto&action=get_procesos_all&id=' +$(this).val(), function(data)
+            {
+                $("#responsable").append(data.responsable);
+                if(data.medicion_fecha==1){x="dias";}else if(data.medicion_fecha==2){x="semanas";}
+                else if(data.medicion_fecha==3){x="meses";}
+                
+                 $("#medicion_fecha").append(x);
+                  $("#numero").append(data.numero);
+                    if (data.numero != null) {
+                        $("#n_dias").val(data.numero);
+                        $.post('index.php', 'controller=listaproyecto&action=calcular_fecha&n_dias=' + data.numero + "&fecha_inicio=" + $("#fecha_i").val(), function(data)
+                        {
+                            $("#fecha_l").val(data);
+                        });
+                    } else {
+                        $("#n_dias").attr("reandonly", false);
+                    }
+                }, 'json');
+            });
 
-    });
+        });
 </script>

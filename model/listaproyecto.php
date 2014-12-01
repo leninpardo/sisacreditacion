@@ -119,17 +119,23 @@ WHERE detalle_proceso_proyecto.idproyecto=".$id);
         try{
  //$stmt->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   //$stmt->beginTransaction();
-
+            //$imagen=empty($vars["documento"])? $vars["tmpdocumento"] : $vars["documento"];
+             // if(move_uploaded_file($_FILES['documento']['temp_name'], 'web/documentos/')){
+                   
               $stmt->bindValue(':p1', $_P["id_proyecto"] , PDO::PARAM_INT);
               $stmt->bindValue(':p2', $_P['select_proceso'], PDO::PARAM_INT);
               $stmt->bindValue(':p3', $_P['fecha_i'] , PDO::PARAM_STR);       
               $stmt->bindValue(':p4', $_P['fecha_l'] , PDO::PARAM_STR); 
               $stmt->execute();   
               $p2 = $stmt->errorInfo();
+               $array= array("rep"=>1 , "msg"=>$p2);
+               /*}else{
+                    $array= array("rep"=>2 , "msg"=>"no se pudo cargar el archivo");
+               }*/
            //$stmt->db->commit();            
              
                             
-        $array= array("rep"=>1 , "msg"=>$p2);
+       
         }  catch (PDOException $e)
         {
            // $this->db->rollback();
@@ -215,6 +221,13 @@ WHERE detalle_proceso_proyecto.idproyecto=:p1 and detalle_proceso_proyecto.idpro
               $stmt2->execute();
               return $stmt2->fetchAll();     
     }
-    
+    public function get_procesos_all($id){
+              $stmt2 = $this->db->prepare("SELECT *FROM proceso_proyecto WHERE idproceso_proyecto=:p1");
+              $stmt2->bindValue(':p1', $id , PDO::PARAM_INT);
+              $stmt2->execute();
+              return $stmt2->fetchObject();
+    }
+
+
 }
 ?>
